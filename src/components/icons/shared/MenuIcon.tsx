@@ -4,7 +4,7 @@ import { IconProps } from '@components/icons/iconProps';
 const SvgMenu = ({
   width = 24,
   height = 24,
-  fill = 'none',
+  fill = 'currentColor',
   stroke,
   strokeWidth,
   ...props

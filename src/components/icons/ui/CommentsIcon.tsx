@@ -4,7 +4,7 @@ import { IconProps } from '@components/icons/iconProps';
 const SvgComments = ({
   width = 24,
   height = 24,
-  fill = 'none',
+  fill = 'currentcolor',
   stroke,
   strokeWidth,
   ...props

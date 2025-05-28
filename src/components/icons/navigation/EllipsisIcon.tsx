@@ -4,7 +4,7 @@ import { IconProps } from '@components/icons/iconProps';
 const SvgMenu1 = ({
   width = 24,
   height = 24,
-  fill = 'none',
+  fill = 'currentColor',
   stroke,
   strokeWidth,
   ...props
@@ -18,7 +18,7 @@ const SvgMenu1 = ({
     viewBox="0 0 28 28"
   >
     <path
-      fill="#1B1E28"
+      fill={fill}
       d="M14.285 17.41a1.42 1.42 0 1 1 0 2.84 1.42 1.42 0 0 1 0-2.84m0-5.683a1.42 1.42 0 1 1-.002 2.842 1.42 1.42 0 0 1 .002-2.842m0-5.682a1.42 1.42 0 1 1-.002 2.842 1.42 1.42 0 0 1 .002-2.842"
     />
   </svg>
