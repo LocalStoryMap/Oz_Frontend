@@ -34,7 +34,7 @@ jobs:
       - name: Prepare output dir
         run: |
           mkdir -p output
-          cp -R .next public package.json next.config.js output/
+          cp -R .next public package.json next.config.mjs output/ 2>/dev/null || true
 
       - name: Upload output artifact
         uses: actions/upload-artifact@v4
