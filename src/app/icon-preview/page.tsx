@@ -74,6 +74,8 @@ function IconPreview() {
                 flexDirection: 'column',
                 alignItems: 'center',
                 gap: '10px',
+                borderBottom: '1px solid black',
+                borderRight: '1px solid black',
               })}
             >
               <p
@@ -86,11 +88,17 @@ function IconPreview() {
                 {name}
               </p>
 
-              <button type="button" onClick={() => onClick(name)}>
+              <button
+                type="button"
+                onClick={() => onClick(name)}
+                className={css({
+                  marginBottom: '10px',
+                })}
+              >
                 <span className={css({ fontSize: '20px' })}>
                   {copiedIconName === name ? '복사완료' : '복사'}
                 </span>
-                <Icon width={70} height={70} color="red" />
+                <Icon width={70} height={70} color="blue" stroke="yellow" />
               </button>
             </div>
           ))}

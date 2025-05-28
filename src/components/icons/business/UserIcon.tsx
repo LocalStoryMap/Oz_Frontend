@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IconProps } from '@components/icons/iconProps';
 
-const SvgPicture = ({
+const SvgCustomer = ({
   width = 24,
   height = 24,
   fill = 'none',
@@ -17,15 +17,13 @@ const SvgPicture = ({
     viewBox="0 0 24 24"
     fill="none"
   >
-    <rect width="24" height="24" rx="4" fill="currentColor" />
+    <circle cx="12" cy="8" r="4" fill="currentColor" />
     <path
-      d="M6 16l4-4 3 3 5-5"
-      stroke="#fff"
+      d="M4 20c0-3.31 3.13-6 8-6s8 2.69 8 6"
+      stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
-      strokeLinejoin="round"
     />
-    <circle cx="8" cy="8" r="1.5" fill="#fff" />
   </svg>
 );
-export default SvgPicture;
+export default SvgCustomer;

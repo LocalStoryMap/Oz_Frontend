@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IconProps } from '@components/icons/iconProps';
 
-const SvgPicture = ({
+const SvgMoreThan = ({
   width = 24,
   height = 24,
   fill = 'none',
@@ -15,17 +15,13 @@ const SvgPicture = ({
     width={width}
     height={height}
     viewBox="0 0 24 24"
-    fill="none"
+    fill={fill}
+    stroke={stroke ?? '#000'}
+    strokeWidth={strokeWidth}
+    strokeLinecap="round"
+    strokeLinejoin="round"
   >
-    <rect width="24" height="24" rx="4" fill="currentColor" />
-    <path
-      d="M6 16l4-4 3 3 5-5"
-      stroke="#fff"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <circle cx="8" cy="8" r="1.5" fill="#fff" />
+    <polyline points="9 18 15 12 9 6" />
   </svg>
 );
-export default SvgPicture;
+export default SvgMoreThan;
