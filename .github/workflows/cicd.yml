@@ -26,6 +26,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install dependencies (skip husky)
+        run: HUSKY_SKIP_INSTALL=1 npm ci
+
       - name: Lint test
         run: npm run lint
 

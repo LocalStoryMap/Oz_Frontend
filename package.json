@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prepare": "panda codegen && husky install",
+    "prepare": "panda codegen && [ \"$HUSKY_SKIP_INSTALL\" = \"1\" ] || husky install",
     "dev": "rm -rf .next && next dev",
     "build": "panda build && next build",
     "start": "next start",
