@@ -12,6 +12,7 @@
       "jsx": true
     }
   },
+
   "plugins": ["prettier", "simple-import-sort", "import"],
   "rules": {
     "no-multiple-empty-lines": "warn",
@@ -63,7 +64,8 @@
           "**/*.spec.ts",
           "**/vite.config.ts",
           "**/jest.config.ts",
-          "**/scripts/**"
+          "**/scripts/**",
+          "**/panda.config.ts"
         ]
       }
     ],
