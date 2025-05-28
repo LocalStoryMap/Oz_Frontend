@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - develop
+  workflow_dispatch:
 
 jobs:
   build:
@@ -31,17 +32,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Prepare output dir
-        run: |
-          mkdir -p output
-          cp -R .next public package.json next.config.mjs output/ 2>/dev/null || true
-
-      - name: Upload output artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: output
-          path: output/
-
   deploy:
     name: Deploy to personal repository
     needs: build
@@ -49,19 +39,13 @@ jobs:
     if: github.event_name == 'push'
 
     steps:
-      - name: Download output artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: output
-          path: output/
-
       - name: Pushes to another repository
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.FE_GITHUB_KEY }}
         with:
-          source-directory: 'output'
+          source-directory: '.'
           destination-github-username: seonysun
           destination-repository-name: localstory-FE
           user-email: ${{ secrets.FE_ACCOUNT_EMAIL }}
