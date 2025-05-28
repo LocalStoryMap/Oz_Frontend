@@ -24,26 +24,12 @@
     "no-use-before-define": "off",
 
     //react 관련
+    "no-undef": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": "off",
     "react/require-default-props": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
-    "react/function-component-definition": [
-      "warn",
-      {
-        "namedComponents": "arrow-function",
-        "unnamedComponents": "arrow-function"
-      }
-    ],
-    "overrides": [
-      {
-        "files": ["app/**/page.tsx", "app/**/layout.tsx"],
-        "rules": {
-          "react/function-component-definition": "off"
-        }
-      }
-    ],
 
     //접근성 관련 옵션 해제
     "jsx-a11y/click-events-have-key-events": "off",
