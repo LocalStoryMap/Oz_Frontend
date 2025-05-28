@@ -10,6 +10,7 @@ const HeartIcon = ({
 }: IconProps) => {
   return (
     <svg
+      {...props}
       width={width}
       height={height}
       viewBox="0 0 16 15"
