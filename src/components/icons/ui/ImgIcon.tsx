@@ -15,7 +15,7 @@ const SvgPicture = ({
     width={width}
     height={height}
     viewBox="0 0 24 24"
-    fill="none"
+    fill={fill}
   >
     <rect width="24" height="24" rx="4" fill="currentColor" />
     <path

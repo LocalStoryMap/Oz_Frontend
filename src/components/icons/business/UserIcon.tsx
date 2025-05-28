@@ -15,7 +15,7 @@ const SvgCustomer = ({
     width={width}
     height={height}
     viewBox="0 0 24 24"
-    fill="none"
+    fill={fill}
   >
     <circle cx="12" cy="8" r="4" fill="currentColor" />
     <path
