@@ -3,7 +3,7 @@ import { IconProps } from '@components/icons/iconProps';
 const HeartIcon = ({
   width = 24,
   height = 24,
-  fill = 'currentColor',
+  fill = 'none',
   stroke,
   strokeWidth,
   ...props
@@ -12,14 +12,15 @@ const HeartIcon = ({
     <svg
       width={width}
       height={height}
-      viewBox="0 0 24 24"
+      viewBox="0 0 16 15"
       fill={fill}
       xmlns="http://www.w3.org/2000/svg"
-      {...props}
     >
       <path
-        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-        fill={fill}
+        d="M8.68043 3.35625L8.21066 3.8456L7.7409 3.35625C6.44367 2.00495 4.34046 2.00495 3.04323 3.35625C1.74601 4.70755 1.74601 6.89844 3.04323 8.24974L7.27113 12.6539C7.79002 13.1944 8.63131 13.1944 9.1502 12.6539L13.3781 8.24974C14.6753 6.89844 14.6753 4.70755 13.3781 3.35625C12.0809 2.00495 9.97765 2.00495 8.68043 3.35625Z"
+        stroke="#FE2352"
+        strokeWidth="1.1"
+        strokeLinejoin="round"
       />
     </svg>
   );

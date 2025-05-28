@@ -11,25 +11,46 @@ const SvgVersion = ({
 }: IconProps) => (
   <svg
     {...props}
-    xmlns="http://www.w3.org/2000/svg"
     width={width}
     height={height}
     viewBox="0 0 26 24"
     fill={fill}
+    xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      stroke={stroke}
+      d="M21.6866 11.5C21.6866 6.805 17.5977 3 12.5523 3C7.50692 3 3.41797 6.805 3.41797 11.5C3.41797 16.195 7.50692 20 12.5523 20"
+      stroke="#7D848D"
+      strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth={strokeWidth}
-      d="M21.687 11.5c0-4.695-4.09-8.5-9.135-8.5s-9.134 3.805-9.134 8.5S7.507 20 12.552 20M20.902 19.27l1.86 1.73"
     />
     <path
-      stroke={stroke}
+      d="M20.9021 19.27L22.7612 21"
+      stroke="#7D848D"
+      strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth={strokeWidth}
-      d="M20.9 15.732c1.049.977 1.049 2.56 0 3.536-1.05.976-2.75.976-3.8 0-1.049-.977-1.049-2.56 0-3.536 1.05-.976 2.75-.976 3.8 0M4.371 15.281h.063c3.044 0 5.074-.162 5.074-2.833 0-2.833 3.044-2.833 3.044-4.722 0-2.112-4.06-1.889-4.06-3.778V3.88M21.687 11.5H18.39c-2.262 0-3.463-2.487-1.96-4.061l2.182-2.286"
+    />
+    <path
+      d="M20.8997 15.7322C21.9489 16.7085 21.9489 18.2914 20.8997 19.2677C19.8506 20.244 18.1495 20.244 17.1004 19.2677C16.0512 18.2914 16.0512 16.7085 17.1004 15.7322C18.1495 14.7559 19.8506 14.7559 20.8997 15.7322"
+      stroke="#7D848D"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M4.37122 15.281H4.43354C7.47796 15.281 9.50793 15.119 9.50793 12.448C9.50793 9.615 12.5524 9.615 12.5524 7.726C12.5524 5.614 8.49241 5.837 8.49241 3.948V3.88"
+      stroke="#7D848D"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M21.6866 11.5H18.3896C16.1276 11.5 14.9272 9.01302 16.4295 7.43902L18.6121 5.15302"
+      stroke="#7D848D"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
