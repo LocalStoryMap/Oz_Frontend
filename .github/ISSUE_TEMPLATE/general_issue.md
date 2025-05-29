@@ -18,6 +18,7 @@ assignees: ''
 - [ ] 🚀 성능 최적화 (Performance)
 - [ ] 🚚 파일 삭제 / 이동 (Remove/Rename)
 - [ ] ♻️ 리팩토링 (Refactoring)
+- [ ] 🎨 구조 변경 (structure)
 
 ## 📝 어떤 작업인가요?
 
