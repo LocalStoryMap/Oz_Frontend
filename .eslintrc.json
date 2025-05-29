@@ -73,7 +73,7 @@
     //import 정렬
     "simple-import-sort/exports": "warn",
     "simple-import-sort/imports": [
-      "error",
+      "warn",
       {
         "groups": [
           ["^react", "^next", "^@?\\w"],
