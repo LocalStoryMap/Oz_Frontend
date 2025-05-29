@@ -8,9 +8,9 @@ import {
   headerWrapper,
   navMenu,
   navWrapper,
-} from '@components/layouts/headerRecipe';
+} from '@components/layouts/header.recipe';
 
-import { NAVIGATE_MENU } from '@/constants/Header';
+import { NAVIGATE_MENU } from '@/constants/headerMenu';
 
 import { css } from '@root/styled-system/css';
 
