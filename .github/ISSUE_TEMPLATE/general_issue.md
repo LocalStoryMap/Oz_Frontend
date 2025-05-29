@@ -10,12 +10,14 @@ assignees: ''
 <!-- 아래에서 해당하는 항목을 선택하고 나머지는 지워주세요 -->
 
 - [ ] ✨ 기능 추가 (Feature)
-- [ ] 🎨 마크업/스타일 (Design)
+- [ ] 💄 마크업/스타일 (Design)
 - [ ] 🔌 API 연동 (API Integration)
-- [ ] 🔧 리팩토링 (Refactoring)
+- [ ] 🔧 구성 파일 추가/삭제 (Chore)
 - [ ] 🐛 버그 수정 (Bug Fix)
 - [ ] 📄 문서/설정 변경 (Docs/Config)
 - [ ] 🚀 성능 최적화 (Performance)
+- [ ] 🚚 파일 삭제 / 이동 (Remove/Rename)
+- [ ] ♻️ 리팩토링 (Refactoring)
 
 ## 📝 어떤 작업인가요?
 
