@@ -2,9 +2,8 @@
 
 import { ComponentProps, forwardRef } from 'react';
 
+import { buttonStyle } from '@/components/ui/common/buttons/buttonStyle';
 import type { Responsive } from '@/types/responsive';
-
-import { buttonStyle } from '@root/styled-system/cva/button';
 
 import { cx } from '@root/styled-system/css';
 
