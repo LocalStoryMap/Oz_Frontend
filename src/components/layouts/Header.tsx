@@ -21,12 +21,18 @@ const Header = () => {
     setIsMenuOpen(prev => !prev);
   };
 
+  const onClose = () => {
+    if (window.innerWidth < 768) {
+      setIsMenuOpen(false);
+    }
+  };
+
   return (
     <header className={css({ paddingTop: '4' })}>
       {isMenuOpen && <div className={dimOverlay()} onClick={onClick} />}
       <nav className={navWrapper()}>
         <div className={headerWrapper()}>
-          <Link href="/">
+          <Link href="/" onClick={onClose} passHref>
             <LogoIcon width={150} color="black" />
           </Link>
           <ul className={navMenu({ isOpen: isMenuOpen })}>
@@ -42,6 +48,7 @@ const Header = () => {
                 <Link
                   href={menu.path}
                   className={css({ display: 'block', width: '100%' })}
+                  onClick={onClose}
                 >
                   {menu.title}
                 </Link>
