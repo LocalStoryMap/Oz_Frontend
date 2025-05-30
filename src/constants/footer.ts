@@ -19,8 +19,8 @@ export const FOOTER_CONTACT: FooterContactItem = [
 ];
 
 export const FOOTER_MENU: FooterMenu = [
-  { title: '이용약관', path: '/terms' },
-  { title: '개인정보처리방침', path: '/privacy' },
-  { title: '제휴/광고 문의', path: '/ads' },
-  { title: '소셜/등록/제작 문의', path: '/inquiry' },
+  { title: '이용약관', path: '/' },
+  { title: '개인정보처리방침', path: '/' },
+  { title: '제휴/광고 문의', path: '/' },
+  { title: '소셜/등록/제작 문의', path: '/' },
 ];
