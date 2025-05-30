@@ -1,0 +1,62 @@
+'use client';
+
+import { ReactNode } from 'react';
+import Image from 'next/image';
+
+import defaultThumbnail from '@images/default-thumbnail.png';
+
+import { css } from '@root/styled-system/css';
+
+type WideCardProps = {
+  image: string;
+  children: ReactNode;
+};
+
+/**
+ * WideCard 컴포넌트
+ *
+ * @component
+ * @example
+ * <WideCard image="/images/img.jpg">
+ *   <WideCardContent />
+ * </WideCard>
+ *
+ * @param {string} image - 카드 우측에 표시할 이미지 경로
+ * @param {ReactNode} [children] - 카드 좌측에 표시할 상세 컨텐츠
+ */
+
+function WideCard({ image, children }: WideCardProps) {
+  return (
+    <div
+      className={css({
+        display: 'flex',
+        alignItems: 'center',
+        gap: 3.5,
+        p: 3,
+        borderRadius: 'lg',
+        boxShadow: 'md',
+      })}
+    >
+      <Image
+        src={image || defaultThumbnail}
+        alt="썸네일"
+        className={css({
+          borderRadius: 'lg',
+          width: 'full',
+          maxWidth: '150px',
+          overflow: 'hidden',
+          objectFit: 'cover',
+        })}
+      />
+      <div
+        className={css({
+          flex: 1,
+        })}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
+export default WideCard;
