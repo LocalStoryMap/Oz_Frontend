@@ -3,6 +3,12 @@
 import { ReactNode } from 'react';
 import Image from 'next/image';
 
+import {
+  cardImage,
+  cardImageWrapper,
+  cardWrapper,
+} from '@/components/ui/common/cards/card.recipe';
+
 import defaultThumbnail from '@images/default-thumbnail.png';
 
 import { css } from '@root/styled-system/css';
@@ -27,27 +33,14 @@ type WideCardProps = {
 
 function WideCard({ image, children }: WideCardProps) {
   return (
-    <div
-      className={css({
-        display: 'flex',
-        alignItems: 'center',
-        gap: 3.5,
-        p: 3,
-        borderRadius: 'lg',
-        boxShadow: 'md',
-      })}
-    >
-      <Image
-        src={image || defaultThumbnail}
-        alt="썸네일"
-        className={css({
-          borderRadius: 'lg',
-          width: 'full',
-          maxWidth: '150px',
-          overflow: 'hidden',
-          objectFit: 'cover',
-        })}
-      />
+    <div className={cardWrapper()}>
+      <div className={cardImageWrapper()}>
+        <Image
+          src={image || defaultThumbnail}
+          alt="썸네일"
+          className={cardImage()}
+        />
+      </div>
       <div
         className={css({
           flex: 1,

@@ -1,6 +1,6 @@
 import { StarIcon } from '@/components/icons';
 
-import { css } from '@root/styled-system/css';
+import { flex } from '@root/styled-system/patterns';
 
 type StarRatingProps = {
   value: number;
@@ -9,7 +9,7 @@ type StarRatingProps = {
 
 function StarRating({ value, max = 5 }: StarRatingProps) {
   return (
-    <div className={css({ display: 'flex', gap: 1 })}>
+    <div className={flex({ gap: 'xs' })}>
       {Array.from({ length: max }).map((_, i) => {
         const filled = i < Math.floor(value);
         return (

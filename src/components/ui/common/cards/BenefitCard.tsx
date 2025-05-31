@@ -1,8 +1,10 @@
 import { ReactNode } from 'react';
 
 import { BookIcon, HomeMarkerIcon } from '@/components/icons';
-
-import { css } from '@root/styled-system/css';
+import {
+  cardWrapper,
+  titleText,
+} from '@/components/ui/common/cards/card.recipe';
 
 type BenefitCardProps = {
   icon?: 'book' | 'map';
@@ -42,21 +44,12 @@ function BenefitCard({ icon, title, content }: BenefitCardProps) {
         return null;
     }
   };
+
   return (
-    <div
-      className={css({
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 3,
-        p: 4,
-        borderRadius: 'sm',
-        boxShadow: 'md',
-        alignItems: 'center',
-      })}
-    >
+    <div className={cardWrapper({ direction: 'col', p: 'md', radius: 'sm' })}>
       {renderIcon()}
-      <p className={css({ textStyle: 'label1' })}>{title}</p>
-      <p className={css({ textStyle: 'label1', color: 'gray.600' })}>
+      <p className={titleText({ align: 'center' })}>{title}</p>
+      <p className={titleText({ align: 'center', color: 'gray600' })}>
         {content}
       </p>
     </div>

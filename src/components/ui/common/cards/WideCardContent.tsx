@@ -3,9 +3,13 @@
 import { ReactNode } from 'react';
 
 import { CalendarIcon, LocationIcon } from '@/components/icons';
+import {
+  cardWrapper,
+  flexBetween,
+  subText,
+  titleText,
+} from '@/components/ui/common/cards/card.recipe';
 import StarRating from '@/components/ui/common/ratings/StarRating';
-
-import { css } from '@root/styled-system/css';
 
 type WideCardContentProps = {
   title: string;
@@ -51,76 +55,40 @@ function WideCardContent({
 }: WideCardContentProps) {
   const ICON_MAP = {
     feeling: '😀',
-    location: <LocationIcon fill="#A5A7B5" strokeWidth={0.2} />,
+    location: (
+      <LocationIcon width={20} height={20} fill="#A5A7B5" strokeWidth={0.2} />
+    ),
   } as const;
 
   const icon = footerType ? ICON_MAP[footerType] : null;
 
   return (
     <div
-      className={css({
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 2,
-        p: 1,
-        justifyContent: 'space-between',
+      className={cardWrapper({
+        direction: 'col',
+        align: 'start',
+        p: 'xs',
+        shadow: 'none',
       })}
     >
-      <div
-        className={css({
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        })}
-      >
-        <span
-          className={css({
-            textStyle: 'label1',
-            lineClamp: 1,
-            width: 'full',
-          })}
-        >
-          {title}
-        </span>
+      <div className={flexBetween()}>
+        <span className={titleText()}>{title}</span>
         {action}
       </div>
-      <p
-        className={css({
-          display: 'flex',
-          gap: 1,
-          alignItems: 'center',
-          textStyle: 'body3',
-          color: 'gray.600',
-        })}
-      >
+      <p className={subText()}>
         {date && <CalendarIcon />}
         <span>{subtitle}</span>
       </p>
       {rating && (
-        <div
-          className={css({
-            display: 'flex',
-            gap: 1.5,
-            alignItems: 'center',
-            textStyle: 'body3',
-            color: 'gray.600',
-          })}
-        >
+        <div className={subText({ gap: 'md' })}>
           <StarRating value={Number(rating)} />
           <span>{rating}</span>
         </div>
       )}
       {footerText && (
-        <p className={css({ display: 'flex', alignItems: 'center', gap: 1 })}>
+        <p className={subText({ color: 'muted' })}>
           {icon}
-          <span
-            className={css({
-              textStyle: 'body3',
-              color: 'gray.400',
-            })}
-          >
-            {footerText}
-          </span>
+          <span>{footerText}</span>
         </p>
       )}
     </div>
