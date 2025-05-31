@@ -55,8 +55,8 @@ export const cardWrapper = cva({
 export const flexBetween = cva({
   base: {
     display: 'flex',
-    alignItems: 'center',
     width: 'full',
+    alignItems: 'center',
     justifyContent: 'space-between',
   },
 });
@@ -64,6 +64,7 @@ export const flexBetween = cva({
 export const flex = cva({
   base: {
     display: 'flex',
+    width: 'full',
   },
   variants: {
     direction: {
@@ -140,6 +141,8 @@ export const subText = cva({
     textStyle: {
       body3: { textStyle: 'body3' },
       body4: { textStyle: 'body4' },
+      label1: { textStyle: 'label1' },
+      label2: { textStyle: 'label2' },
     },
   },
   defaultVariants: {
@@ -188,6 +191,37 @@ export const cardImage = cva({
     objectFit: 'cover',
     width: 'full',
     height: 'full',
+  },
+});
+
+export const gridImageWrapper = cva({
+  base: {
+    display: 'grid',
+    width: '100%',
+    height: '200px',
+    overflow: 'hidden',
+  },
+  variants: {
+    layout: {
+      '1': {
+        gridTemplateColumns: '1fr',
+        gridTemplateRows: '1fr',
+      },
+      '2': {
+        gridTemplateColumns: 'repeat(2, 1fr)',
+      },
+      '3': {
+        gridTemplateColumns: 'repeat(3, 1fr)',
+      },
+      '4': {
+        gridTemplateColumns: 'repeat(2, 1fr)',
+        gridTemplateRows: 'repeat(2, 1fr)',
+      },
+      '5': {
+        gridTemplateColumns: '1fr 1fr 1fr',
+        gridTemplateRows: 'repeat(2, 1fr)',
+      },
+    },
   },
 });
 
