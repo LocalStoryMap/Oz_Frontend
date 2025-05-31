@@ -30,10 +30,10 @@ type SquareCardProps = {
  *
  * @component
  * @example
- * <SquareCard image="" title="국제시장" location="부산 중구" />
+ * <SquareCard image="/images/default-thumbnail.png" title="국제시장" location="부산 중구" />
  *
  * @example
- * <SquareCard image="" custom>
+ * <SquareCard image="/images/default-thumbnail.png" custom>
  *   <div>내가 원하는 콘텐츠</div>
  * </SquareCard>
  *
@@ -65,6 +65,7 @@ function SquareCard({
         <Image
           src={image || defaultThumbnail}
           alt={title || '카드이미지'}
+          fill
           className={cardImage()}
         />
         <span className={topRightAbsolute()}>{liked ? '❤️' : '🤍'}</span>

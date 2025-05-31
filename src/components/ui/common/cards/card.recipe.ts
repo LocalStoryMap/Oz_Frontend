@@ -189,8 +189,6 @@ export const cardImageWrapper = cva({
 export const cardImage = cva({
   base: {
     objectFit: 'cover',
-    width: 'full',
-    height: 'full',
   },
 });
 

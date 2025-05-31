@@ -23,7 +23,7 @@ type WideCardProps = {
  *
  * @component
  * @example
- * <WideCard image="/images/img.jpg">
+ * <WideCard image="/images/default-thumbnail.png">
  *   <WideCardContent />
  * </WideCard>
  *
@@ -38,6 +38,7 @@ function WideCard({ image, children }: WideCardProps) {
         <Image
           src={image || defaultThumbnail}
           alt="썸네일"
+          fill
           className={cardImage()}
         />
       </div>
