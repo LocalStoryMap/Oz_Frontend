@@ -32,6 +32,7 @@
     "react/require-default-props": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
     "react/function-component-definition": "off",
+    "react/no-array-index-key": "off",
 
     //접근성 관련 옵션 해제
     "jsx-a11y/click-events-have-key-events": "off",
