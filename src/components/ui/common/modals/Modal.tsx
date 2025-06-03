@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { ReactNode, useRef } from 'react';
 
 import { DangerIcon } from '@/components/icons';
 import { Button } from '@/components/ui/common/buttons/Button';
@@ -11,6 +11,8 @@ import {
   modalTitle,
   modalWrapper,
 } from '@/components/ui/common/modals/modal.recipe';
+import useClickOutside from '@/hooks/useClickOutside';
+import { useModalStore } from '@/store/useModalStore';
 
 type ModalProps = {
   title?: string;
@@ -50,10 +52,15 @@ function Modal({
   onConfirm,
   children,
 }: ModalProps) {
+  const { close } = useModalStore();
+
+  const modalRef = useRef<HTMLDivElement>(null);
+  useClickOutside(modalRef, close);
+
   return (
     <div className={modalWrapper()}>
       {children || (
-        <div className={modalContent()}>
+        <div ref={modalRef} className={modalContent()}>
           <div className={flex({ align: 'center', gap: 'xl' })}>
             <DangerIcon width={44} height={44} fill="red" />
             <div className={flex({ gap: 'md', px: 'lg' })}>
@@ -63,7 +70,7 @@ function Modal({
           </div>
           <div className={flex({ direction: 'row', gap: 'sm' })}>
             {type === 'two' && (
-              <Button color="outlineSoft" size="md" radius="md">
+              <Button onClick={close} color="outlineSoft" size="md" radius="md">
                 취소
               </Button>
             )}
