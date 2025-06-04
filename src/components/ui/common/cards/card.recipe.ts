@@ -93,7 +93,7 @@ export const flex = cva({
     },
     px: { lg: { px: '10' } },
     marginB: {
-      xs: { marginBottom: 2 },
+      sm: { marginBottom: 4 },
     },
   },
   defaultVariants: {

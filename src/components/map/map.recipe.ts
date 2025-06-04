@@ -36,10 +36,15 @@ export const IconWrapper = cva({
 export const CategoryTitle = cva({
   variants: {
     textStyle: {
+      body2: { textStyle: 'body2' },
       body3: { textStyle: 'body3' },
       body4: { textStyle: 'body4' },
       label1: { textStyle: 'label1' },
       label2: { textStyle: 'label2' },
+    },
+    active: {
+      true: { color: 'black' },
+      false: { color: 'gray.300' },
     },
   },
   defaultVariants: {

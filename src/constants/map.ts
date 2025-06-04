@@ -13,3 +13,8 @@ export const MAP_CATEGORY: MapCategory = [
   { label: '로컬맛집', path: '/', icon: FoodIcon },
   { label: '카페', path: '/', icon: CoffeeIcon },
 ];
+
+export const MAP_VIEW_TABS = [
+  { label: '전체', value: 'all', path: '/' },
+  { label: '인기', value: 'popular', path: '/' },
+];
