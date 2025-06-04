@@ -64,14 +64,18 @@ export const flexBetween = cva({
 export const flex = cva({
   base: {
     display: 'flex',
-    width: 'full',
   },
   variants: {
+    width: { full: { width: 'full' }, auto: { width: 'auto' } },
     direction: {
       row: { flexDirection: 'row' },
       col: { flexDirection: 'column' },
     },
-    align: { center: { alignItems: 'center' } },
+    align: {
+      start: { alignItems: 'flex-start' },
+      center: { alignItems: 'center' },
+      end: { alignItems: 'flex-end' },
+    },
     gap: {
       none: { gap: '0' },
       xs: { gap: '1' },
@@ -88,8 +92,12 @@ export const flex = cva({
       lg: { p: '6' },
     },
     px: { lg: { px: '10' } },
+    marginB: {
+      xs: { marginBottom: 2 },
+    },
   },
   defaultVariants: {
+    width: 'full',
     direction: 'col',
     gap: 'none',
     p: 'none',

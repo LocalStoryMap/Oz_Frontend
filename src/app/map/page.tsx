@@ -1,0 +1,27 @@
+import { CategoryTitle, IconWrapper } from '@/components/map/map.recipe';
+import { flex } from '@/components/ui/common/cards/card.recipe';
+import { MAP_CATEGORY } from '@/constants/map';
+
+function page() {
+  return (
+    <div className={flex({ direction: 'row', p: 'xs', marginB: 'xs' })}>
+      {MAP_CATEGORY.map(category => (
+        <div className={flex({ width: 'auto', align: 'center' })}>
+          <div
+            className={IconWrapper({
+              size: 'lg',
+              radius: 'full',
+              border: 'black',
+              margin: 'xs',
+            })}
+          >
+            <category.icon />
+          </div>
+          <p className={CategoryTitle()}>{category.label}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default page;
