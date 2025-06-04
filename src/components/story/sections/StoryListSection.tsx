@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import isMatchedByKeywordAndRegion from '@components/story/isMatchedByKeywordAndRegion';
-import normalizeText from '@components/story/normalizeText';
+import isMatchedByKeywordAndRegion from '@components/story/utils/isMatchedByKeywordAndRegion';
+import normalizeText from '@components/story/utils/normalizeText';
 import StoryCard from '@components/ui/common/cards/StoryCard';
 
 import { mockStoryList } from '@/mocks/mockStoryList';
