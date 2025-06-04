@@ -1,8 +1,8 @@
 import React from 'react';
 import { commentListWrapperStyle } from '@components/story/detail/comment.recipe';
 import CommentCard from '@components/story/detail/comment/CommentCard';
-import { CommentItem } from '@components/story/useComment';
-import { UseInputMode } from '@components/story/useInputMode';
+import { CommentItem } from '@components/story/hooks/useComment';
+import { UseInputMode } from '@components/story/hooks/useInputMode';
 
 import { css } from '@root/styled-system/css';
 

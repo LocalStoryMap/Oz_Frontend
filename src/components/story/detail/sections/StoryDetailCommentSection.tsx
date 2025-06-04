@@ -5,8 +5,8 @@ import CommentInputBox from '@components/story/detail/comment/CommentInputBox';
 import PostReactionButtons from '@components/story/detail/post/PostReactionButtons';
 import StoryDetailCommentCard from '@components/story/detail/sections/StoryDetailCommentCard';
 import UserHeaderInfo from '@components/story/detail/UserHeaderInfo';
-import useComment from '@components/story/useComment';
-import useInputMode from '@components/story/useInputMode';
+import useComment from '@components/story/hooks/useComment';
+import useInputMode from '@components/story/hooks/useInputMode';
 import { Button } from '@components/ui/common/buttons/Button';
 
 import { css } from '@root/styled-system/css';

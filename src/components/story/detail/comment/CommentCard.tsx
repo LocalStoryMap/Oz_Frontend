@@ -3,8 +3,8 @@ import ActionButtons from '@components/story/detail/comment/ActionButtons';
 import CommentContent from '@components/story/detail/comment/CommentContent';
 import ReplyInput from '@components/story/detail/comment/ReplyInput';
 import UserHeaderInfo from '@components/story/detail/UserHeaderInfo';
-import type { CommentItem } from '@components/story/useComment';
-import type { UseInputMode } from '@components/story/useInputMode';
+import type { CommentItem } from '@components/story/hooks/useComment';
+import type { UseInputMode } from '@components/story/hooks/useInputMode';
 
 import { css } from '@root/styled-system/css';
 
