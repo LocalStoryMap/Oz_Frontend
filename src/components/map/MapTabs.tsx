@@ -14,7 +14,14 @@ function MapTabs() {
 
   return (
     <>
-      <nav className={flex({ direction: 'row', gap: 'lg', marginB: 'sm' })}>
+      <nav
+        className={flex({
+          direction: 'row',
+          gap: 'lg',
+          marginB: 'sm',
+          px: 'sm',
+        })}
+      >
         {MAP_VIEW_TABS.map(({ label, value }) => (
           <button
             key={value}

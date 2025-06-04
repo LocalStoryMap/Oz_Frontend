@@ -48,7 +48,7 @@ export const cardWrapper = cva({
     gap: 'md',
     p: 'sm',
     radius: 'lg',
-    shadow: 'md',
+    shadow: 'sm',
   },
 });
 
@@ -91,7 +91,7 @@ export const flex = cva({
       md: { p: '4' },
       lg: { p: '6' },
     },
-    px: { lg: { px: '10' } },
+    px: { sm: { paddingX: 3 }, lg: { px: '10' } },
     marginB: {
       sm: { marginBottom: 4 },
     },
