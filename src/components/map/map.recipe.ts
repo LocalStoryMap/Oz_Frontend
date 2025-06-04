@@ -1,6 +1,6 @@
 import { cva } from '@root/styled-system/css';
 
-export const IconWrapper = cva({
+export const iconWrapper = cva({
   base: { display: 'flex', alignItems: 'center', justifyContent: 'center' },
   variants: {
     size: {
@@ -33,7 +33,7 @@ export const IconWrapper = cva({
   },
 });
 
-export const CategoryTitle = cva({
+export const categoryTitle = cva({
   variants: {
     textStyle: {
       body2: { textStyle: 'body2' },
@@ -49,5 +49,35 @@ export const CategoryTitle = cva({
   },
   defaultVariants: {
     textStyle: 'body3',
+  },
+});
+
+export const gridLayout = cva({
+  base: {
+    display: 'grid',
+  },
+  variants: {
+    columns: {
+      1: { gridTemplateColumns: 'repeat(1, 1fr)' },
+      2: { gridTemplateColumns: 'repeat(2, 1fr)' },
+      3: { gridTemplateColumns: 'repeat(3, 1fr)' },
+      4: { gridTemplateColumns: 'repeat(4, 1fr)' },
+    },
+    gap: {
+      none: { gap: 0 },
+      lg: { gap: 6 },
+    },
+    p: {
+      none: { padding: 0 },
+      sm: { padding: 2 },
+    },
+    marginB: {
+      sm: { marginBottom: 3 },
+    },
+  },
+  defaultVariants: {
+    columns: 2,
+    gap: 'lg',
+    p: 'sm',
   },
 });
