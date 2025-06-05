@@ -2,9 +2,9 @@
 
 import { CheckIcon } from '@/components/icons';
 import { Button } from '@/components/ui/common/buttons/Button';
-import { Input } from '@/components/ui/common/textfield/Input';
-import { Search } from '@/components/ui/common/textfield/Search';
-import { Textarea } from '@/components/ui/common/textfield/Textarea';
+import { Input } from '@/components/ui/common/textfields/Input';
+import { Search } from '@/components/ui/common/textfields/Search';
+import { Textarea } from '@/components/ui/common/textfields/Textarea';
 
 import { css } from '@root/styled-system/css';
 
@@ -204,15 +204,15 @@ export default function TextStylePreviewPage() {
       </div>
 
       {/**
-       * Textfield 컴포넌트 스타일 가이드
+       * Textfields 컴포넌트 스타일 가이드
        * @section Textfields
        * @description Search / Input / Textarea 컴포넌트의 피그마 시안 기반 스타일 구현
        *
        * 디자인 특징:
        * - Search: startIcon(왼쪽 검색 아이콘), white/gray.100 배경별 색상 차이
        * - Input: endIcon(오른쪽 체크 아이콘), 인증 상태별 조건부 렌더링
-       * - Textarea: 두 가지 스타일 - 일반(gray.50, body2, xs) / 큰 버전(white, label2, md)
-       * - 입력 텍스트는 모두 textDefault, placeholder는 gray.500 기준
+       * - Textarea: Small (gray.50, body2) / Large (white, label2)
+       * - 입력 텍스트는 모두 textDefault
        */}
       <div
         className={css({
@@ -249,10 +249,10 @@ export default function TextStylePreviewPage() {
          * @usage Map Search
          * @example <Search placeholder="Search" />
          */}
-        <Search placeholder="Search" />
+        <Search placeholder="Search" autoFocus />
 
         {/**
-         * Search Component - Filled (Gray) - TimeLine
+         * Search Component - Filled (Gray)
          * @usage TimeLine
          * @example <Search placeholder="어떤 곳이든" variant="filled" />
          */}
@@ -295,13 +295,13 @@ export default function TextStylePreviewPage() {
         />
 
         {/**
-         * Textarea Component - Small Size (Profile Edit)
+         * Textarea Component - Small Size
          * @usage Profile Edit
          * @example
-         * <Textarea placeholder="자기소개 작성" size="md" />
+         * <Textarea size="md" placeholder="자기소개를 입력하세요" />
          */}
         <Textarea
-          placeholder="반 갑 습 니 다 ^^"
+          placeholder="자기소개를 입력하세요"
           size="md"
           radius="lg"
           fullWidth
@@ -309,13 +309,13 @@ export default function TextStylePreviewPage() {
 
         {/**
          * Textarea Component - Large Size
-         * @usage TimeLine Story 작성
+         * @usage TimeLine Story
          * @example
-         * <Textarea variant="large" placeholder="자세한 후기를 작성하세요" />
+         * <Textarea size="lg" placeholder="후기를 작성하세요" />
          */}
         <Textarea
-          variant="large"
-          placeholder="직전 다녀온 생생한 후기를 작성해보세요"
+          size="lg"
+          placeholder="직접 다녀온 생생한 후기를 작성해보세요"
           fullWidth
         />
       </div>
