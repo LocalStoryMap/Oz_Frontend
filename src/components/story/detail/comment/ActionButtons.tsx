@@ -1,7 +1,7 @@
 import { buttonWrapperStyle } from '@components/story/detail/comment.recipe';
 import { Button } from '@components/ui/common/buttons/Button';
 
-// 댓글 답글 / 수정 / 삭제 버튼 컴포넌트 서버 api 나오면 뮤테이션 처리 관심사 분리
+// 댓글 답글 / 수정 / 삭제 버튼 컴포넌트 서버 api 나오면 뮤테이션 처리 관심사 분리 !
 function ActionButtons({
   isPendingDelete,
   onReply,
