@@ -1,5 +1,6 @@
 import { cva } from '@root/styled-system/css';
 
+// style
 export const storySection = cva({
   base: {
     mb: 12,
