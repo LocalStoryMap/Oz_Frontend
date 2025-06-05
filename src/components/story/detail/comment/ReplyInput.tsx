@@ -27,7 +27,11 @@ function ReplyInput({
         placeholder="댓글을 입력하세요"
         className={inputBoxStyle()}
       />
-      <Button onClick={onSubmit} className={replyButtonStyle()}>
+      <Button
+        onClick={onSubmit}
+        className={replyButtonStyle()}
+        disabled={!value.trim()}
+      >
         등록
       </Button>
       <Button onClick={onCancel} className={replyButtonStyle()}>
