@@ -42,6 +42,10 @@ export const cardWrapper = cva({
       md: { boxShadow: 'md' },
       lg: { boxShadow: 'lg' },
     },
+    cursor: {
+      none: { cursor: 'default' },
+      pointer: { cursor: 'pointer' },
+    },
   },
   defaultVariants: {
     direction: 'row',
@@ -50,6 +54,7 @@ export const cardWrapper = cva({
     p: 'sm',
     radius: 'lg',
     shadow: 'sm',
+    cursor: 'pointer',
   },
 });
 
@@ -94,6 +99,7 @@ export const flex = cva({
     },
     px: { sm: { paddingX: 3 }, lg: { px: '10' } },
     marginB: {
+      xs: { marginBottom: 2 },
       sm: { marginBottom: 4 },
     },
   },

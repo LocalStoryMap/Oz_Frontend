@@ -33,6 +33,7 @@ function MapTabs() {
             className={categoryTitle({
               textStyle: selectedTab === value ? 'label1' : 'body2',
               active: selectedTab === value,
+              cursor: 'pointer',
             })}
             onClick={() => setSelectedTab(value)}
           >
