@@ -9,7 +9,7 @@ import {
   subText,
   titleText,
 } from '@/components/ui/common/cards/card.recipe';
-import StarRating from '@/components/ui/common/ratings/StarRating';
+import StarRating from '@/components/ui/ratings/StarRating';
 
 type WideCardContentProps = {
   title: string;
