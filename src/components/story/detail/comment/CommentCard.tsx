@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import ActionButtons from '@components/story/detail/comment/ActionButtons';
 import CommentContent from '@components/story/detail/comment/CommentContent';
 import ReplyInput from '@components/story/detail/comment/ReplyInput';
@@ -17,8 +17,15 @@ type Props = {
 };
 
 export default function CommentCard({ comment, depth }: Props) {
-  const { inputMode, setInputMode, onSubmit, onCancel, onDelete, onChange } =
-    useCommentStore();
+  const {
+    inputMode,
+    setInputMode,
+    onSubmit,
+    onCancel,
+    onDelete,
+    onChange,
+    comments,
+  } = useCommentStore();
 
   const isEditing =
     inputMode.mode === 'edit' && inputMode.payload.commentId === comment.id;
@@ -28,6 +35,10 @@ export default function CommentCard({ comment, depth }: Props) {
     inputMode.mode === 'edit' &&
     inputMode.payload.commentId === comment.id &&
     !inputMode.payload.value;
+
+  const childComments = useMemo(() => {
+    return comments.filter(c => c.parentId === comment.id);
+  }, [comments, comment.id]);
 
   return (
     <div
@@ -74,12 +85,9 @@ export default function CommentCard({ comment, depth }: Props) {
 
       {depth < 2 && (
         <div className={css({ marginLeft: 16 })}>
-          {useCommentStore
-            .getState()
-            .comments.filter(c => c.parentId === comment.id)
-            .map(child => (
-              <CommentCard key={child.id} comment={child} depth={depth + 1} />
-            ))}
+          {childComments.map(child => (
+            <CommentCard key={child.id} comment={child} depth={depth + 1} />
+          ))}
         </div>
       )}
     </div>
