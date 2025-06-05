@@ -4,8 +4,8 @@ import {
   inputBoxStyle,
   inputWrapperStyle,
 } from '@components/story/detail/comment.recipe';
-import { CommentItem } from '@components/story/hooks/useComment';
 import { Button } from '@components/ui/common/buttons/Button';
+import { CommentItem, useCommentStore } from '@store/useCommentStore';
 
 import { css } from '@root/styled-system/css';
 
@@ -13,20 +13,11 @@ type Props = {
   comment: CommentItem;
   isEditing: boolean;
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: () => void;
-  onCancel: () => void;
 };
 
 // 댓글 내용을 보여주거나 수정 폼을 렌더링하는 컴포넌트 역할 분리
-function CommentContent({
-  comment,
-  isEditing,
-  value,
-  onChange,
-  onSubmit,
-  onCancel,
-}: Props) {
+function CommentContent({ comment, isEditing, value }: Props) {
+  const { onCancel, onSubmit, onChange } = useCommentStore();
   if (!isEditing)
     return (
       <p className={css({ textAlign: 'start', mb: 4 })}>{comment.title}</p>

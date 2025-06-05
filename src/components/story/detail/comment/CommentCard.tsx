@@ -3,35 +3,23 @@ import ActionButtons from '@components/story/detail/comment/ActionButtons';
 import CommentContent from '@components/story/detail/comment/CommentContent';
 import ReplyInput from '@components/story/detail/comment/ReplyInput';
 import UserHeaderInfo from '@components/story/detail/UserHeaderInfo';
-import type { CommentItem } from '@components/story/hooks/useComment';
-import type { UseInputMode } from '@components/story/hooks/useInputMode';
+import { useCommentStore } from '@store/useCommentStore';
 
 import { css } from '@root/styled-system/css';
 
 type Props = {
-  comment: CommentItem;
-  childNodes: Record<number, CommentItem[]>;
-  inputMode: UseInputMode;
-  setInputMode: React.Dispatch<React.SetStateAction<UseInputMode>>;
-  onSubmit: () => void;
-  onCancel: () => void;
-  onDelete: () => void;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  comment: {
+    id: number;
+    title: string;
+    parentId: number | null;
+  };
   depth: number;
 };
 
-// 대댓글을 보여주는 컴포넌트
-export default function CommentCard({
-  comment,
-  childNodes,
-  inputMode,
-  setInputMode,
-  onSubmit,
-  onCancel,
-  onDelete,
-  onChange,
-  depth,
-}: Props) {
+export default function CommentCard({ comment, depth }: Props) {
+  const { inputMode, setInputMode, onSubmit, onCancel, onDelete, onChange } =
+    useCommentStore();
+
   const isEditing =
     inputMode.mode === 'edit' && inputMode.payload.commentId === comment.id;
   const isReplying =
@@ -63,10 +51,7 @@ export default function CommentCard({
               })
             }
             onDeleteConfirm={() =>
-              setInputMode({
-                mode: 'edit',
-                payload: { commentId: comment.id },
-              })
+              setInputMode({ mode: 'edit', payload: { commentId: comment.id } })
             }
             onDelete={onDelete}
           />
@@ -74,10 +59,7 @@ export default function CommentCard({
         <CommentContent
           comment={comment}
           isEditing={isEditing}
-          value={inputMode.payload.value ?? ''}
-          onChange={onChange}
-          onSubmit={onSubmit}
-          onCancel={onCancel}
+          value={isEditing ? (inputMode.payload.value ?? '') : comment.title}
         />
       </div>
 
@@ -90,21 +72,16 @@ export default function CommentCard({
         />
       )}
 
-      {depth < 2 &&
-        childNodes[comment.id]?.map(child => (
-          <CommentCard
-            key={child.id}
-            comment={child}
-            childNodes={childNodes}
-            inputMode={inputMode}
-            setInputMode={setInputMode}
-            onSubmit={onSubmit}
-            onCancel={onCancel}
-            onDelete={onDelete}
-            onChange={onChange}
-            depth={depth + 1}
-          />
-        ))}
+      {depth < 2 && (
+        <div className={css({ marginLeft: 16 })}>
+          {useCommentStore
+            .getState()
+            .comments.filter(c => c.parentId === comment.id)
+            .map(child => (
+              <CommentCard key={child.id} comment={child} depth={depth + 1} />
+            ))}
+        </div>
+      )}
     </div>
   );
 }

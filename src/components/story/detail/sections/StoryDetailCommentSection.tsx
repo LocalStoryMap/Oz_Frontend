@@ -5,9 +5,8 @@ import CommentInputBox from '@components/story/detail/comment/CommentInputBox';
 import PostReactionButtons from '@components/story/detail/post/PostReactionButtons';
 import StoryDetailCommentCard from '@components/story/detail/sections/StoryDetailCommentCard';
 import UserHeaderInfo from '@components/story/detail/UserHeaderInfo';
-import useComment from '@components/story/hooks/useComment';
-import useInputMode from '@components/story/hooks/useInputMode';
 import { Button } from '@components/ui/common/buttons/Button';
+import { useCommentStore } from '@store/useCommentStore';
 
 import { css } from '@root/styled-system/css';
 
@@ -17,25 +16,14 @@ import { css } from '@root/styled-system/css';
  * 댓글 상태 및 입력 모드를 useComment와 useInputMode 훅을 통해 관리한다.
  */
 function StoryDetailCommentSection() {
-  const { rootComments, comments, setComments, childNodes } = useComment();
-  const { inputMode, setInputMode, onSubmit, onChange, onCancel, onDelete } =
-    useInputMode({
-      comments,
-      setComments,
-    });
+  const { rootInputValue, setRootInputValue, onSubmitRoot } = useCommentStore();
 
   return (
     <article>
       <div className={css({ display: 'flex', alignItems: 'center' })}>
         <UserHeaderInfo userName="이관용" createdAt="2025-05-27" />
         <div className={css({ marginLeft: 'auto' })}>
-          <div
-            className={css({
-              display: 'flex',
-              marginLeft: 'auto',
-              gap: 4,
-            })}
-          >
+          <div className={css({ display: 'flex', gap: 4 })}>
             <Button size="sm" color="outline">
               수정
             </Button>
@@ -45,21 +33,14 @@ function StoryDetailCommentSection() {
           </div>
         </div>
       </div>
+
       <PostReactionButtons />
-      <StoryDetailCommentCard
-        rootComments={rootComments}
-        inputMode={inputMode}
-        setInputMode={setInputMode}
-        childNodes={childNodes}
-        onSubmit={onSubmit}
-        onCancel={onCancel}
-        onDelete={onDelete}
-        onChange={onChange}
-      />
+      <StoryDetailCommentCard />
+
       <CommentInputBox
-        value={inputMode.payload.value ?? ''}
-        onChange={onChange}
-        onSubmit={onSubmit}
+        value={rootInputValue}
+        onChange={e => setRootInputValue(e.target.value)}
+        onSubmit={onSubmitRoot}
       />
     </article>
   );
