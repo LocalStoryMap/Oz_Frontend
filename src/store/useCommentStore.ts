@@ -48,9 +48,15 @@ export const useCommentStore = create<CommentStore>((set, get) => ({
     }));
   },
   onSubmit: () => {
-    const { inputMode, comments } = get();
+    const { inputMode } = get();
+    if (!inputMode.payload.value?.trim()) {
+      return;
+    }
     switch (inputMode.mode) {
       case 'reply':
+        if (inputMode.payload.parent === undefined) {
+          return;
+        }
         set(state => ({
           comments: [
             ...state.comments,
@@ -80,7 +86,7 @@ export const useCommentStore = create<CommentStore>((set, get) => ({
     }
   },
   onSubmitRoot: () => {
-    const { rootInputValue, comments } = get();
+    const { rootInputValue } = get();
     if (!rootInputValue.trim()) return;
     set(state => ({
       comments: [
@@ -100,9 +106,18 @@ export const useCommentStore = create<CommentStore>((set, get) => ({
   onDelete: () => {
     const { inputMode, comments } = get();
     const deleteTargetId = inputMode.payload.commentId;
+
+    if (!deleteTargetId) {
+      return;
+    }
+    const targetComment = comments.find(
+      comment => comment.id === deleteTargetId,
+    );
+    if (!targetComment) {
+      return;
+    }
     const idsToDelete = [deleteTargetId];
-    const isRoot =
-      comments.find(c => c.id === deleteTargetId)?.parentId === null;
+    const isRoot = targetComment.parentId === null;
     if (isRoot) {
       const childIds = comments
         .filter(c => c.parentId === deleteTargetId)
