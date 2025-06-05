@@ -19,12 +19,14 @@ function CommentInputBox({ value, onChange, onSubmit }: Props) {
         value={value}
         className={css({ width: '100%' })}
         onChange={onChange}
+        aria-label="댓글 입력"
       />
       <Button
         size="sm"
         color="outlineSoft"
         onClick={onSubmit}
         className={css({ width: '20%' })}
+        disabled={!value.trim()}
       >
         등록
       </Button>
