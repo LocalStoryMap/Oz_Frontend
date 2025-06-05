@@ -12,14 +12,14 @@ function PostReactionButtons() {
         display: 'flex',
         alignItems: 'center',
         mb: 12,
-        borderBottom: '1px solid grey',
+        borderBottom: '1px solid token(colors.gray.200)',
         width: '100%',
       })}
     >
-      <Button size="sm" color="outline">
+      <Button size="sm" color="outline" aria-label="좋아요 버튼">
         <HeartIcon />0
       </Button>
-      <Button size="sm" color="outline">
+      <Button size="sm" color="outline" aria-label="댓글 수">
         <CommentsIcon fill="none" />0
       </Button>
     </div>
