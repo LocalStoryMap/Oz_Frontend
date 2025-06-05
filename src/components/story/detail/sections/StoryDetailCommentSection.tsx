@@ -24,10 +24,18 @@ function StoryDetailCommentSection() {
         <UserHeaderInfo userName="이관용" createdAt="2025-05-27" />
         <div className={css({ marginLeft: 'auto' })}>
           <div className={css({ display: 'flex', gap: 4 })}>
-            <Button size="sm" color="outline">
+            <Button
+              size="sm"
+              color="outline"
+              onClick={() => alert('글 쓰기 수정으로 가는 버튼')}
+            >
               수정
             </Button>
-            <Button size="sm" color="outline">
+            <Button
+              size="sm"
+              color="outline"
+              onClick={() => alert('글을 삭제하는 버튼')}
+            >
               삭제
             </Button>
           </div>
