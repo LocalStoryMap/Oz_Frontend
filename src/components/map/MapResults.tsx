@@ -1,6 +1,6 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { Button } from '@/components/ui/common/buttons/Button';
 import { flex, flexBetween } from '@/components/ui/common/cards/card.recipe';
@@ -11,6 +11,8 @@ import { Likes } from '@/components/ui/common/toggles';
 import { locationList } from '@/mocks/mapDetail';
 
 function MapResults() {
+  const router = useRouter();
+
   const searchParams = useSearchParams();
   const query = searchParams.get('query') || '';
 
@@ -33,6 +35,7 @@ function MapResults() {
               footerType="location"
               footerText={place.location}
               action={<Likes liked={place.liked} />}
+              onClick={() => router.push(`/map/{place.id}`)}
             />
           </WideCard>
         ))}
