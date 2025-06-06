@@ -203,6 +203,9 @@ export const cardImageWrapper = cva({
       lg: { borderRadius: 'lg' },
       full: { borderRadius: 'full' },
     },
+    maxW: {
+      130: { maxW: '130px' },
+    },
   },
   defaultVariants: {
     aspect: 'square',

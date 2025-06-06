@@ -77,7 +77,7 @@ function WideCardContent({
       onClick={onClick}
     >
       <p className={titleText()}>{title}</p>
-      <div className={topRightAbsolute({ top: 5, right: 3 })}>{action}</div>
+      <div className={topRightAbsolute({ top: 3, right: 3 })}>{action}</div>
       <div className={subText()}>
         {date && <CalendarIcon />}
         <span>{subtitle}</span>

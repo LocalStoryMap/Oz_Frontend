@@ -33,7 +33,7 @@ function MapResults() {
           />
         </div>
       </div>
-      <div>
+      <div className={flex({ gap: 'lg' })}>
         {data.map(place => (
           <WideCard image={place.image}>
             <WideCardContent
