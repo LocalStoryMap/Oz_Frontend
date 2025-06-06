@@ -13,6 +13,7 @@ import {
   titleText,
   topRightAbsolute,
 } from '@/components/ui/common/cards/card.recipe';
+import { Likes } from '@/components/ui/common/toggles';
 
 import defaultThumbnail from '@images/default-thumbnail.png';
 
@@ -68,8 +69,10 @@ function SquareCard({
           fill
           className={cardImage()}
         />
-        <span className={topRightAbsolute()}>{liked ? '❤️' : '🤍'}</span>
       </div>
+      <span className={topRightAbsolute()} style={{ zIndex: 1 }}>
+        <Likes liked={liked} />
+      </span>
       {custom ? (
         children
       ) : (
