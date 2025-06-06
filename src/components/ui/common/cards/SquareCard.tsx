@@ -18,12 +18,14 @@ import { Likes } from '@/components/ui/common/toggles';
 import defaultThumbnail from '@images/default-thumbnail.png';
 
 type SquareCardProps = {
+  id?: number;
   image: string;
   liked?: boolean;
   title?: string;
   location?: string;
   custom?: boolean;
   children?: ReactNode;
+  onClick?: () => void;
 };
 
 /**
@@ -47,12 +49,14 @@ type SquareCardProps = {
  */
 
 function SquareCard({
+  id,
   image,
   liked = false,
   title,
   location,
   custom = false,
   children,
+  onClick,
 }: SquareCardProps) {
   return (
     <div
@@ -61,6 +65,7 @@ function SquareCard({
         align: 'start',
         gap: 'sm',
       })}
+      onClick={onClick}
     >
       <div className={cardImageWrapper({ maxWidth: 'none' })}>
         <Image
@@ -69,10 +74,10 @@ function SquareCard({
           fill
           className={cardImage()}
         />
+        <span className={topRightAbsolute()}>
+          <Likes liked={liked} />
+        </span>
       </div>
-      <span className={topRightAbsolute()} style={{ zIndex: 1 }}>
-        <Likes liked={liked} />
-      </span>
       {custom ? (
         children
       ) : (

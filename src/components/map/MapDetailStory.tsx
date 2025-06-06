@@ -34,8 +34,9 @@ function MapDetailStory({ title, images }: MapDetailStoryProps) {
         </span>
       </p>
       <div className={gridLayout({ columns: 4, gap: 'sm', p: 'xs' })}>
-        {images.map(img => (
+        {images.map((img, i) => (
           <Image
+            key={i}
             src={img}
             alt={title}
             width={0}
