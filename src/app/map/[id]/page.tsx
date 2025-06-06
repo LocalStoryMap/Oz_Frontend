@@ -1,6 +1,8 @@
 import Image from 'next/image';
 
 import { LocationIcon } from '@/components/icons';
+import MapDetailStory from '@/components/map/MapDetailStory';
+import { Button } from '@/components/ui/common/buttons/Button';
 import {
   cardImageWrapper,
   flex,
@@ -14,7 +16,7 @@ function page() {
   const data = mapDetail;
 
   return (
-    <div className={flex({ marginB: 'sm', gap: 'lg' })}>
+    <div className={flex({ marginB: 'sm', gap: 'xl' })}>
       <div className={cardImageWrapper({ maxWidth: 'none', aspect: 'wide' })}>
         <Image src={data.image} alt={data.title} fill />
         <span
@@ -37,7 +39,7 @@ function page() {
             color: 'gray400',
           })}
         >
-          <LocationIcon />
+          <LocationIcon width={20} height={20} />
           {data.location}
         </p>
         <p
@@ -50,6 +52,8 @@ function page() {
           {data.description}
         </p>
       </div>
+      <MapDetailStory title={data.title} images={data.storyImg} />
+      <Button>스토리 나누러 가기</Button>
     </div>
   );
 }

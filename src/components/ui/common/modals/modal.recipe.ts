@@ -74,6 +74,8 @@ export const modalText = cva({
       pageTitle: { textStyle: 'pageTitle' },
       body2: { textStyle: 'body2' },
       body3: { textStyle: 'body3' },
+      label1: { textStyle: 'label1' },
+      label2: { textStyle: 'label2' },
     },
     align: {
       left: { textAlign: 'left' },
@@ -86,6 +88,10 @@ export const modalText = cva({
       gray600: { color: 'gray.600' },
       gray500: { color: 'gray.500' },
       gray400: { color: 'gray.400' },
+      blue500: { color: 'blue.500' },
+    },
+    cursor: {
+      pointer: { cursor: 'pointer' },
     },
   },
   defaultVariants: {
