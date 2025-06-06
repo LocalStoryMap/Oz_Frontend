@@ -1,13 +1,15 @@
 'use client';
 
+import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-import { Button } from '@/components/ui/common/buttons/Button';
 import { flex, flexBetween } from '@/components/ui/common/cards/card.recipe';
 import WideCard from '@/components/ui/common/cards/WideCard';
 import WideCardContent from '@/components/ui/common/cards/WideCardContent';
+import FilterDropdown from '@/components/ui/common/dropdowns/FilterDropdown';
 import { modalText } from '@/components/ui/common/modals/modal.recipe';
 import { Likes } from '@/components/ui/common/toggles';
+import { MAP_DROPDOWN_OPTIONS } from '@/constants/map';
 import { locationList } from '@/mocks/mapDetail';
 
 function MapResults() {
@@ -16,13 +18,20 @@ function MapResults() {
   const searchParams = useSearchParams();
   const query = searchParams.get('query') || '';
 
+  const [selected, setSelected] = useState(MAP_DROPDOWN_OPTIONS[0].value);
   const data = locationList;
 
   return (
     <div className={flex({ p: 'md', gap: 'lg', marginB: 'sm' })}>
       <div className={flexBetween()}>
         <span className={modalText({ text: 'sub2' })}>{query}</span>
-        <div>드롭박스</div>
+        <div>
+          <FilterDropdown
+            options={MAP_DROPDOWN_OPTIONS}
+            selected={selected}
+            onChange={value => setSelected(value)}
+          />
+        </div>
       </div>
       <div>
         {data.map(place => (
