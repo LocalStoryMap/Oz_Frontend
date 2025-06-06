@@ -237,7 +237,19 @@ export const gridImageWrapper = cva({
 export const topRightAbsolute = cva({
   base: {
     position: 'absolute',
-    top: '1',
-    right: '1',
+  },
+  variants: {
+    top: {
+      1: { top: '1' },
+      3: { top: '3' },
+    },
+    right: {
+      1: { right: '1' },
+      3: { right: '3' },
+    },
+  },
+  defaultVariants: {
+    top: 1,
+    right: 1,
   },
 });
