@@ -156,6 +156,9 @@ export const subText = cva({
       label1: { textStyle: 'label1' },
       label2: { textStyle: 'label2' },
     },
+    clamp: {
+      1: { lineClamp: 1, width: 'full' },
+    },
   },
   defaultVariants: {
     color: 'default',

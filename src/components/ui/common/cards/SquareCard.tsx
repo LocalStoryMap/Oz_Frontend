@@ -83,9 +83,11 @@ function SquareCard({
       ) : (
         <div className={flex({ gap: 'sm' })}>
           <p className={titleText()}>{title}</p>
-          <p className={subText()}>
+          <p className={flex({ direction: 'row', align: 'center', gap: 'xs' })}>
             <LocationIcon width={16} height={16} />
-            <span className={subText({ color: 'muted' })}>{location}</span>
+            <span className={subText({ color: 'muted', clamp: 1 })}>
+              {location}
+            </span>
           </p>
         </div>
       )}
