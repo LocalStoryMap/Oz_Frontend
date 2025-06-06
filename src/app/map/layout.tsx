@@ -1,7 +1,7 @@
 import { GpsLocationIcon } from '@/components/icons';
 import { iconWrapper } from '@/components/map/map.recipe';
 import PageHeader from '@/components/ui/common/pageHeader/PageHeader';
-import { Search } from '@/components/ui/common/textfield';
+import { Search } from '@/components/ui/common/textfields';
 
 import { css } from '@root/styled-system/css';
 
