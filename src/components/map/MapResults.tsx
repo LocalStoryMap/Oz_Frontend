@@ -22,33 +22,39 @@ function MapResults() {
   const data = locationList;
 
   return (
-    <div className={flex({ p: 'md', gap: 'lg', marginB: 'sm' })}>
-      <div className={flexBetween()}>
-        <span className={modalText({ text: 'sub2' })}>{query}</span>
-        <div>
-          <FilterDropdown
-            options={MAP_DROPDOWN_OPTIONS}
-            selected={selected}
-            onChange={value => setSelected(value)}
-          />
+    <div className={flex({ p: 'md', marginB: 'sm' })}>
+      {query.trim() === '' ? (
+        <p>검색 결과가 없습니다.</p>
+      ) : (
+        <div className={flex({ gap: 'lg' })}>
+          <div className={flexBetween()}>
+            <span className={modalText({ text: 'sub2' })}>{query}</span>
+            <div>
+              <FilterDropdown
+                options={MAP_DROPDOWN_OPTIONS}
+                selected={selected}
+                onChange={value => setSelected(value)}
+              />
+            </div>
+          </div>
+          <div className={flex({ gap: 'lg' })}>
+            {data.map(place => (
+              <WideCard image={place.image}>
+                <WideCardContent
+                  title={place.title}
+                  subtitle={place.type}
+                  date={false}
+                  rating={place.rating}
+                  footerType="location"
+                  footerText={place.location}
+                  action={<Likes liked={place.liked} />}
+                  onClick={() => router.push(`/map/{place.id}`)}
+                />
+              </WideCard>
+            ))}
+          </div>
         </div>
-      </div>
-      <div className={flex({ gap: 'lg' })}>
-        {data.map(place => (
-          <WideCard image={place.image}>
-            <WideCardContent
-              title={place.title}
-              subtitle={place.type}
-              date={false}
-              rating={place.rating}
-              footerType="location"
-              footerText={place.location}
-              action={<Likes liked={place.liked} />}
-              onClick={() => router.push(`/map/{place.id}`)}
-            />
-          </WideCard>
-        ))}
-      </div>
+      )}
     </div>
   );
 }
