@@ -7,3 +7,27 @@ export const mapDetail = {
   storyImg: ['/images/story1.png', '/images/story2.png', '/images/story3.png'],
   liked: false,
 };
+
+export const locationList = [
+  {
+    id: 1,
+    title: '부산어린이대공원',
+    image: '/images/section.png',
+    location: '부산 부산진구 새싹로 295',
+    liked: false,
+  },
+  {
+    id: 2,
+    title: '국제시장',
+    image: '/images/section.png',
+    location: '부산 어쩌고 저쩌고 장소가 길어지면',
+    liked: true,
+  },
+  {
+    id: 3,
+    title: '송도해수욕장',
+    image: '/images/section.png',
+    location: '부산 기장군',
+    liked: true,
+  },
+];
