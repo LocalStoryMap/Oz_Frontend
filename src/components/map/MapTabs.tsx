@@ -59,7 +59,7 @@ function MapTabs() {
             title={place.title}
             location={place.location}
             liked={place.liked}
-            onClick={() => router.push(`/map/{id}`)}
+            onClick={() => router.push(`/map/{place.id}`)}
           />
         ))}
       </div>
