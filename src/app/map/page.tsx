@@ -11,6 +11,7 @@ function page() {
       <div className={flex({ direction: 'row', p: 'xs', marginB: 'sm' })}>
         {MAP_CATEGORY.map(category => (
           <div
+            key={category.label}
             className={cx(
               flex({ width: 'auto', align: 'center' }),
               css({ cursor: 'pointer' }),

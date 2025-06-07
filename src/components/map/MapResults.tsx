@@ -36,7 +36,7 @@ function MapResults({ query }: { query: string }) {
           </div>
           <div className={flex({ gap: 'lg' })}>
             {data.map(place => (
-              <WideCard image={place.image}>
+              <WideCard key={place.id} image={place.image}>
                 <WideCardContent
                   title={place.title}
                   subtitle={place.type}
@@ -45,7 +45,7 @@ function MapResults({ query }: { query: string }) {
                   footerType="location"
                   footerText={place.location}
                   action={<Likes liked={place.liked} />}
-                  onClick={() => router.push(`/map/{place.id}`)}
+                  onClick={() => router.push(`/map/${place.id}`)}
                 />
               </WideCard>
             ))}
