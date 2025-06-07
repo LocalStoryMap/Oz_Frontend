@@ -17,7 +17,8 @@ function MapSearchBar() {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (query.trim()) {
-      router.push(`/map/result?query=${encodeURIComponent(query.trim())}`);
+      router.push(`/map/search?query=${encodeURIComponent(query.trim())}`);
+      setQuery('');
     }
   };
 

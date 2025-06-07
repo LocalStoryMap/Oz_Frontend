@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import { flex, flexBetween } from '@/components/ui/common/cards/card.recipe';
 import WideCard from '@/components/ui/common/cards/WideCard';
@@ -12,18 +12,15 @@ import { Likes } from '@/components/ui/common/toggles';
 import { MAP_DROPDOWN_OPTIONS } from '@/constants/map';
 import { locationList } from '@/mocks/mapDetail';
 
-function MapResults() {
+function MapResults({ query }: { query: string }) {
   const router = useRouter();
-
-  const searchParams = useSearchParams();
-  const query = searchParams.get('query') || '';
 
   const [selected, setSelected] = useState(MAP_DROPDOWN_OPTIONS[0].value);
   const data = locationList;
 
   return (
     <div className={flex({ p: 'md', marginB: 'sm' })}>
-      {query.trim() === '' ? (
+      {query.trim() === '' || data.length < 1 ? (
         <p>검색 결과가 없습니다.</p>
       ) : (
         <div className={flex({ gap: 'lg' })}>
