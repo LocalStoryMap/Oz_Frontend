@@ -66,7 +66,9 @@ function StoryPostForm() {
           이미지/동영상 첨부
         </Button>
       </div>
-      <Button color="black">작성 완료</Button>
+      <Button onClick={() => router.push(`/story/`)} color="black">
+        작성 완료
+      </Button>
     </div>
   );
 }
