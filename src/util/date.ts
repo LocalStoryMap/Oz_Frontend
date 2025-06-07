@@ -23,3 +23,12 @@ export function getDayOptions(): Option[] {
     return { label: `${day}일`, value: day };
   });
 }
+
+export function getToday() {
+  const today = new Date();
+  const year = today.getFullYear().toString();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+
+  return { year, month, day };
+}
