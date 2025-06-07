@@ -5,6 +5,8 @@ import { flex } from '@/components/ui/common/cards/card.recipe';
 import { modalText } from '@/components/ui/common/modals/modal.recipe';
 import { Search, Textarea } from '@/components/ui/common/textfields';
 
+import { css } from '@root/styled-system/css';
+
 function StoryPostForm() {
   return (
     <div className={flex({ gap: 'xl' })}>
@@ -16,7 +18,13 @@ function StoryPostForm() {
           radius="md"
           placeholder="직접 다녀온 생생한 후기를 작성해보세요"
           fullWidth
-          style={{ minHeight: '150px', fontWeight: 400 }}
+          className={css({
+            minH: {
+              base: '150px',
+              md: '250px',
+            },
+            fontWeight: '400',
+          })}
         />
         <Button color="outline" size="sm">
           이미지/동영상 첨부
