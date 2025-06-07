@@ -13,7 +13,7 @@ export const dropdownButton = cva({
     cursor: 'pointer',
     fontSize: 'sm',
     color: 'gray.600',
-    minW: '28',
+    minW: '24',
   },
 });
 
@@ -28,6 +28,8 @@ export const dropdownList = cva({
     zIndex: '10',
     w: 'full',
     boxShadow: 'sm',
+    maxHeight: '130px',
+    overflowY: 'auto',
   },
 });
 

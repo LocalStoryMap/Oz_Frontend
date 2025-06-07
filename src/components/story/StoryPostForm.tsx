@@ -1,23 +1,59 @@
 'use client';
 
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
 import { Button } from '@/components/ui/common/buttons/Button';
 import { flex } from '@/components/ui/common/cards/card.recipe';
+import FilterDropdown from '@/components/ui/common/dropdowns/FilterDropdown';
 import { modalText } from '@/components/ui/common/modals/modal.recipe';
 import { Search, Textarea } from '@/components/ui/common/textfields';
+import {
+  getDayOptions,
+  getMonthOptions,
+  getToday,
+  getYearOptions,
+} from '@/util/date';
 
 import { css } from '@root/styled-system/css';
 
 function StoryPostForm() {
+  const router = useRouter();
+
+  const [date, setDate] = useState(getToday());
+
   return (
-    <div className={flex({ gap: 'xl' })}>
+    <div className={flex({ gap: 'xl', marginB: 'sm' })}>
       <div className={flex({ gap: 'lg', p: 'sm', marginB: 'sm' })}>
-        <p className={modalText({ text: 'body2', align: 'left' })}>글작성</p>
+        <p className={modalText({ text: 'head4', align: 'left' })}>글작성</p>
+        <div className={flex({ direction: 'row', gap: 'md' })}>
+          <FilterDropdown
+            options={getYearOptions()}
+            selected={date.year}
+            onChange={value => setDate(prev => ({ ...prev, year: value }))}
+          />
+          <FilterDropdown
+            options={getMonthOptions()}
+            selected={date.month}
+            onChange={value => setDate(prev => ({ ...prev, month: value }))}
+          />
+          <FilterDropdown
+            options={getDayOptions()}
+            selected={date.day}
+            onChange={value => setDate(prev => ({ ...prev, day: value }))}
+          />
+        </div>
         <Search radius="md" placeholder="위치를 지정해주세요" />
         <Textarea
           size="lg"
           radius="md"
+          placeholder="제목을 작성해보세요"
+          style={{ height: '50px' }}
+        />
+        <Textarea
+          size="lg"
+          radius="md"
           placeholder="직접 다녀온 생생한 후기를 작성해보세요"
-          fullWidth
           className={css({
             minH: {
               base: '150px',
