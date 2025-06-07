@@ -77,6 +77,10 @@ export const flex = cva({
   },
   variants: {
     width: { full: { width: 'full' }, auto: { width: 'auto' } },
+    position: {
+      relative: { position: 'relative' },
+      static: { position: 'static' },
+    },
     direction: {
       row: { flexDirection: 'row' },
       col: { flexDirection: 'column' },
@@ -266,6 +270,7 @@ export const topRightAbsolute = cva({
     right: {
       0: { right: '0' },
       1: { right: '1' },
+      2: { right: '2' },
       3: { right: '3' },
       5: { right: '5' },
     },
