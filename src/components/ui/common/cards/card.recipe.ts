@@ -189,6 +189,7 @@ export const cardImageWrapper = cva({
       square: { aspectRatio: '1' },
       wide: { aspectRatio: '3/2' },
       video: { aspectRatio: '16/9' },
+      87: { aspectRatio: '8/7' },
     },
     maxWidth: {
       none: {},
