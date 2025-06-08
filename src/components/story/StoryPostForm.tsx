@@ -2,12 +2,14 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { gridLayout } from '@components/map/map.recipe';
+import StoryPostPlace from '@components/story/sections/StoryPostPlace';
+import { Button } from '@components/ui/common/buttons/Button';
+import { flex } from '@components/ui/common/cards/card.recipe';
+import FilterDropdown from '@components/ui/common/dropdowns/FilterDropdown';
+import { modalText } from '@components/ui/common/modals/modal.recipe';
+import { Textarea } from '@components/ui/common/textfields';
 
-import { Button } from '@/components/ui/common/buttons/Button';
-import { flex } from '@/components/ui/common/cards/card.recipe';
-import FilterDropdown from '@/components/ui/common/dropdowns/FilterDropdown';
-import { modalText } from '@/components/ui/common/modals/modal.recipe';
-import { Search, Textarea } from '@/components/ui/common/textfields';
 import {
   getDayOptions,
   getMonthOptions,
@@ -26,6 +28,7 @@ function StoryPostForm() {
     <div className={flex({ gap: 'xl', marginB: 'sm' })}>
       <div className={flex({ gap: 'lg', p: 'sm', marginB: 'sm' })}>
         <p className={modalText({ text: 'head4', align: 'left' })}>글작성</p>
+        <StoryPostPlace />
         <div className={flex({ direction: 'row', gap: 'md' })}>
           <FilterDropdown
             options={getYearOptions()}
@@ -43,7 +46,6 @@ function StoryPostForm() {
             onChange={value => setDate(prev => ({ ...prev, day: value }))}
           />
         </div>
-        <Search radius="md" placeholder="위치를 지정해주세요" />
         <Textarea
           size="lg"
           radius="md"
@@ -65,8 +67,11 @@ function StoryPostForm() {
         <Button color="outline" size="sm">
           이미지/동영상 첨부
         </Button>
+        <div className={gridLayout({ columns: 4, p: 'xs', gap: 'sm' })}>
+          이미지 미리보기 영역
+        </div>
       </div>
-      <Button onClick={() => router.push(`/story/`)} color="black">
+      <Button onClick={() => router.push(`/story`)} color="black">
         작성 완료
       </Button>
     </div>
