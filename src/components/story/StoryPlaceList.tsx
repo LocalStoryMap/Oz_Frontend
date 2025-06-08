@@ -33,7 +33,7 @@ function StoryPlaceList() {
         <div className={flex({ gap: 'lg' })}>
           <div className={flexBetween()}>
             <div>
-              <span className={modalText({ text: 'head3' })}>{query}</span>
+              <span className={modalText({ text: 'sub2' })}>{query}</span>
               <p
                 className={cx(
                   flex({ direction: 'row', align: 'center', gap: 'xs' }),
