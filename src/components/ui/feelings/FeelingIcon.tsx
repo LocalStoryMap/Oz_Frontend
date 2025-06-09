@@ -1,10 +1,12 @@
 import { feelings } from '@/constants/story';
 
+type FeelingValue = (typeof feelings)[number]['value'];
+
 function FeelingIcon({
   value,
   size,
 }: {
-  value: string | undefined;
+  value: FeelingValue | undefined;
   size?: number;
 }) {
   const feeling = feelings.find(feeling => feeling.value === value);
