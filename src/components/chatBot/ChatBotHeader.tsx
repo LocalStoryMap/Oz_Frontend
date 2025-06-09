@@ -38,6 +38,7 @@ function ChatBotHeader({ openModal }: Props) {
         type="button"
         size="sm"
         color="outline"
+        aria-label="닫기"
         onClick={openModal}
         className={css({
           width: 'auto',
