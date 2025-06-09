@@ -10,12 +10,11 @@ function page() {
     <>
       <div className={flex({ direction: 'row', p: 'xs', marginB: 'sm' })}>
         {MAP_CATEGORY.map(category => (
-          <Link href={`/map/search?type=${category.value}`}>
-            <MarkerIcon
-              key={category.label}
-              label={category.label}
-              icon={category.icon}
-            />
+          <Link
+            key={category.label}
+            href={`/map/search?type=${category.value}`}
+          >
+            <MarkerIcon label={category.label} icon={category.icon} />
           </Link>
         ))}
       </div>
