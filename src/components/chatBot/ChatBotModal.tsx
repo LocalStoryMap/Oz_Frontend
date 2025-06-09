@@ -23,6 +23,7 @@ function ChatBotModal() {
           <button
             type="button"
             onClick={openModal}
+            aria-label="대화 시작하기"
             className={css({
               bg: 'black',
               borderRadius: 'full',
