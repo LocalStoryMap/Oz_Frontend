@@ -10,12 +10,12 @@ import WideCardContent from '@/components/ui/common/cards/WideCardContent';
 import { Likes } from '@/components/ui/common/toggles';
 import MarkerContainer from '@/components/ui/maps/MarkerContainer';
 import MarkerIcon from '@/components/ui/maps/MarkerIcon';
-import { MAP_CATEGORY } from '@/constants/map';
+import { CategoryValueType, MAP_CATEGORY } from '@/constants/map';
 import { mapDetail, mapMarkers } from '@/mocks/mapDetail';
 
 import { css } from '@root/styled-system/css';
 
-function MapView() {
+function MapView({ initialType }: { initialType?: CategoryValueType }) {
   const router = useRouter();
 
   useKakaoLoader({
@@ -25,9 +25,9 @@ function MapView() {
 
   const center = { lat: 35.115045, lng: 129.041519 };
 
-  const [selectedCategory, setSelectedCategory] = useState<
-    (typeof MAP_CATEGORY)[number]['value']
-  >(MAP_CATEGORY[0].value);
+  const [selectedCategory, setSelectedCategory] = useState<CategoryValueType>(
+    initialType ?? MAP_CATEGORY[0].value,
+  );
   const data = mapMarkers;
 
   const [selectedMarker, setSelectedMarker] = useState<

@@ -14,6 +14,8 @@ export const MAP_CATEGORY: MapCategory = [
   { label: '카페', value: 'cafe', icon: CoffeeIcon },
 ] as const;
 
+export type CategoryValueType = (typeof MAP_CATEGORY)[number]['value'];
+
 export const MAP_VIEW_TABS = [
   { label: '전체', value: 'all', path: '/' },
   { label: '인기', value: 'popular', path: '/' },

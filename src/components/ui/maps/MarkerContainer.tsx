@@ -3,11 +3,11 @@
 import { useState } from 'react';
 import { MapMarker, MapMarkerProps, useMap } from 'react-kakao-maps-sdk';
 
-import { MAP_CATEGORY } from '@/constants/map';
+import { CategoryValueType } from '@/constants/map';
 
 type MarkerContainerProps = {
   position: MapMarkerProps['position'];
-  type?: (typeof MAP_CATEGORY)[number]['value'];
+  type?: CategoryValueType;
   content?: string;
   onClick?: () => void;
 };

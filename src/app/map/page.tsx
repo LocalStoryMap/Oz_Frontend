@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import MapTabs from '@/components/map/MapTabs';
 import { flex } from '@/components/ui/common/cards/card.recipe';
 import MarkerIcon from '@/components/ui/maps/MarkerIcon';
@@ -8,11 +10,13 @@ function page() {
     <>
       <div className={flex({ direction: 'row', p: 'xs', marginB: 'sm' })}>
         {MAP_CATEGORY.map(category => (
-          <MarkerIcon
-            key={category.label}
-            label={category.label}
-            icon={category.icon}
-          />
+          <Link href={`/map/search?type=${category.value}`}>
+            <MarkerIcon
+              key={category.label}
+              label={category.label}
+              icon={category.icon}
+            />
+          </Link>
         ))}
       </div>
       <MapTabs />

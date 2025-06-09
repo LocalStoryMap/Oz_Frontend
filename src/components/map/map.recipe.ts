@@ -6,6 +6,10 @@ export const iconWrapper = cva({
     alignItems: 'center',
     justifyContent: 'center',
     cursor: 'pointer',
+    _hover: {
+      opacity: 0.8,
+      transform: 'scale(1.05)',
+    },
   },
   variants: {
     size: {
