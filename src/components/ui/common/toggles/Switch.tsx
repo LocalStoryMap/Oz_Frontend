@@ -26,7 +26,7 @@ export function Switches({
   disabled = false,
   'aria-label': ariaLabel,
 }: SwitchesProps) {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(checked);
 
   useEffect(() => {
     setIsChecked(checked);

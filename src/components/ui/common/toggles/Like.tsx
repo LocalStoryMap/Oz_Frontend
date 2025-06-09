@@ -27,7 +27,7 @@ export function Likes({
   disabled = false,
   'aria-label': ariaLabel = '좋아요',
 }: LikesProps) {
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(liked);
 
   useEffect(() => {
     setIsLiked(liked);
