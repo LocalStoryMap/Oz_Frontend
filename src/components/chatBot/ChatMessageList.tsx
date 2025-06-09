@@ -14,9 +14,9 @@ type Props = {
 function ChatMessageList({ messages, image }: Props) {
   return (
     <div>
-      {messages.map((message, index) => (
+      {messages.map(message => (
         <div
-          key={`message-${index}`}
+          key={`message-${message.type}-${message.content}`}
           className={css({
             display: 'flex',
             justifyContent: message.type === 'user' ? 'flex-end' : 'flex-start',

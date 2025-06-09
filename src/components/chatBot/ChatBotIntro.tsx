@@ -18,9 +18,9 @@ const INITIAL_MESSAGES = [
 function ChatBotIntro({ image }: Props) {
   return (
     <div>
-      {INITIAL_MESSAGES.map((item, index) => (
+      {INITIAL_MESSAGES.map(item => (
         <div
-          key={`initial-${index}`}
+          key={`iniaial-${item.type}-${item.content}`}
           className={css({
             display: 'flex',
             alignItems: 'flex-start',
