@@ -7,9 +7,9 @@ import {
 } from '@/components/icons/feelings';
 
 export const feelings = [
-  { label: Smiling, value: 'smile' },
-  { label: Grinning, value: 'grinning' },
-  { label: Neutral, value: 'neutral' },
-  { label: Frowning, value: 'frown' },
-  { label: Angry, value: 'angry' },
+  { label: Smiling, value: 'smile', description: '좋았어요.' },
+  { label: Grinning, value: 'grinning', description: '즐거운 추억!' },
+  { label: Neutral, value: 'neutral', description: '무난무난쓰.' },
+  { label: Frowning, value: 'frown', description: '조금 별로.' },
+  { label: Angry, value: 'angry', description: '맘에 안 듦.' },
 ];
