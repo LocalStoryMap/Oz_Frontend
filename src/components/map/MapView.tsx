@@ -1,52 +1,16 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  Map,
-  MapMarker,
-  MapMarkerProps,
-  useKakaoLoader,
-  useMap,
-} from 'react-kakao-maps-sdk';
+import { Map, useKakaoLoader } from 'react-kakao-maps-sdk';
 import { useRouter } from 'next/navigation';
 
-import { flex } from '@/components/ui/common/cards/card.recipe';
 import WideCard from '@/components/ui/common/cards/WideCard';
 import WideCardContent from '@/components/ui/common/cards/WideCardContent';
 import { Likes } from '@/components/ui/common/toggles';
+import MarkerContainer from '@/components/ui/maps/MarkerContainer';
 import { mapDetail, mapMarkers } from '@/mocks/mapDetail';
 
-import { css, cx } from '@root/styled-system/css';
-
-type EventMarkerContainerProps = {
-  position: MapMarkerProps['position'];
-  content?: string;
-  onClick?: () => void;
-};
-
-function EventMarkerContainer({
-  position,
-  content,
-  onClick,
-}: EventMarkerContainerProps) {
-  const map = useMap();
-  const [isVisible, setIsVisible] = useState(false);
-
-  return (
-    <MapMarker
-      position={position}
-      clickable
-      onMouseOver={() => setIsVisible(true)}
-      onMouseOut={() => setIsVisible(false)}
-      onClick={marker => {
-        map.panTo(marker.getPosition());
-        onClick?.();
-      }}
-    >
-      {isVisible && <div>{content}</div>}
-    </MapMarker>
-  );
-}
+import { css } from '@root/styled-system/css';
 
 function MapView() {
   const router = useRouter();
@@ -65,10 +29,10 @@ function MapView() {
   >(null);
 
   return (
-    <div className={(cx(flex({ gap: 'md' })), css({ position: 'relative' }))}>
+    <div className={css({ position: 'relative' })}>
       <Map center={center} style={{ width: '100%', height: '600px' }} level={5}>
         {data?.map(marker => (
-          <EventMarkerContainer
+          <MarkerContainer
             key={marker.id}
             position={marker.latlng}
             content={marker.place}
@@ -78,13 +42,13 @@ function MapView() {
       </Map>
       {selectedMarker && (
         <div
-          style={{
+          className={css({
             position: 'absolute',
-            bottom: 8,
+            bottom: '2',
             left: '2.5%',
             zIndex: 10,
-            width: '95%',
-          }}
+            w: '95%',
+          })}
         >
           <WideCard image={place.image}>
             <WideCardContent
