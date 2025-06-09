@@ -1,7 +1,41 @@
 'use client';
 
-import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
+import { useState } from 'react';
+import {
+  Map,
+  MapMarker,
+  MapMarkerProps,
+  useKakaoLoader,
+  useMap,
+} from 'react-kakao-maps-sdk';
 import { useRouter } from 'next/navigation';
+
+import { mapMarkers } from '@/mocks/mapDetail';
+
+type EventMarkerContainerProps = {
+  position: MapMarkerProps['position'];
+  content: string;
+};
+
+function EventMarkerContainer({
+  position,
+  content,
+}: EventMarkerContainerProps) {
+  const map = useMap();
+  const [isVisible, setIsVisible] = useState(false);
+
+  return (
+    <MapMarker
+      position={position}
+      clickable
+      onMouseOver={() => setIsVisible(true)}
+      onMouseOut={() => setIsVisible(false)}
+      onClick={marker => map.panTo(marker.getPosition())}
+    >
+      {isVisible && <div>{content}</div>}
+    </MapMarker>
+  );
+}
 
 function MapView() {
   useKakaoLoader({
@@ -13,15 +47,17 @@ function MapView() {
 
   const router = useRouter();
 
+  const data = mapMarkers;
+
   return (
     <Map center={center} style={{ width: '100%', height: '360px' }} level={5}>
-      <MapMarker
-        position={center}
-        clickable
-        onClick={() => router.push(`/map/1`)}
-      >
-        {/* <div>마커 상세</div> */}
-      </MapMarker>
+      {data?.map(marker => (
+        <EventMarkerContainer
+          key={marker.id}
+          position={marker.latlng}
+          content={marker.place}
+        />
+      ))}
     </Map>
   );
 }

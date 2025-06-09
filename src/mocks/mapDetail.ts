@@ -37,3 +37,26 @@ export const locationList = [
     rating: 5.0,
   },
 ];
+
+export const mapMarkers = [
+  {
+    id: 1,
+    place: '장소 1번',
+    latlng: { lat: 35.116246, lng: 129.040217 },
+  },
+  {
+    id: 2,
+    place: '장소 2번',
+    latlng: { lat: 35.114573, lng: 129.039001 },
+  },
+  {
+    id: 3,
+    place: '장소 3번',
+    latlng: { lat: 35.115887, lng: 129.042705 },
+  },
+  {
+    id: 4,
+    place: '장소 4번',
+    latlng: { lat: 35.113824, lng: 129.041812 },
+  },
+];
