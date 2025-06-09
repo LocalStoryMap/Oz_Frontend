@@ -18,6 +18,10 @@ export const iconWrapper = cva({
       gray: { borderWidth: '1px', borderColor: 'gray.200' },
       black: { borderWidth: '2px', borderColor: 'black' },
     },
+    bg: {
+      black: { backgroundColor: 'black' },
+      white: { backgroundColor: 'white' },
+    },
     radius: {
       md: { borderRadius: 'md' },
       full: { borderRadius: 'full' },
