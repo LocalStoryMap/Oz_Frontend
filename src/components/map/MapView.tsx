@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Map, useKakaoLoader } from 'react-kakao-maps-sdk';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { mapOverlayWrapper } from '@/components/map/map.recipe';
 import WideCard from '@/components/ui/common/cards/WideCard';
@@ -12,11 +12,13 @@ import MarkerContainer from '@/components/ui/maps/MarkerContainer';
 import MarkerIcon from '@/components/ui/maps/MarkerIcon';
 import { CategoryValueType, MAP_CATEGORY } from '@/constants/map';
 import { mapDetail, mapMarkers } from '@/mocks/mapDetail';
+import { isValidCategory } from '@/util/map';
 
 import { css } from '@root/styled-system/css';
 
-function MapView({ initialType }: { initialType?: CategoryValueType }) {
+function MapView() {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   useKakaoLoader({
     appkey: process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY!,
@@ -25,9 +27,10 @@ function MapView({ initialType }: { initialType?: CategoryValueType }) {
 
   const center = { lat: 35.115045, lng: 129.041519 };
 
-  const [selectedCategory, setSelectedCategory] = useState<CategoryValueType>(
-    initialType ?? MAP_CATEGORY[0].value,
-  );
+  const type = searchParams.get('type');
+  const selectedCategory: CategoryValueType = isValidCategory(type)
+    ? (type as CategoryValueType)
+    : MAP_CATEGORY[0].value;
   const data = mapMarkers;
 
   const [selectedMarker, setSelectedMarker] = useState<
@@ -45,7 +48,11 @@ function MapView({ initialType }: { initialType?: CategoryValueType }) {
             icon={category.icon}
             size="md"
             selected={selectedCategory === category.value}
-            onClick={() => setSelectedCategory(category.value)}
+            onClick={() => {
+              const next = new URLSearchParams(searchParams);
+              next.set('type', category.value);
+              router.push(`/map/search?${next.toString()}`);
+            }}
           />
         ))}
       </div>
