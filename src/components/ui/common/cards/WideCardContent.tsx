@@ -83,10 +83,12 @@ function WideCardContent({
     >
       <p className={titleText()}>{title}</p>
       <div className={topRightAbsolute({ top: 3, right: 3 })}>{action}</div>
-      <div className={subText()}>
-        {date && <CalendarIcon />}
-        <span>{subtitle}</span>
-      </div>
+      {subtitle && (
+        <div className={subText()}>
+          {date && <CalendarIcon />}
+          <span>{subtitle}</span>
+        </div>
+      )}
       {rating && (
         <div className={flex({ direction: 'row', align: 'center', gap: 'sm' })}>
           <StarRating value={Number(rating)} />
