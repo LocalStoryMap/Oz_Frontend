@@ -10,6 +10,8 @@ import { Input } from '@components/ui/common/textfields';
 
 import { css } from '@root/styled-system/css';
 
+import { Message } from '@components/chatBot/types';
+
 type Props = {
   openModal: () => void;
 };
