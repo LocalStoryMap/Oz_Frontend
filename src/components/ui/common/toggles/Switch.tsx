@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { css } from '@root/styled-system/css';
 
@@ -26,9 +26,15 @@ export function Switches({
   disabled = false,
   'aria-label': ariaLabel,
 }: SwitchesProps) {
-  const [isChecked, setIsChecked] = useState(checked);
+  const [isChecked, setIsChecked] = useState(false);
 
-  const handleToggle = () => {
+  useEffect(() => {
+    setIsChecked(checked);
+  }, [checked]);
+
+  const handleToggle = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (disabled) return;
     const newState = !isChecked;
     setIsChecked(newState);
