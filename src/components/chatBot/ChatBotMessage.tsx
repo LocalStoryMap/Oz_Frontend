@@ -31,15 +31,20 @@ function ChatBotMessage({ openModal }: Props) {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!value.trim()) return;
     // Todo: 추후 서버 연결시 서버에서 가져오는 데이터 answer으로 교체
     try {
       const mockData = { answer: '안녕하세요' };
-      setMessages(prev => [...prev, { type: 'user', content: value }]);
-      setMessages(prev => [...prev, { type: 'bot', content: mockData.answer }]);
+      setMessages(prev => [
+        ...prev,
+        { type: 'user', content: mockData.answer },
+        { type: 'bot', content: value },
+      ]);
     } catch (e) {
       console.log(e);
+    } finally {
+      setValue('');
     }
-    setValue('');
   };
 
   return (
@@ -74,6 +79,7 @@ function ChatBotMessage({ openModal }: Props) {
           type="submit"
           size="md"
           color="primary"
+          aria-label="전송하기"
           className={css({
             width: 'auto',
             px: '1.5rem',
