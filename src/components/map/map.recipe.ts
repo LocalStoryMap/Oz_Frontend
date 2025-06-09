@@ -95,3 +95,33 @@ export const gridLayout = cva({
     p: 'sm',
   },
 });
+
+export const mapOverlayWrapper = cva({
+  base: {
+    position: 'absolute',
+  },
+  variants: {
+    zindex: {
+      10: { zIndex: 10 },
+    },
+    type: {
+      category: {
+        display: 'flex',
+        padding: '1',
+        borderRadius: 'md',
+        top: '1',
+        left: '1',
+        backgroundColor: 'white',
+      },
+      card: {
+        bottom: '2',
+        left: '2.5%',
+        w: '95%',
+      },
+    },
+  },
+  defaultVariants: {
+    type: 'category',
+    zindex: 10,
+  },
+});
