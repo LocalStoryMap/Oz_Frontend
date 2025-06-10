@@ -78,6 +78,7 @@ export const modalText = cva({
       body3: { textStyle: 'body3' },
       label1: { textStyle: 'label1' },
       label2: { textStyle: 'label2' },
+      search: { fontSize: '20px', fontWeight: 600 },
     },
     align: {
       left: { textAlign: 'left' },

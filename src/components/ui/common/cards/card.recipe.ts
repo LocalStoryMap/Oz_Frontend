@@ -106,7 +106,7 @@ export const flex = cva({
       md: { p: '4' },
       lg: { p: '6' },
     },
-    px: { sm: { paddingX: 3 }, lg: { px: '10' } },
+    px: { xs: { px: 1.5 }, sm: { px: 3 }, lg: { px: '10' } },
     marginB: {
       xs: { marginBottom: 2 },
       sm: { marginBottom: 4 },
@@ -170,6 +170,7 @@ export const subText = cva({
       body4: { textStyle: 'body4' },
       label1: { textStyle: 'label1' },
       label2: { textStyle: 'label2' },
+      rating: { fontSize: '14px', fontWeight: 500 },
     },
     clamp: {
       1: { lineClamp: 1, width: 'full' },

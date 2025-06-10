@@ -92,7 +92,7 @@ function WideCardContent({
       {rating && (
         <div className={flex({ direction: 'row', align: 'center', gap: 'sm' })}>
           <StarRating value={Number(rating)} />
-          <span className={subText()}>{rating}</span>
+          <span className={subText({ textStyle: 'rating' })}>{rating}</span>
         </div>
       )}
       {footerText && (

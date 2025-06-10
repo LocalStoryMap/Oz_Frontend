@@ -16,7 +16,7 @@ import { modalText } from '@/components/ui/common/modals/modal.recipe';
 import FeelingIcon from '@/components/ui/feelings/FeelingIcon';
 import { placeStoryList } from '@/mocks/placeStoryList';
 
-import { cx } from '@root/styled-system/css';
+import { css, cx } from '@root/styled-system/css';
 
 function StoryPlaceList() {
   const router = useRouter();
@@ -33,8 +33,10 @@ function StoryPlaceList() {
       ) : (
         <div className={flex({ gap: 'lg' })}>
           <div className={flexBetween()}>
-            <div>
-              <span className={modalText({ text: 'sub2' })}>{query}</span>
+            <div className={flex({ gap: 'xs' })}>
+              <span className={modalText({ text: 'search', align: 'left' })}>
+                {query}
+              </span>
               <p
                 className={cx(
                   flex({ direction: 'row', align: 'center', gap: 'xs' }),
@@ -47,7 +49,17 @@ function StoryPlaceList() {
             </div>
             <EllipsisIcon width={28} height={28} />
           </div>
-          <div className={gridLayout()}>
+          <div
+            className={cx(
+              gridLayout(),
+              css({
+                gridTemplateColumns: {
+                  base: 'repeat(2, 1fr)',
+                  md: 'repeat(4, 1fr)',
+                },
+              }),
+            )}
+          >
             {data.map(story => (
               <SquareCard
                 key={story.id}
@@ -56,7 +68,13 @@ function StoryPlaceList() {
                 custom
                 onClick={() => router.push(`/story/${story.id}`)}
               >
-                <div className={flex({ position: 'relative', gap: 'xs' })}>
+                <div
+                  className={flex({
+                    position: 'relative',
+                    gap: 'xs',
+                    p: 'xs',
+                  })}
+                >
                   <p className={titleText()}>{story.author}</p>
                   <p
                     className={flex({
@@ -70,8 +88,8 @@ function StoryPlaceList() {
                       {story.date}
                     </span>
                   </p>
-                  <span className={topRightAbsolute({ top: 0, right: 1 })}>
-                    <FeelingIcon value={story.feeling} />
+                  <span className={topRightAbsolute({ top: 1, right: 3 })}>
+                    <FeelingIcon size={24} value={story.feeling} />
                   </span>
                 </div>
               </SquareCard>
