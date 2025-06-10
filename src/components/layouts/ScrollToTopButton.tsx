@@ -16,7 +16,7 @@ function ScrollToTopButton() {
 
   useEffect(() => {
     const handleShowButton = () => {
-      if (window.scrollY > 500 && !showButton) {
+      if (window.scrollY > 500) {
         setShowButton(true);
       } else {
         setShowButton(false);
