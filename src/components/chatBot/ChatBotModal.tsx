@@ -14,7 +14,7 @@ import { css } from '@root/styled-system/css';
 
 function ChatBotModal() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const chatbotRef = useRef<HTMLDivElement | null>(null);
+  const chatbotRef = useRef<HTMLElement | null>(null);
   const openModal = useCallback(() => setIsModalOpen(prev => !prev), []);
   const onClose = useCallback(() => setIsModalOpen(false), []);
   useClickOutside(chatbotRef, onClose);
