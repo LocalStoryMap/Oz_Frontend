@@ -8,7 +8,7 @@ import useScrollTop from '@hooks/useScrollTop';
 import { css } from '@root/styled-system/css';
 
 function CreatePostBtn() {
-  const { showButton } = useScrollTop();
+  const { showButton } = useScrollTop(500);
   const router = useRouter();
   return (
     showButton && (

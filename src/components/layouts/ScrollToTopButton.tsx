@@ -6,7 +6,7 @@ import useScrollTop from '@hooks/useScrollTop';
 import { css } from '@root/styled-system/css';
 
 function ScrollToTopButton() {
-  const { showButton, scrollToTop } = useScrollTop();
+  const { showButton, scrollToTop } = useScrollTop(500);
 
   return (
     showButton && (
