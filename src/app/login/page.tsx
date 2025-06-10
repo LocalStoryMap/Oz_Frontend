@@ -66,6 +66,7 @@ export default function LoginPage() {
           <div className={loginFadeIn({ visible })}>
             <div className={loginButtonWrapper()}>
               <Button
+                color="custom"
                 size="lg"
                 radius="sm"
                 fullWidth
@@ -87,6 +88,7 @@ export default function LoginPage() {
               </Button>
 
               <Button
+                color="custom"
                 size="lg"
                 radius="sm"
                 fullWidth
