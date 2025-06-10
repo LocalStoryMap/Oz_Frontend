@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { CratePostIcon } from '@components/icons';
+import { CreatePostIcon } from '@components/icons';
 import useScrollTop from '@hooks/useScrollTop';
 
 import { css } from '@root/styled-system/css';
@@ -33,7 +33,7 @@ function CreatePostBtn() {
         })}
         onClick={() => router.push('/story/post')}
       >
-        <CratePostIcon />
+        <CreatePostIcon />
       </button>
     )
   );

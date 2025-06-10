@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconProps } from '@components/icons/iconProps';
 
-function CratePostIcon({
+function CreatePostIcon({
   width = 24,
   height = 24,
   fill = 'none',
@@ -40,4 +40,4 @@ function CratePostIcon({
   );
 }
 
-export default CratePostIcon;
+export default CreatePostIcon;
