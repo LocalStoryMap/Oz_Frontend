@@ -96,6 +96,13 @@ export const modalText = cva({
     cursor: {
       pointer: { cursor: 'pointer' },
     },
+    hover: {
+      on: {
+        _hover: {
+          transform: 'scale(1.05)',
+        },
+      },
+    },
   },
   defaultVariants: {
     align: 'center',

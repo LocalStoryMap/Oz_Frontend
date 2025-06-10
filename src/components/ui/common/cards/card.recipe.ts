@@ -50,6 +50,18 @@ export const cardWrapper = cva({
       none: { cursor: 'default' },
       pointer: { cursor: 'pointer' },
     },
+    hover: {
+      on: {
+        transition: 'transform 0.2s ease-in-out',
+        _hover: {
+          transform: 'scale(1.02)',
+        },
+      },
+      off: {
+        transition: 'none',
+        _hover: {},
+      },
+    },
   },
   defaultVariants: {
     position: 'relative',
@@ -60,6 +72,7 @@ export const cardWrapper = cva({
     radius: 'lg',
     shadow: 'sm',
     cursor: 'pointer',
+    hover: 'on',
   },
 });
 

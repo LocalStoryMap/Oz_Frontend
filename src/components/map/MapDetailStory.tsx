@@ -31,6 +31,7 @@ function MapDetailStory({ title, images }: MapDetailStoryProps) {
             text: 'label2',
             color: 'blue500',
             cursor: 'pointer',
+            hover: 'on',
           })}
           onClick={() => router.push(`/story/search?query=${title}`)}
         >

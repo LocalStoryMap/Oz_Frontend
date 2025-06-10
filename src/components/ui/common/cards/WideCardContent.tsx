@@ -78,6 +78,7 @@ function WideCardContent({
         align: 'start',
         p: 'xs',
         shadow: 'none',
+        hover: 'off',
       })}
       onClick={onClick}
     >
