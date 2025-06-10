@@ -9,7 +9,15 @@ import { Search } from '@/components/ui/common/textfields';
 
 import { css } from '@root/styled-system/css';
 
-function MapSearchBar() {
+type SearchBarProps = {
+  basePath?: string;
+  placeholder?: string;
+};
+
+function SearchBar({
+  basePath = 'map',
+  placeholder = 'Search',
+}: SearchBarProps) {
   const router = useRouter();
 
   const [query, setQuery] = useState('');
@@ -17,7 +25,9 @@ function MapSearchBar() {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (query.trim()) {
-      router.push(`/map/search?query=${encodeURIComponent(query.trim())}`);
+      router.push(
+        `/${basePath}/search?query=${encodeURIComponent(query.trim())}`,
+      );
       setQuery('');
     }
   };
@@ -28,23 +38,28 @@ function MapSearchBar() {
         className={css({
           flex: 1,
           marginLeft: 10,
-          paddingX: 3,
+          paddingX: '5%',
           textAlign: 'center',
         })}
       >
         <form onSubmit={onSubmit}>
           <Search
-            placeholder="Search"
+            placeholder={placeholder}
             value={query}
             onChange={e => setQuery(e.target.value)}
           />
         </form>
       </div>
-      <div className={iconWrapper()} onClick={() => router.push('/map/search')}>
-        <GpsLocationIcon fill="#707070" />
-      </div>
+      {basePath === 'map' && (
+        <div
+          className={iconWrapper()}
+          onClick={() => router.push('/map/search')}
+        >
+          <GpsLocationIcon fill="#707070" />
+        </div>
+      )}
     </>
   );
 }
 
-export default MapSearchBar;
+export default SearchBar;
