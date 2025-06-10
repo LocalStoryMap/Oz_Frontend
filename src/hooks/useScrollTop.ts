@@ -22,7 +22,7 @@ function useScrollTop(threshold: number) {
     return () => {
       window.removeEventListener('scroll', handleShowButton);
     };
-  }, []);
+  }, [threshold]);
 
   return { showButton, scrollToTop };
 }
