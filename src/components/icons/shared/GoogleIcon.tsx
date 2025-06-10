@@ -2,8 +2,8 @@ import * as React from 'react';
 import { IconProps } from '@components/icons/iconProps';
 
 /**
- * @component KakaoIcon
- * @description 카카오 로그인용 아이콘.
+ * @component GoogleIcon
+ * @description 구글 로그인용 아이콘.
  */
 export const GoogleIcon = ({ className, ...props }: IconProps) => (
   <svg
