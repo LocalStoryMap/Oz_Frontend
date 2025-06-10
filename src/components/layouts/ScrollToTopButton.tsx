@@ -26,29 +26,29 @@ function ScrollToTopButton() {
     return () => {
       window.removeEventListener('scroll', handleShowButton);
     };
-  }, [showButton]);
+  }, []);
+
   return (
     showButton && (
-      <div className={css({ position: 'relative' })}>
-        <button
-          type="button"
-          className={css({
-            position: 'fixed',
-            p: 4,
-            bg: 'black',
-            color: 'white',
-            borderRadius: 'full',
-            zIndex: 10,
-            transition: 'all 0.3s ease-in-out',
-            cursor: 'pointer',
-            top: '82%',
-            right: '4rem',
-          })}
-          onClick={scrollToTop}
-        >
-          Top
-        </button>
-      </div>
+      <button
+        type="button"
+        aria-label="맨 위로 스크롤"
+        className={css({
+          position: 'fixed',
+          p: 4,
+          bg: 'black',
+          color: 'white',
+          borderRadius: 'full',
+          zIndex: 10,
+          transition: 'all 0.3s ease-in-out',
+          cursor: 'pointer',
+          top: '82%',
+          right: '4rem',
+        })}
+        onClick={scrollToTop}
+      >
+        Top
+      </button>
     )
   );
 }
