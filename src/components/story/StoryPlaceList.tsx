@@ -27,7 +27,7 @@ function StoryPlaceList() {
   const data = placeStoryList;
 
   return (
-    <div className={flex({ p: 'sm', marginB: 'sm' })}>
+    <div className={flex({ p: 'sm', marginT: 'sm', marginB: 'sm' })}>
       {query.trim() === '' || data.length < 1 ? (
         <p>검색 결과가 없습니다.</p>
       ) : (

@@ -33,23 +33,30 @@ function SearchBar({
   };
 
   return (
-    <>
-      <div
+    <div
+      className={css({
+        flex: 1,
+        display: 'flex',
+        justifyContent: { base: 'center', md: 'flex-start' },
+        alignItems: 'center',
+        gap: { base: '6%', md: 4 },
+        paddingLeft: { base: '6%', md: 2 },
+        textAlign: 'center',
+      })}
+    >
+      <form
+        onSubmit={onSubmit}
         className={css({
           flex: 1,
-          marginLeft: 10,
-          paddingX: '5%',
-          textAlign: 'center',
+          maxWidth: { base: '100%', md: '350px' },
         })}
       >
-        <form onSubmit={onSubmit}>
-          <Search
-            placeholder={placeholder}
-            value={query}
-            onChange={e => setQuery(e.target.value)}
-          />
-        </form>
-      </div>
+        <Search
+          placeholder={placeholder}
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+        />
+      </form>
       {basePath === 'map' && (
         <div
           className={iconWrapper()}
@@ -58,7 +65,7 @@ function SearchBar({
           <GpsLocationIcon fill="#707070" />
         </div>
       )}
-    </>
+    </div>
   );
 }
 

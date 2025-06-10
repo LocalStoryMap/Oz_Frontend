@@ -120,6 +120,9 @@ export const flex = cva({
       lg: { p: '6' },
     },
     px: { xs: { px: 1.5 }, sm: { px: 3 }, lg: { px: '10' } },
+    marginT: {
+      sm: { marginTop: 3 },
+    },
     marginB: {
       xs: { marginBottom: 2 },
       sm: { marginBottom: 4 },
