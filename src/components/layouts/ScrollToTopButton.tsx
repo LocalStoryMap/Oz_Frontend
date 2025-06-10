@@ -1,32 +1,12 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import useScrollTop from '@hooks/useScrollTop';
 
 import { css } from '@root/styled-system/css';
 
 function ScrollToTopButton() {
-  const [showButton, setShowButton] = useState<boolean>(false);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
-
-  useEffect(() => {
-    const handleShowButton = () => {
-      if (window.scrollY > 500) {
-        setShowButton(true);
-      } else {
-        setShowButton(false);
-      }
-    };
-    window.addEventListener('scroll', handleShowButton);
-    return () => {
-      window.removeEventListener('scroll', handleShowButton);
-    };
-  }, []);
+  const { showButton, scrollToTop } = useScrollTop();
 
   return (
     showButton && (
@@ -42,8 +22,12 @@ function ScrollToTopButton() {
           zIndex: 10,
           transition: 'all 0.3s ease-in-out',
           cursor: 'pointer',
-          top: '82%',
-          right: '4rem',
+          bottom: '20px',
+          right: '1rem',
+          transform: 'translateZ(0)',
+          _active: {
+            WebkitTapHighlightColor: 'transparent',
+          },
         })}
         onClick={scrollToTop}
       >
