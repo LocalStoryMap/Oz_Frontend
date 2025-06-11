@@ -23,15 +23,15 @@ instance.interceptors.request.use(
   error => Promise.reject(error),
 );
 
-instance.interceptors.response.use(
-  response => response,
-  error => {
-    if (error.response?.status === 401) {
-      // 토큰 재발급 or 로그아웃 로직 추가
-      if (typeof window !== 'undefined') {
+if (typeof window !== 'undefined') {
+  instance.interceptors.response.use(
+    response => response,
+    error => {
+      if (error.response?.status === 401) {
+        // 토큰 재발급 or 로그아웃 로직 추가
         window.location.href = '/login';
       }
-    }
-    return Promise.reject(error);
-  },
-);
+      return Promise.reject(error);
+    },
+  );
+}
