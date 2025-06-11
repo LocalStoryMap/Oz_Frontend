@@ -1,4 +1,4 @@
-export const API_ENDPOINTS = {
+export const ENDPOINTS = {
   AI: {
     CHAT: '/Ai/chat/',
     SUMMARY: '/Ai/summarize/',
