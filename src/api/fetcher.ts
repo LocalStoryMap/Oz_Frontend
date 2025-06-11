@@ -13,9 +13,12 @@ export async function ssrFetcher<T = any>(url: string): Promise<T | null> {
   }
 }
 
-export function queryFetcher<T = any>(url: string): () => Promise<T> {
+export function queryFetcher<T = any>(
+  url: string,
+  params?: Record<string, any>,
+): () => Promise<T> {
   return async () => {
-    const res = await instance.get<T>(url);
+    const res = await instance.get<T>(url, { params });
     return res.data;
   };
 }
