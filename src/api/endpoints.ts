@@ -5,7 +5,7 @@ export const ENDPOINTS = {
   },
   FOLLOWS: {
     LIST: '/follows/', // get, post
-    DETAIL: (id: number) => `/follows/${id}/`, // get, delete
+    DETAIL: (id: number) => `/follows/${id}/`, // get, put, patch, delete
   },
   SUBSCRIBE: {
     LIST: '/subscribes/', // get, post
@@ -13,15 +13,15 @@ export const ENDPOINTS = {
   },
   NOTIFICATIONS: {
     LIST: '/notifications/', // get, post
-    DETAIL: (id: number) => `/notifications/${id}/`, // get, delete
+    DETAIL: (id: number) => `/notifications/${id}/`, // get, put, patch, delete
   },
   SEARCH: {
-    LIST: '/api/search/',
-    SUGGEST: '/api/search/suggestions/',
+    LIST: '/search/',
+    SUGGEST: '/search/suggestions/',
   },
   SEARCH_HISTORY: {
     LIST: '/search/history/', // get, post
-    DETAIL: (id: number) => `/search/history/${id}/`, // get, delete
+    DETAIL: (id: number) => `/search/history/${id}/`, // get, put, patch, delete
   },
   TOKEN: '/token/',
   USERS: {
@@ -32,20 +32,20 @@ export const ENDPOINTS = {
     ME: '/users/me/', // get, put, patch
   },
   STORY: {
-    LIST: '/api/stories/', // get, post
-    DETAIL: (id: number) => `/api/stories/${id}/`, // get, put, delete
+    LIST: '/stories/', // get, post
+    DETAIL: (id: number) => `/stories/${id}/`, // get, put, delete
   },
   STORY_IMAGE: {
-    UPLOAD: '/api/images/',
-    DELETE: (id: number) => `/api/images/${id}/`,
-    LIST: (id: number) => `/api/stories/${id}/images/`,
+    UPLOAD: '/images/',
+    DELETE: (id: number) => `/images/${id}/`,
+    LIST: (id: number) => `/stories/${id}/images/`,
   },
   COMMENT: {
-    LIST: (id: number) => `/api/stories/${id}/comments/`, // get, post
+    LIST: (id: number) => `/stories/${id}/comments/`, // get, post
     DETAIL: (storyId: number, commentId: number) =>
-      `/api/stories/${storyId}/comments/${commentId}/`, // get, put, delete
+      `/stories/${storyId}/comments/${commentId}/`, // get, put, delete
     IMAGE: (storyId: number, commentId: number) =>
-      `/api/stories/${storyId}/comments/${commentId}/images/`, // get, post,
+      `/stories/${storyId}/comments/${commentId}/images/`, // get, post,
   },
   BOOKMARK: {
     LIST: '/bookmarks/', // get, post
@@ -54,7 +54,7 @@ export const ENDPOINTS = {
   MARKER: {
     LIST: '/markers/', // get, post
     DETAIL: (id: number) => `/markers/${id}/`, // get, put, delete
-    LIKE: (id: number) => `/api/markers/${id}/likes/`, // get, post, delete
+    LIKE: (id: number) => `/markers/${id}/likes/`, // get, post, delete
   },
   ROUTE: {
     LIST: '/routes/', // get, post
@@ -62,9 +62,9 @@ export const ENDPOINTS = {
     LIKE: (id: number) => `/routes/${id}/likes/`, // get, post, delete
   },
   ROUTEMARKER: {
-    LIST: '/api/route-markers/', // get, post
-    DETAIL: (id: number) => `/api/route-markers/${id}/`, // put, delete
-    UPDATE: '/api/route-markers/bulk-update/',
+    LIST: '/route-markers/', // get, post
+    DETAIL: (id: number) => `/route-markers/${id}/`, // put, delete
+    UPDATE: '/route-markers/bulk-update/',
   },
   PAYMENT: {
     LIST: '/payments/', // get, post

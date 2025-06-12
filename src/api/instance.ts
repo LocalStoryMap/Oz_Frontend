@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
 
-const BASE_URL = 'https://localstorymap.com';
+const BASE_URL = 'https://localstorymap.com/api';
 
 export const instance = axios.create({
   baseURL: BASE_URL,
