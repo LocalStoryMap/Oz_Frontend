@@ -70,4 +70,4 @@ export const ENDPOINTS = {
     LIST: '/payments/', // get, post
     DETAIL: (id: number) => `/payments/${id}/`, // get, delete
   },
-};
+} as const;
