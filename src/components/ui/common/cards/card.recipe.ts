@@ -5,6 +5,7 @@ export const cardWrapper = cva({
     display: 'flex',
     backgroundColor: 'white',
     overflow: 'hidden',
+    width: '100%',
   },
   variants: {
     position: {
