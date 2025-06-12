@@ -1,0 +1,23 @@
+import { ENDPOINTS } from '@/api/endpoints';
+import { mutationFetcher } from '@/api/fetcher';
+
+interface KakaoLoginResponse {
+  token: string;
+  user: {
+    id: number;
+    email: string;
+    nickname: string;
+    provider: string;
+    social_id: string;
+    profile_image?: string;
+    is_paid_user?: boolean;
+    date_joined: string;
+    last_login?: string;
+  };
+}
+
+export const postKakaoLoginCode = (
+  code: string,
+): Promise<KakaoLoginResponse> => {
+  return mutationFetcher('post', ENDPOINTS.USERS.KAKAO, { access_token: code });
+};
