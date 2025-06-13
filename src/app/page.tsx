@@ -7,7 +7,6 @@ import { scrollSubText } from '@components/home/recipes/text.recipe';
 import HeroSection from '@components/home/sections/HeroSection';
 import ScrollMarkerSection from '@components/home/sections/ScrollMarkerSection';
 import SubscribeTeaserSection from '@components/home/sections/SubscribeTeaserSection';
-import { Button } from '@components/ui/common/buttons/Button';
 
 import { css } from '@root/styled-system/css';
 
@@ -61,8 +60,23 @@ export default function Home() {
       <article>
         <div className={css({ textAlign: 'center', mb: '24' })}>
           <h1 className={scrollSubText()}>함께할 준비가 되었나요?</h1>
-          <Link href="/subscribe">
-            <Button size="lg">구독하러 가기</Button>
+          <Link
+            href="/subscribe"
+            className={css({
+              display: 'inline-block',
+              padding: '12px 24px',
+              width: '100%',
+              backgroundColor: 'primary',
+              color: 'white',
+              borderRadius: 'md',
+              fontWeight: 'bold',
+              textDecoration: 'none',
+              '&:hover': {
+                backgroundColor: 'primary.dark',
+              },
+            })}
+          >
+            구독하러 가기
           </Link>
         </div>
       </article>
