@@ -30,8 +30,11 @@ function StoryDetailContent({ findData }: { findData?: Props }) {
       >
         2025.05.27
       </h1>
-      <p className={css({ textStyle: 'headline3', mb: '36' })}>
-        {findData?.title}
+      <p className={css({ textStyle: 'headline3', mb: '12' })}>
+        여기는 본문 타이틀 {findData?.title}
+      </p>
+      <p className={css({ textStyle: 'subtitle4', mb: '36' })}>
+        여기는 본문 내용 {findData?.content}
       </p>
     </article>
   );
