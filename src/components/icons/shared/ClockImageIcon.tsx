@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconProps } from '@components/icons/iconProps';
 
-function ClockIcon({
+function ClockImageIcon({
   width = 24,
   height = 24,
   fill = 'none',
@@ -17,7 +17,7 @@ function ClockIcon({
       viewBox="0 0 193 228"
       fill={fill}
       role="img"
-      aria-label="ClockIcon"
+      aria-label="ClockImageIcon"
       xmlns="http://www.w3.org/2000/svg"
     >
       <rect width="192.66" height="228" rx="22" fill="url(#pattern0_57_757)" />
@@ -45,4 +45,4 @@ function ClockIcon({
   );
 }
 
-export default ClockIcon;
+export default ClockImageIcon;

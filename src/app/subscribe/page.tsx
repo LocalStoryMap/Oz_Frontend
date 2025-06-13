@@ -1,6 +1,10 @@
 import React from 'react';
 
-import { CheckIcon, ChevronRightIcon, ClockIcon } from '@/components/icons';
+import {
+  CheckIcon,
+  ChevronRightIcon,
+  ClockImageIcon,
+} from '@/components/icons';
 import { FAQ } from '@/constants/subscribe';
 
 import { css } from '@root/styled-system/css';
@@ -49,7 +53,7 @@ function Page() {
             justifyContent: 'center',
           })}
         >
-          <ClockIcon width={240} height={240} />
+          <ClockImageIcon width={240} height={240} />
         </div>
       </article>
       <div className={css({ bg: 'gray.100' })}>
