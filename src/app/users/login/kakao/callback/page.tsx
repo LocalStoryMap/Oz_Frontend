@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { postKakaoLoginCode } from '@/app/api/login/loginApi';
+import { SpinnerMessage } from '@/components/ui/common/loading/SpinnerMessage';
 import { useAuthStore } from '@/store/useAuthStore';
 
 export default function KakaoCallbackPage() {
@@ -27,5 +28,9 @@ export default function KakaoCallbackPage() {
       });
   }, [params]);
 
-  return <div>로그인 중입니다...</div>;
+  return (
+    <div>
+      <SpinnerMessage message="로그인 중입니다..." />
+    </div>
+  );
 }
