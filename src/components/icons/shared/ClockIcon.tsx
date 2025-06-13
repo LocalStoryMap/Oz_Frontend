@@ -16,6 +16,8 @@ function ClockIcon({
       height={height}
       viewBox="0 0 193 228"
       fill={fill}
+      role="img"
+      aria-label="ClockIcon"
       xmlns="http://www.w3.org/2000/svg"
     >
       <rect width="192.66" height="228" rx="22" fill="url(#pattern0_57_757)" />
