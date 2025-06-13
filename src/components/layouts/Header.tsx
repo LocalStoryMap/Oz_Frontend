@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { CloseIcon, LogoIcon, MenuIcon } from '@components/icons';
@@ -11,27 +11,18 @@ import {
   navWrapper,
 } from '@components/layouts/header.recipe';
 
+import { AUTH_MENU, MenuItem, NAVIGATE_MENU } from '@/constants/headerMenu';
+import { useIsMobile } from '@/hooks/useIsMobile';
 import { useAuthStore } from '@/store/useAuthStore';
-
-import { css } from '@root/styled-system/css';
 
 const Header = () => {
   const router = useRouter();
   const user = useAuthStore(state => state.user);
   const clearAuth = useAuthStore(state => state.clearAuth);
-
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // 디바이스 감지
-  useEffect(() => {
-    const updateSize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    updateSize();
-    window.addEventListener('resize', updateSize);
-    return () => window.removeEventListener('resize', updateSize);
-  }, []);
+  const isLoggedIn = !!user;
 
   const handleLogout = () => {
     clearAuth();
@@ -39,78 +30,94 @@ const Header = () => {
     router.push('/login');
   };
 
-  const handleLogin = () => {
-    router.push('/login');
+  const handleToggleMenu = () => setIsMenuOpen(prev => !prev);
+  const handleCloseMenu = () => {
+    if (isMobile) setIsMenuOpen(false);
   };
 
-  const onClick = () => setIsMenuOpen(prev => !prev);
-  const onClose = () => {
-    if (window.innerWidth < 768) {
-      setIsMenuOpen(false);
-    }
-  };
-
-  const menuItems = [
-    { title: '스토리', path: '/story' },
-    { title: '구독', path: '/' },
-    { title: '지도', path: '/map' },
-    ...(user ? [{ title: '마이 페이지', path: '/' }] : []),
-  ];
-
-  const AuthButton = (
-    <button type="button" onClick={user ? handleLogout : handleLogin}>
-      {user ? '로그아웃' : '로그인'}
-    </button>
-  );
+  const authMenu = AUTH_MENU(isMobile, isLoggedIn, handleLogout);
 
   return (
-    <header className={css({ paddingTop: '4' })}>
-      {isMenuOpen && <div className={dimOverlay()} onClick={onClick} />}
+    <>
+      <header className="pt_4" style={{ zIndex: 1000, position: 'relative' }}>
+        <nav className={navWrapper()}>
+          <div className={headerWrapper()}>
+            <Link href="/" className="d_flex ai_center">
+              <LogoIcon width={150} color="black" />
+            </Link>
 
-      <nav className={navWrapper()}>
-        <div className={headerWrapper()}>
-          <Link href="/" onClick={onClose} passHref>
-            <LogoIcon width={150} color="black" />
-          </Link>
+            <div className="d_flex ai_center gap_4 md:gap_6">
+              {isMobile ? (
+                <>
+                  {authMenu.map((menu: MenuItem) => (
+                    <Link
+                      key={menu.title}
+                      href={menu.path}
+                      onClick={() => {
+                        menu.onClick?.();
+                        handleCloseMenu();
+                      }}
+                    >
+                      {menu.title}
+                    </Link>
+                  ))}
+                  <button
+                    type="button"
+                    aria-label="메뉴 열기 또는 닫기"
+                    className="d_block md:d_none cursor_pointer"
+                    onClick={handleToggleMenu}
+                    style={{ zIndex: 1001 }}
+                  >
+                    {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
+                  </button>
+                </>
+              ) : (
+                <>
+                  {authMenu.map((menu: MenuItem) => (
+                    <Link
+                      key={menu.title}
+                      href={menu.path}
+                      onClick={menu.onClick}
+                    >
+                      {menu.title}
+                    </Link>
+                  ))}
+                </>
+              )}
+            </div>
+          </div>
 
-          {/* 모바일: 햄버거 버튼 왼쪽에 로그인/로그아웃 */}
-          {isMobile && AuthButton}
-
-          <ul className={navMenu({ isOpen: isMenuOpen })}>
-            {menuItems.map(menu => (
-              <li key={menu.title}>
-                <Link
-                  href={menu.path}
-                  onClick={onClose}
-                  className={css({ display: 'block', width: '100%' })}
+          {/* 모바일 드롭다운 메뉴 */}
+          {isMobile && (
+            <ul className={navMenu({ isOpen: isMenuOpen })}>
+              {[
+                ...NAVIGATE_MENU,
+                ...(isLoggedIn
+                  ? [{ title: '마이 페이지', path: '/mypage' }]
+                  : []),
+              ].map(menu => (
+                <li
+                  key={menu.path}
+                  className="d_flex ai_center hover:td_underline"
                 >
-                  {menu.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
+                  <Link
+                    className="d_block w_100%"
+                    href={menu.path}
+                    onClick={handleCloseMenu}
+                  >
+                    {menu.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </nav>
+      </header>
 
-          {/* PC: 메뉴 오른쪽에 로그인/로그아웃 */}
-          {!isMobile && AuthButton}
-
-          <button
-            type="button"
-            onClick={onClick}
-            aria-label="메뉴 열기 또는 닫기"
-            className={css({
-              display: {
-                base: 'block',
-                md: 'none',
-              },
-              cursor: 'pointer',
-              marginLeft: '4',
-            })}
-          >
-            {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
-          </button>
-        </div>
-      </nav>
-    </header>
+      {isMenuOpen && isMobile && (
+        <div className={dimOverlay()} onClick={handleCloseMenu} />
+      )}
+    </>
   );
 };
 
