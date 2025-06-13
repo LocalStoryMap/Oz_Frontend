@@ -2,8 +2,6 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { TravelIcon, UserIcon } from '@components/icons';
-import { Button } from '@components/ui/common/buttons/Button';
 import PageHeader from '@components/ui/common/pageHeader/PageHeader';
 
 import { css } from '@root/styled-system/css';
@@ -27,29 +25,14 @@ function StoryDetailContent({ findData }: { findData?: Props }) {
         height={500}
         className={css({ width: '100%', height: '500px', objectFit: 'cover' })}
       />
-      <p className={css({ textStyle: 'headline3', mt: 12 })}>
+      <h1
+        className={css({ textStyle: 'headline4', color: 'gray.300', mt: 12 })}
+      >
+        2025.05.27
+      </h1>
+      <p className={css({ textStyle: 'headline3', mb: '36' })}>
         {findData?.title}
       </p>
-      <div
-        className={css({
-          display: 'flex',
-          mt: 12,
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        })}
-      >
-        <Button color="outline" onClick={() => alert('프로필 보기로 이동 ')}>
-          <UserIcon />
-          프로필 보기
-        </Button>
-        <Button
-          color="outline"
-          onClick={() => alert('사용자 여행 코스로 보기 이동 ')}
-        >
-          <TravelIcon />
-          여행 코스 보기
-        </Button>
-      </div>
     </article>
   );
 }
