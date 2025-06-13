@@ -39,13 +39,14 @@ function StoryListSection({
       {filteredData.length > 0 ? (
         filteredData.map(item => (
           <div
+            key={item.id}
             className={css({
               display: 'flex',
               flexDirection: 'column',
               mb: 8,
             })}
           >
-            <Link href={`/story/${item.id}`} key={item.id}>
+            <Link href={`/story/${item.id}`}>
               <StoryCard
                 images={[item.img]}
                 title={item.title}
