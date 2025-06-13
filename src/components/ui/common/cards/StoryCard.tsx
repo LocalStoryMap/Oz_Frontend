@@ -106,9 +106,9 @@ function StoryCard({ images, userProfile, title, content }: StoryCardProps) {
         <div
           className={css({ display: 'flex', alignItems: 'center', gap: '2' })}
         >
-          <HeartIcon />
+          <HeartIcon aria-label="좋아요 1개" />
           <span>1</span>
-          <EyeIcons />
+          <EyeIcons aria-label="조회수 1개" />
           <span>1</span>
         </div>
       </div>
