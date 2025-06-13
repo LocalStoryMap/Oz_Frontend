@@ -33,9 +33,9 @@ function StorySearchSection({ keyword }: { keyword: string }) {
     router.replace('/story');
   };
 
-  const onRegionClick = (region: string) => {
+  const onSortClick = (sortValue: string) => {
     const params = new URLSearchParams();
-    params.set('region', region);
+    params.set('sort', sortValue);
     setSearch('');
     router.push(`/story?${params.toString()}`);
   };
@@ -55,15 +55,11 @@ function StorySearchSection({ keyword }: { keyword: string }) {
         <Button
           size="sm"
           color="outline"
-          onClick={e => onRegionClick(e.currentTarget.innerText)}
+          onClick={() => onSortClick('popular')}
         >
           인기순
         </Button>
-        <Button
-          size="sm"
-          color="outline"
-          onClick={e => onRegionClick(e.currentTarget.innerText)}
-        >
+        <Button size="sm" color="outline" onClick={() => onSortClick('latest')}>
           최신순
         </Button>
       </div>
