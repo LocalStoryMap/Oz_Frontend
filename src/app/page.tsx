@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import Link from 'next/link';
 import { scrollSectionInner } from '@components/home/recipes/HomeSection.recipe';
 import { scrollSubText } from '@components/home/recipes/text.recipe';
 import HeroSection from '@components/home/sections/HeroSection';
@@ -60,7 +61,9 @@ export default function Home() {
       <article>
         <div className={css({ textAlign: 'center', mb: '24' })}>
           <h1 className={scrollSubText()}>함께할 준비가 되었나요?</h1>
-          <Button size="lg">구독하러 가기</Button>
+          <Link href="/subscribe">
+            <Button size="lg">구독하러 가기</Button>
+          </Link>
         </div>
       </article>
     </section>
