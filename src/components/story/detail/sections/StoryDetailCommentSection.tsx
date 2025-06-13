@@ -33,7 +33,7 @@ function StoryDetailCommentSection() {
               aria-label="팔로우 버튼"
               size="sm"
               color="outline"
-              onClick={() => alert('글 쓰기 수정으로 가는 버튼')}
+              onClick={() => alert('팔로우 하는 버튼')}
             >
               Follow
             </Button>
