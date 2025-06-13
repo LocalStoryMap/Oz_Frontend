@@ -16,7 +16,6 @@ export const chatBotPanel = cva({
     flexDirection: 'column',
     justifyContent: 'space-between',
     overflow: 'hidden',
-    position: 'fixed',
     bottom: { base: '1rem', md: '5rem' },
     right: { base: '1rem', md: '1rem' },
     width: { base: 'min(calc(100vw - 2rem), 25rem)', md: '25rem' },
