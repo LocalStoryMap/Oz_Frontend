@@ -59,7 +59,7 @@ function Page() {
         </div>
       </article>
       <div className={css({ bg: 'gray.100' })}>
-        <Link href="/payment">
+        <Link href="/payment" aria-label="플래너 정기구독 결제 페이지로 이동">
           <article
             className={css({
               bg: 'white',
