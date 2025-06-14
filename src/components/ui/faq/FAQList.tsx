@@ -5,7 +5,7 @@ type Props = {
 };
 
 function FaqList({ text }: Props) {
-  return <li>- {text}</li>;
+  return <li>· {text}</li>;
 }
 
 export default FaqList;
