@@ -27,7 +27,7 @@ export default function KakaoCallbackPage() {
       .catch(err => {
         console.error('카카오 로그인 실패:', err);
       });
-  }, [params]);
+  }, [params, router, setAuth]);
 
   return (
     <div>

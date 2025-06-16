@@ -9,11 +9,12 @@ export default function AuthInitializer() {
 
   useEffect(() => {
     const user = localStorage.getItem('user');
-    const token = localStorage.getItem('token');
-    if (user && token) {
-      setAuth(JSON.parse(user), token);
+    const access = localStorage.getItem('access');
+    const refresh = localStorage.getItem('refresh');
+    if (user && access && refresh) {
+      setAuth(JSON.parse(user), access, refresh);
     }
-  }, []);
+  }, [setAuth]);
 
   return null;
 }

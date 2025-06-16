@@ -17,11 +17,7 @@ import {
 import { GoogleIcon } from '@/components/icons/shared/GoogleIcon';
 import { KakaoIcon } from '@/components/icons/shared/KakaoIcon';
 import { Button } from '@/components/ui/common/buttons/Button';
-import {
-  KAKAO_AUTH_URL,
-  KAKAO_REDIRECT_URI,
-  KAKAO_REST_API_KEY,
-} from '@/constants/auth';
+import { KAKAO_AUTH_URL } from '@/constants/auth';
 
 export default function LoginPage() {
   const [loadingProvider, setLoadingProvider] = useState<
@@ -37,12 +33,8 @@ export default function LoginPage() {
   const handleLogin = (provider: 'kakao' | 'google') => {
     setLoadingProvider(provider);
     if (provider === 'kakao') {
-      console.log('[DEBUG] client_id', KAKAO_REST_API_KEY);
-      console.log('[DEBUG] redirect_uri', KAKAO_REDIRECT_URI);
-
       window.location.href = KAKAO_AUTH_URL;
     } else {
-      console.log('구글 로그인 시작');
       setTimeout(() => setLoadingProvider(null), 1000);
     }
   };
