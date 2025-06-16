@@ -21,7 +21,8 @@ function KakaoCallbackContent() {
       .then(({ access, refresh, user }) => {
         setAuth(user, access, refresh);
         localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('token', JSON.stringify({ access, refresh }));
+        localStorage.setItem('access', access);
+        localStorage.setItem('refresh', refresh);
         router.push('/');
       })
       .catch(err => {
