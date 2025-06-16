@@ -17,10 +17,11 @@ export default function KakaoCallbackPage() {
     if (!code) return;
 
     postKakaoLoginCode(code)
-      .then(({ token, user }) => {
-        setAuth(user, token);
+      .then(({ access, refresh, user }) => {
+        setAuth(user, access, refresh);
         localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('token', token);
+        localStorage.setItem('access', access);
+        localStorage.setItem('refresh', refresh);
         router.push('/');
       })
       .catch(err => {

@@ -2,7 +2,8 @@ import { ENDPOINTS } from '@/api/endpoints';
 import { mutationFetcher } from '@/api/fetcher';
 
 interface KakaoLoginResponse {
-  token: string;
+  access: string;
+  refresh: string;
   user: {
     id: number;
     email: string;
