@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { postKakaoLoginCode } from '@/app/api/login/loginApi';
 import { SpinnerMessage } from '@/components/ui/common/loading/SpinnerMessage';
 import { useAuthStore } from '@/store/useAuthStore';
 
-export default function KakaoCallbackPage() {
+function KakaoCallbackContent() {
   const params = useSearchParams();
   const router = useRouter();
   const setAuth = useAuthStore(state => state.setAuth);
@@ -29,9 +29,13 @@ export default function KakaoCallbackPage() {
       });
   }, [params, router, setAuth]);
 
+  return <SpinnerMessage message="로그인 중입니다..." />;
+}
+
+export default function KakaoCallbackPage() {
   return (
-    <div>
-      <SpinnerMessage message="로그인 중입니다..." />
-    </div>
+    <Suspense fallback={<SpinnerMessage message="로딩 중..." />}>
+      <KakaoCallbackContent />
+    </Suspense>
   );
 }
