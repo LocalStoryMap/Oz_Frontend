@@ -19,5 +19,5 @@ interface KakaoLoginResponse {
 export const postKakaoLoginCode = (
   code: string,
 ): Promise<KakaoLoginResponse> => {
-  return mutationFetcher('post', ENDPOINTS.USERS.KAKAO, { access_token: code });
+  return mutationFetcher('post', ENDPOINTS.USERS.KAKAO, { code });
 };
