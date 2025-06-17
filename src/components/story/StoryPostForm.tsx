@@ -13,6 +13,7 @@ import { useMutation } from '@tanstack/react-query';
 
 import { storyOption } from '@/api/options/storyOption';
 import { FEELINGS } from '@/constants/story';
+import { PostStoryPayload } from '@/types/story';
 import {
   getDayOptions,
   getMonthOptions,
@@ -35,19 +36,26 @@ function StoryPostForm() {
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [images, setImages] = useState<string[]>([]);
 
   const { mutate } = useMutation({
     ...storyOption.postStory(),
-    onSuccess: () => router.push('/story'),
+    onSuccess: () => {
+      router.push('/story');
+    },
   });
 
   const onSubmit = () => {
-    const postData = {
-      title,
-      content,
-      emoji: feeling,
+    const payload: PostStoryPayload = {
+      story: {
+        title,
+        content,
+        emoji: feeling,
+      },
+      images,
     };
-    mutate(postData);
+
+    mutate(payload);
   };
 
   return (
