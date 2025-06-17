@@ -14,16 +14,16 @@ type Props = {
 function ChatMessageList({ messages, image }: Props) {
   return (
     <div>
-      {messages.map(message => (
+      {messages.map((message, idx) => (
         <div
-          key={`message-${message.role}-${message.content}`}
+          key={`message-${idx}`}
           className={css({
             display: 'flex',
             justifyContent: message.role === 'user' ? 'flex-end' : 'flex-start',
             mb: '1rem',
           })}
         >
-          {message.role === 'bot' && (
+          {message.role === 'assistant' && (
             <div
               className={css({
                 width: '40px',

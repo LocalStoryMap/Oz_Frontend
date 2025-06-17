@@ -1,5 +1,5 @@
 export type Message = {
-  role: 'bot' | 'user';
+  role: 'assistant' | 'user';
   content: string;
   desc?: string;
 };

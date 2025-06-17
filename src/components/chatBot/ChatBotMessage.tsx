@@ -26,7 +26,6 @@ function ChatBotMessage({ openModal }: Props) {
   });
   const [value, setValue] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([]);
-
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
   };
@@ -37,7 +36,7 @@ function ChatBotMessage({ openModal }: Props) {
       setMessages(prev => [
         ...prev,
         { role: 'user', content: variables.userMessage },
-        { role: 'bot', content: data.reply },
+        { role: 'assistant', content: data.reply },
       ]);
     },
   });
@@ -50,7 +49,7 @@ function ChatBotMessage({ openModal }: Props) {
         { role: 'system', content: '너는 여행 AI야' },
         ...messages.map(
           (m): APIMessage => ({
-            role: m.role === 'bot' ? 'assistant' : m.role,
+            role: m.role === 'assistant' ? 'user' : m.role,
             content: m.content,
           }),
         ),
