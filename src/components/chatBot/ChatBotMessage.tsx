@@ -1,16 +1,18 @@
 'use client';
 
 import React, { useState } from 'react';
+import { chatBotOptions } from '@api/options/chateBot';
 import { chatInputWrapper } from '@components/chatBot/chatBot.recipe';
 import ChatBotHeader from '@components/chatBot/ChatBotHeader';
 import ChatBotIntro from '@components/chatBot/ChatBotIntro';
 import ChatMessageList from '@components/chatBot/ChatMessageList';
 import { Button } from '@components/ui/common/buttons/Button';
-import { Input } from '@components/ui/common/textfields';
+import { Textarea } from '@components/ui/common/textfields';
+import { useMutation } from '@tanstack/react-query';
 
 import { css } from '@root/styled-system/css';
 
-import { Message } from '@components/chatBot/types';
+import { APIMessage, Message } from '@components/chatBot/types';
 
 type Props = {
   openModal: () => void;
@@ -25,25 +27,48 @@ function ChatBotMessage({ openModal }: Props) {
   const [value, setValue] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([]);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
   };
+
+  const mutation = useMutation({
+    ...chatBotOptions.postChatBot(),
+    onSuccess: (data, variables) => {
+      setMessages(prev => [
+        ...prev,
+        { role: 'user', content: variables.userMessage },
+        { role: 'bot', content: data.reply },
+      ]);
+    },
+  });
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!value.trim()) return;
-    // Todo: 추후 서버 연결시 서버에서 가져오는 데이터 answer으로 교체
     try {
-      const mockData = { answer: '안녕하세요' };
-      setMessages(prev => [
-        ...prev,
-        { type: 'user', content: mockData.answer },
-        { type: 'bot', content: value },
-      ]);
+      const findMessage: APIMessage[] = [
+        { role: 'system', content: '너는 여행 AI야' },
+        ...messages.map(
+          (m): APIMessage => ({
+            role: m.role === 'bot' ? 'assistant' : m.role,
+            content: m.content,
+          }),
+        ),
+      ];
+      mutation.mutate({
+        findMessage,
+        userMessage: value.trim(),
+      });
+      setValue('');
     } catch (e) {
       console.log(e);
-    } finally {
-      setValue('');
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      onSubmit(e as any);
     }
   };
 
@@ -73,10 +98,19 @@ function ChatBotMessage({ openModal }: Props) {
         <ChatMessageList messages={messages} image={chatbotMeta.image} />
       </div>
       <form onSubmit={onSubmit} className={chatInputWrapper()}>
-        <Input
+        <Textarea
           value={value}
+          rows={1}
+          onKeyDown={handleKeyDown}
           onChange={onChange}
           placeholder="메시지를 입력하세요..."
+          className={css({
+            flex: 1,
+            resize: 'none',
+            minHeight: '40px',
+            maxHeight: '200px',
+            overflowY: 'auto',
+          })}
         />
         <Button
           type="submit"
