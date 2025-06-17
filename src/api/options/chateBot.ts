@@ -17,8 +17,6 @@ export const chatBotOptions = {
   }),
   summarize: () => ({
     mutationFn: (data: { locationId?: number; rawText: string }) =>
-      mutationFetcher('post', ENDPOINTS.AI.SUMMARY, {
-        data,
-      }),
+      mutationFetcher('post', ENDPOINTS.AI.SUMMARY, data),
   }),
 };
