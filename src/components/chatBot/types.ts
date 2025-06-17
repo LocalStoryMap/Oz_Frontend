@@ -1,5 +1,10 @@
 export type Message = {
-  type: 'bot' | 'user';
+  role: 'bot' | 'user';
   content: string;
   desc?: string;
+};
+
+export type APIMessage = {
+  role: 'system' | 'user' | 'assistant';
+  content: string;
 };
