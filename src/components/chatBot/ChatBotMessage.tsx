@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { chatBotOptions } from '@api/options/chateBot';
 import { chatInputWrapper } from '@components/chatBot/chatBot.recipe';
 import ChatBotHeader from '@components/chatBot/ChatBotHeader';
@@ -24,10 +24,15 @@ function ChatBotMessage({ openModal }: Props) {
     image: '/images/story1.png',
     desc: '여행이 궁금할 땐 언제든지 물어보세요!',
   });
+  const formRef = useRef<HTMLFormElement | null>(null);
   const [value, setValue] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([]);
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
+  };
+
+  const sendMessage = () => {
+    formRef.current?.requestSubmit();
   };
 
   const mutation = useMutation({
@@ -67,7 +72,7 @@ function ChatBotMessage({ openModal }: Props) {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
-      onSubmit(e as any);
+      sendMessage();
     }
   };
 
@@ -96,7 +101,7 @@ function ChatBotMessage({ openModal }: Props) {
         {/* 대화 메시지 표시 */}
         <ChatMessageList messages={messages} image={chatbotMeta.image} />
       </div>
-      <form onSubmit={onSubmit} className={chatInputWrapper()}>
+      <form ref={formRef} onSubmit={onSubmit} className={chatInputWrapper()}>
         <Textarea
           value={value}
           rows={1}
