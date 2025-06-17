@@ -69,18 +69,21 @@ function StoryPostForm() {
             selected={date.year}
             onChange={value => setDate(prev => ({ ...prev, year: value }))}
             minW="80px"
+            disabled
           />
           <FilterDropdown
             options={getMonthOptions()}
             selected={date.month}
             onChange={value => setDate(prev => ({ ...prev, month: value }))}
             minW="80px"
+            disabled
           />
           <FilterDropdown
             options={getDayOptions()}
             selected={date.day}
             onChange={value => setDate(prev => ({ ...prev, day: value }))}
             minW="80px"
+            disabled
           />
           <FilterDropdown
             options={renderedFeelings}
