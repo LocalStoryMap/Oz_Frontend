@@ -7,7 +7,7 @@ export const markerOption = {
   getMarkerList: (params?: Record<string, any>) =>
     queryOptions<string[]>({
       queryKey: ['marker', 'list', params],
-      queryFn: queryFetcher(ENDPOINTS.MARKER.LIST, { params }),
+      queryFn: queryFetcher(ENDPOINTS.MARKER.LIST, params),
     }),
   postMarker: () => ({
     mutationFn: (data: any) =>
