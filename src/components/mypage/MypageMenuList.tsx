@@ -59,13 +59,12 @@ export default function MypageMenuList() {
       colorMode: 'fill',
     },
     {
-      title: '로그아웃',
+      title: '회원탈퇴',
       icon: LogoutIcon,
       colorMode: 'stroke',
       action: () => {
-        // 로그아웃 로직
-        // localStorage.removeItem('token');
-        router.push('/login');
+        // 회원 탈퇴 로직
+        router.push('/');
       },
     },
   ];
