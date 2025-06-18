@@ -34,6 +34,7 @@ function StoryPostForm() {
   }));
   const [feeling, setFeeling] = useState('smile');
 
+  const [marker, setMarker] = useState<number | null>(null);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [images, setImages] = useState<string[]>([]);
@@ -48,13 +49,13 @@ function StoryPostForm() {
   const onSubmit = () => {
     const payload: PostStoryPayload = {
       story: {
+        marker: 1,
         title,
         content,
         emoji: feeling,
       },
       images,
     };
-
     mutate(payload);
   };
 
@@ -62,7 +63,7 @@ function StoryPostForm() {
     <div className={flex({ gap: 'xl', marginB: 'sm' })}>
       <div className={flex({ gap: 'lg', p: 'sm', marginB: 'sm' })}>
         <p className={modalText({ text: 'head4', align: 'left' })}>글작성</p>
-        <StoryPostPlace />
+        <StoryPostPlace setMarker={setMarker} />
         <div className={flex({ direction: 'row', gap: 'md' })}>
           <FilterDropdown
             options={getYearOptions()}
