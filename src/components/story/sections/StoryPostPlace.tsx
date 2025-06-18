@@ -10,6 +10,7 @@ import { flex, flexBetween } from '@/components/ui/common/cards/card.recipe';
 import { border } from '@/components/ui/common/dropdowns/dropdown.recipe';
 import { modalText } from '@/components/ui/common/modals/modal.recipe';
 import { Search } from '@/components/ui/common/textfields';
+import useDebounce from '@/hooks/useDebounce';
 import { Marker } from '@/types/marker';
 
 import { css, cx } from '@root/styled-system/css';
@@ -22,13 +23,14 @@ function StoryPostPlace({
   const [search, setSearch] = useState('');
   const [selectedPlace, setSelectedPlace] = useState<Marker | null>(null);
 
+  const debouncedSearch = useDebounce(search, 300);
   const { queryKey, queryFn } = markerOption.getMarkerList({
-    search_term: search,
+    search_term: debouncedSearch,
   });
   const { data } = useQuery({
     queryKey,
     queryFn,
-    enabled: !!search,
+    enabled: !!debouncedSearch,
   });
   const suggestions = data?.data;
 
