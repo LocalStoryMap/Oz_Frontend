@@ -77,6 +77,8 @@ function ChatBotMessage({ openModal }: Props) {
     }
   };
 
+  if (mutation.isError) return <div>Error...</div>;
+
   return (
     <div
       className={css({
