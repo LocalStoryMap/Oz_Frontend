@@ -64,7 +64,13 @@ function StoryCard({
         return {
           ...old,
           data: old.data.map(item =>
-            item.storyId === storyId ? { ...item, liked: newLiked } : item,
+            item.storyId === storyId
+              ? {
+                  ...item,
+                  liked: newLiked,
+                  likeCount: (item.likeCount ?? 0) + (newLiked ? 1 : -1),
+                }
+              : item,
           ),
         };
       });
