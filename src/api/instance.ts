@@ -14,12 +14,18 @@ export const instance = axios.create({
   withCredentials: true,
 });
 
+export const setAuthHeader = (token: string) => {
+  instance.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
 instance.interceptors.request.use(
   config => {
-    const token =
-      useAuthStore.getState().access || localStorage.getItem('access');
-    if (token && config.headers) {
-      config.headers.Authorization = `Bearer ${token}`;
+    if (typeof window !== 'undefined') {
+      const token =
+        useAuthStore.getState().access || localStorage.getItem('access');
+      if (!config.headers.Authorization && token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
     }
     return config;
   },
