@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { markerOption } from '@/api/options/markerOption';
 import { CloseIcon, LocationIcon } from '@/components/icons';
+import { searchWrapper } from '@/components/story/sections/story.recipe';
 import { flex, flexBetween } from '@/components/ui/common/cards/card.recipe';
 import { border } from '@/components/ui/common/dropdowns/dropdown.recipe';
 import { modalText } from '@/components/ui/common/modals/modal.recipe';
@@ -58,20 +59,7 @@ function StoryPostPlace({
             onChange={e => setSearch(e.target.value)}
           />
           {suggestions && (
-            <div
-              className={cx(
-                border({ color: 'gray100' }),
-                css({
-                  width: '100%',
-                  position: 'absolute',
-                  top: 12,
-                  zIndex: 100,
-                  bgColor: 'white',
-                  maxHeight: '200px',
-                  overflowY: 'auto',
-                }),
-              )}
-            >
+            <div className={cx(border({ color: 'gray100' }), searchWrapper())}>
               {suggestions.length > 0 ? (
                 suggestions.map((item, i) => (
                   <div
