@@ -28,7 +28,7 @@ type StoryCardProps = {
   content?: string;
   likeCount?: number;
   viewCount?: number;
-  liked?: boolean; // ✅ 낙관적 업데이트 위해 추가
+  liked?: boolean;
 };
 
 type StoryListResponse = {
@@ -43,7 +43,7 @@ function StoryCard({
   storyId,
   likeCount,
   viewCount,
-  liked, // ✅ 받기
+  liked,
 }: StoryCardProps) {
   const queryClient = useQueryClient();
   const imageCount = images?.length ?? 0;

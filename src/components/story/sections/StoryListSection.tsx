@@ -57,7 +57,7 @@ function StoryListSection({
             <Link href={`/story/${item.storyId}`}>
               <StoryCard
                 images={[item.userProfileImage]}
-                storyId={String(item.storyId)}
+                storyId={item.storyId ? String(item.storyId) : 'mock-id'}
                 title={item.title}
                 content={item.content}
                 userProfile={item.userProfileImage}
