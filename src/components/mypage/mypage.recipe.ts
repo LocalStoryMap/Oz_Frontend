@@ -238,3 +238,31 @@ export const menuItemTitle = cva({
     fontWeight: '400',
   },
 });
+
+// 로그인 구분 배지 스타일
+
+export const providerBadge = cva({
+  base: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '16px',
+    height: '16px',
+    borderRadius: 'full',
+    fontSize: '10px',
+    fontWeight: '700',
+    marginLeft: '4px',
+  },
+  variants: {
+    provider: {
+      google: {
+        backgroundColor: 'blue.100',
+        color: 'blue.600',
+      },
+      kakao: {
+        backgroundColor: 'yellow.500',
+        color: 'black',
+      },
+    },
+  },
+});
