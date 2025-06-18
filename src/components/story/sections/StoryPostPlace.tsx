@@ -67,6 +67,8 @@ function StoryPostPlace({
                   top: 12,
                   zIndex: 100,
                   bgColor: 'white',
+                  maxHeight: '200px',
+                  overflowY: 'auto',
                 }),
               )}
             >
@@ -95,7 +97,13 @@ function StoryPostPlace({
                     )}
                   >
                     <LocationIcon width={20} height={20} />
-                    <span className={modalText({ color: 'gray500' })}>
+                    <span
+                      className={modalText({
+                        color: 'gray500',
+                        align: 'left',
+                        clamp: 1,
+                      })}
+                    >
                       {item.markerName}
                     </span>
                   </div>
