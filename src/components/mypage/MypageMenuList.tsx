@@ -80,7 +80,7 @@ export default function MypageMenuList() {
   return (
     <div className={menuListContainer()}>
       <ul className={menuListStyles()}>
-        {menuItems.map((item, index) => {
+        {menuItems.map(item => {
           const IconComponent = item.icon;
 
           return (

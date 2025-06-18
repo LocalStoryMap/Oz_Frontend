@@ -58,7 +58,7 @@ export async function apiRequest(
     ...options,
     headers: {
       ...options.headers,
-      Authorization: `Bearer ${access}`,
+      ...(access ? { Authorization: `Bearer ${access}` } : {}),
     },
   });
 

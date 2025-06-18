@@ -16,7 +16,7 @@ export interface ClientUser {
   id: number;
   email: string;
   nickname: string;
-  provider: string;
+  provider: 'google' | 'kakao';
   profile_image: string | null;
   is_paid_user: boolean;
 }

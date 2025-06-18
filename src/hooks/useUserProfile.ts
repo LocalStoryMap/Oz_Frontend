@@ -46,6 +46,7 @@ export const useUserProfile = () => {
   }, [user, access, refresh, setAuth]);
 
   // 초기 렌더링 시 유저 프로필 정보 조회 및 동기화
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (user && access) {
       fetchUserProfile();
