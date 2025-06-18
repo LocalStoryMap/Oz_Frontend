@@ -61,6 +61,8 @@ function StoryListSection({
                 userProfile={item.userProfileImage}
                 viewCount={item.viewCount}
                 likeCount={item.likeCount}
+                userNickname={item.userNickname}
+                createdAt={item.createdAt}
               />
             </Link>
           </div>

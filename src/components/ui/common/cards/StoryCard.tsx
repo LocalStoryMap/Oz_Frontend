@@ -29,6 +29,8 @@ type StoryCardProps = {
   likeCount?: number;
   viewCount?: number;
   liked?: boolean;
+  userNickname?: string;
+  createdAt?: string;
 };
 
 type StoryListResponse = {
@@ -44,6 +46,8 @@ function StoryCard({
   likeCount,
   viewCount,
   liked,
+  userNickname,
+  createdAt,
 }: StoryCardProps) {
   const queryClient = useQueryClient();
   const imageCount = images?.length ?? 0;
@@ -103,6 +107,16 @@ function StoryCard({
       })}
     >
       <div
+        className={css({
+          display: 'flex',
+          alignItems: 'center',
+          gap: 2,
+          mb: 2,
+          ml: 4,
+          mt: 2,
+        })}
+      />
+      <div
         className={gridImageWrapper({
           layout: layout as '1' | '2' | '3' | '4' | '5',
         })}
@@ -136,6 +150,18 @@ function StoryCard({
         })}
       >
         <Image src={userProfile || defaultUserProfile} alt="프로필" fill />
+      </div>
+      <div className={cx(css({ mt: 4, pl: '4' }))}>
+        {userNickname && (
+          <span className={subText({ color: 'muted' })}>{userNickname}</span>
+        )}
+        {createdAt && (
+          <span>
+            <span className={subText({ color: 'default' })}>
+              {new Date(createdAt).toLocaleDateString()}
+            </span>
+          </span>
+        )}
       </div>
       <div className={cx(css({ mt: 2 }), flex({ gap: 'md', p: 'lg' }))}>
         <p className={titleText({ color: 'gray600' })}>{title}</p>
