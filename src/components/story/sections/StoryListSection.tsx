@@ -34,8 +34,6 @@ function StoryListSection({
     queryFn: () => instance.get(ENDPOINTS.STORY.LIST),
   });
 
-  console.log(data?.data);
-
   return (
     <article className={css({ mb: 12 })}>
       <div className={css({ mb: 12 })}>
