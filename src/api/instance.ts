@@ -1,6 +1,8 @@
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
 
+import { useAuthStore } from '@/store/useAuthStore';
+
 const BASE_URL = 'https://localstorymap.com/api';
 
 export const instance = axios.create({
@@ -14,7 +16,8 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(
   config => {
-    const token = localStorage.getItem('token'); // 전역 상태 로직으로 변경
+    const token =
+      useAuthStore.getState().access || localStorage.getItem('access');
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
     }
