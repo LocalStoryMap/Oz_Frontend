@@ -7,7 +7,7 @@ import PageHeader from '@/components/ui/common/pageHeader/PageHeader';
 export default function MypagePage() {
   return (
     <>
-      <PageHeader title="마이 페이지" />
+      <PageHeader title="마이페이지" />
       <div className={mypageContainer()}>
         <MypageProfile />
         <MypageStats />
