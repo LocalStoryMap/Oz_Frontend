@@ -30,6 +30,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'kr.object.ncloudstorage.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'img1.kakaocdn.net',
+      },
     ],
   },
 };
