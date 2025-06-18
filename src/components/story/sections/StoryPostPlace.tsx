@@ -9,6 +9,7 @@ import { flex, flexBetween } from '@/components/ui/common/cards/card.recipe';
 import { border } from '@/components/ui/common/dropdowns/dropdown.recipe';
 import { modalText } from '@/components/ui/common/modals/modal.recipe';
 import { Search } from '@/components/ui/common/textfields';
+import { Marker } from '@/types/marker';
 
 import { css, cx } from '@root/styled-system/css';
 
@@ -18,16 +19,17 @@ function StoryPostPlace({
   setMarker: (id: number | null) => void;
 }) {
   const [search, setSearch] = useState('');
-  const [selectedPlace, setSelectedPlace] = useState<string | null>(null);
+  const [selectedPlace, setSelectedPlace] = useState<Marker | null>(null);
 
   const { queryKey, queryFn } = markerOption.getMarkerList({
     search_term: search,
   });
-  const { data: suggestions } = useQuery({
+  const { data } = useQuery({
     queryKey,
     queryFn,
     enabled: !!search,
   });
+  const suggestions = data?.data;
 
   return (
     <div>
@@ -35,7 +37,7 @@ function StoryPostPlace({
         <div className={cx(flexBetween(), border({ p: 2 }))}>
           <p className={flex({ direction: 'row', align: 'center', gap: 'xs' })}>
             <LocationIcon width={20} height={20} />
-            {selectedPlace}
+            {selectedPlace.markerName}
           </p>
           <button
             type="button"
@@ -75,7 +77,7 @@ function StoryPostPlace({
                     onClick={() => {
                       setSelectedPlace(item);
                       setSearch('');
-                      setMarker(1);
+                      setMarker(item.id);
                     }}
                     className={cx(
                       flex({
@@ -94,7 +96,7 @@ function StoryPostPlace({
                   >
                     <LocationIcon width={20} height={20} />
                     <span className={modalText({ color: 'gray500' })}>
-                      {item}
+                      {item.markerName}
                     </span>
                   </div>
                 ))
