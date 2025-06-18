@@ -37,7 +37,7 @@ function StoryPostForm() {
   const [marker, setMarker] = useState<number | null>(null);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<File[]>([]);
 
   const { mutate } = useMutation({
     ...storyOption.postStory(),

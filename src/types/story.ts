@@ -5,5 +5,5 @@ export type PostStoryPayload = {
     content: string;
     emoji: string;
   };
-  images: string[];
+  images: File[];
 };
