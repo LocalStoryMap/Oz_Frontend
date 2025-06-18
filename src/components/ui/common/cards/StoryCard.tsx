@@ -132,7 +132,6 @@ function StoryCard({
         <Image src={userProfile || defaultUserProfile} alt="프로필" fill />
       </div>
       <div className={cx(css({ mt: 2 }), flex({ gap: 'md', p: 'lg' }))}>
-        <p>asdasd</p>
         <p className={titleText({ color: 'gray600' })}>{title}</p>
         <p className={subText({ textStyle: 'label2', color: 'black' })}>
           {content}
