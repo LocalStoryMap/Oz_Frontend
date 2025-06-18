@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { IconProps } from './iconProps';
+import type { IconProps } from '@/components/icons/iconProps';
 
 import { css } from '@root/styled-system/css';
 
