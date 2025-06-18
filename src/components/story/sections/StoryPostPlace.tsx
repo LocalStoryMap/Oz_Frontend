@@ -63,7 +63,7 @@ function StoryPostPlace({
               {suggestions.length > 0 ? (
                 suggestions.map((item, i) => (
                   <div
-                    key={i}
+                    key={item.id}
                     onClick={() => {
                       setSelectedPlace(item);
                       setSearch('');
