@@ -51,7 +51,7 @@ function ChatBotMessage({ openModal }: Props) {
     if (!value.trim()) return;
     try {
       const findMessage: APIMessage[] = [
-        { role: 'system', content: '너는 여행 AI야' },
+        { role: 'assistant', content: '너는 여행 AI야' },
         ...messages.map(
           (m): APIMessage => ({
             role: m.role === 'assistant' ? 'user' : m.role,
@@ -100,7 +100,11 @@ function ChatBotMessage({ openModal }: Props) {
         {/* 초기 메시지 표시 */}
         <ChatBotIntro image={chatbotMeta.image} />
         {/* 대화 메시지 표시 */}
-        <ChatMessageList messages={messages} image={chatbotMeta.image} />
+        <ChatMessageList
+          messages={messages}
+          image={chatbotMeta.image}
+          isPending={mutation.isPending}
+        />
       </div>
       <form ref={formRef} onSubmit={onSubmit} className={chatInputWrapper()}>
         <Textarea
