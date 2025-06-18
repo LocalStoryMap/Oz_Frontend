@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    domains: ['localstorymap.kr.object.ncloudstorage.com'],
+  },
+};
 
 export default nextConfig;
