@@ -1,7 +1,24 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['localstorymap.kr.object.ncloudstorage.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'k.kakaocdn.net',
+      },
+      {
+        protocol: 'https',
+        hostname: 't1.kakaocdn.net',
+      },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'localstorymap.com',
+      },
+    ],
   },
 };
 
