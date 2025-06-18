@@ -20,15 +20,17 @@ const useIntersectionObserver = (
   }, [hasNextPage, fetchNextPage]);
 
   useEffect(() => {
-    if (!observerRef.current) {
-      return undefined;
-    }
+    const target = observerRef.current;
+    if (!target) return undefined;
+
     const observer = callback();
-    observer.observe(observerRef.current);
+    observer.observe(target);
+
     return () => {
       observer.disconnect();
     };
   }, [observerRef, callback]);
+
   return observerRef;
 };
 
