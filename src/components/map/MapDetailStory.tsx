@@ -8,11 +8,12 @@ import { flex, flexBetween } from '@/components/ui/common/cards/card.recipe';
 import { modalText } from '@/components/ui/common/modals/modal.recipe';
 
 type MapDetailStoryProps = {
+  id: number;
   title: string;
-  images: string[];
+  images?: string[];
 };
 
-function MapDetailStory({ title, images }: MapDetailStoryProps) {
+function MapDetailStory({ id, title, images }: MapDetailStoryProps) {
   const router = useRouter();
 
   return (
@@ -41,7 +42,7 @@ function MapDetailStory({ title, images }: MapDetailStoryProps) {
         </span>
       </p>
       <div className={gridLayout({ columns: 4, gap: 'sm', p: 'xs' })}>
-        {images.map((img, i) => (
+        {/* {images.map((img, i) => (
           <Image
             key={i}
             src={img}
@@ -50,7 +51,7 @@ function MapDetailStory({ title, images }: MapDetailStoryProps) {
             height={0}
             style={{ width: '100%', height: 'auto', borderRadius: 8 }}
           />
-        ))}
+        ))} */}
       </div>
     </div>
   );

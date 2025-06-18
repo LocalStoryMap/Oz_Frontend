@@ -24,6 +24,11 @@ export const markerOption = {
           pagination: res.pagination,
         })),
     }),
+  getMarkerDetail: (id: number) =>
+    queryOptions<Marker>({
+      queryKey: ['marker', id],
+      queryFn: queryFetcher(ENDPOINTS.MARKER.DETAIL(id)),
+    }),
   postMarker: () => ({
     mutationFn: (data: any) =>
       mutationFetcher('post', ENDPOINTS.MARKER.LIST, data),
