@@ -60,9 +60,10 @@ function ChatBotMessage({ openModal }: Props) {
         ),
       ];
       mutation.mutate({
-        findMessage,
+        messages: [...findMessage, { role: 'user', content: value.trim() }],
         userMessage: value.trim(),
       });
+
       setValue('');
     } catch (e) {
       console.log(e);
