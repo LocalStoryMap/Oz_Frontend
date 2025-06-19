@@ -117,8 +117,18 @@ function StoryPostForm() {
           })}
         />
         <FileUploadButton setImages={setImages} />
-        <div className={gridLayout({ columns: 4, p: 'xs', gap: 'sm' })}>
-          이미지 미리보기 영역
+        <div className={gridLayout({ columns: 3, p: 'xs', gap: 'sm' })}>
+          {images.map((file, idx) => (
+            <img
+              key={idx}
+              src={URL.createObjectURL(file)}
+              alt={`미리보기 ${idx + 1}`}
+              style={{ width: '100%', objectFit: 'cover', borderRadius: 8 }}
+              onLoad={e =>
+                URL.revokeObjectURL((e.target as HTMLImageElement).src)
+              }
+            />
+          ))}
         </div>
       </div>
       <Button onClick={onSubmit} color="black">
