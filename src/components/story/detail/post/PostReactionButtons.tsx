@@ -5,10 +5,10 @@ import { Button } from '@components/ui/common/buttons/Button';
 import { css } from '@root/styled-system/css';
 
 type Props = {
-  likeCount: number;
+  likeCount: number | undefined;
 };
 // 게시글 하트 댓글 수를 보여줌 추후 서버 연결 시 뮤테이션 처리 관심사 분리
-function PostReactionButtons({ likeCount }: Props): JSX.Element {
+function PostReactionButtons({ likeCount = 0 }: Props) {
   return (
     <div
       className={css({
