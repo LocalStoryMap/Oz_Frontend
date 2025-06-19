@@ -12,7 +12,7 @@ import { css } from '@root/styled-system/css';
 
 type Props = {
   story: {
-    likeCount: number;
+    likeCount: number | undefined;
     userNickname: string;
     userProfileImage: string;
     createdAt: string;
