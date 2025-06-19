@@ -12,6 +12,7 @@ import { Textarea } from '@components/ui/common/textfields';
 import { useMutation } from '@tanstack/react-query';
 
 import { storyOption } from '@/api/options/storyOption';
+import FileUploadButton from '@/components/ui/maps/FileUploadButton';
 import { FEELINGS } from '@/constants/story';
 import { PostStoryPayload } from '@/types/story';
 import {
@@ -115,9 +116,7 @@ function StoryPostForm() {
             fontWeight: '400',
           })}
         />
-        <Button color="outline" size="sm">
-          이미지/동영상 첨부
-        </Button>
+        <FileUploadButton setImages={setImages} />
         <div className={gridLayout({ columns: 4, p: 'xs', gap: 'sm' })}>
           이미지 미리보기 영역
         </div>
