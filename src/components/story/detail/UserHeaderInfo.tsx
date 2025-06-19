@@ -7,7 +7,7 @@ import defaultUserProfile from '@images/default-userImage.png';
 type Props = {
   userName: string;
   createdAt: string;
-  userProfileImage: string;
+  userProfileImage?: string;
 };
 // 유저 정보를 보여주는 컴포넌트 서버 API 나오면 유저 정보 받아야 함
 function UserHeaderInfo({ userName, createdAt, userProfileImage }: Props) {
