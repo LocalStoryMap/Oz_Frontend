@@ -95,7 +95,7 @@ function StoryCard({
   const safeLiked = liked ?? false;
 
   const imageCount = images?.length ?? 0;
-  const layout = String(Math.min(imageCount, 5));
+  const layout = String(Math.max(1, Math.min(imageCount, 5)));
 
   return (
     <div
