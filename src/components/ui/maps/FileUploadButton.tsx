@@ -23,13 +23,13 @@ function FileUploadButton({
   return (
     <>
       <Button color="outline" size="sm" onClick={onUpload}>
-        이미지/동영상 첨부
+        이미지 첨부
       </Button>
       <input
         type="file"
         ref={inputRef}
         onChange={onFileChange}
-        accept="image/*,video/*"
+        accept="image/*"
         style={{ display: 'none' }}
       />
     </>
