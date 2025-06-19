@@ -27,7 +27,9 @@ function StoryDetailContent({ story }: Props) {
       <h1
         className={css({ textStyle: 'headline4', color: 'gray.300', mt: 12 })}
       >
-        {new Date(story?.createdAt).toLocaleDateString()}
+        {story
+          ? new Date(story?.createdAt).toLocaleDateString()
+          : '날짜 정보 없음'}
       </h1>
       <p className={css({ textStyle: 'headline3', mb: '12' })}>
         {story?.title}
