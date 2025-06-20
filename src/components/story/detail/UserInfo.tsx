@@ -5,29 +5,31 @@ import StoryContentActions from '@components/story/detail/StoryContentActions';
 import { css } from '@root/styled-system/css';
 
 type Props = {
-  createdAt: string;
-  userNickname: string;
-  userProfileImage: string;
+  createdAt: string | undefined;
+  userNickname: string | undefined;
+  userProfileImage: string | undefined;
 };
 
 function UserInfo({ createdAt, userNickname, userProfileImage }: Props) {
-  // TODO: 써야하는 데이터
-  console.log(userProfileImage);
+  const defaultUserImage = '/images/default-userImage.png';
+
   return (
     <article>
       <div className={css({ display: 'flex', gap: 4 })}>
         <Image
-          src="/images/default-userImage.png"
+          src={userProfileImage || defaultUserImage}
           alt="userImage"
           width={40}
           height={40}
           onError={e => {
             const target = e.target as HTMLImageElement;
-            target.src = '/images/default-userImage.png';
+            target.src = defaultUserImage;
           }}
         />
         <div>
-          <p>{new Date(createdAt).toLocaleDateString()}</p>
+          <p>
+            {createdAt ? new Date(createdAt).toLocaleDateString() : undefined}
+          </p>
           <p>{userNickname}</p>
         </div>
         <StoryContentActions />
