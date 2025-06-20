@@ -48,7 +48,14 @@ async function page({ params }: { params: { id: string } }) {
               })}
             >
               <LocationIcon width={20} height={20} />
-              {data.adress}
+              <span
+                className={modalText({
+                  align: 'left',
+                  clamp: 1,
+                })}
+              >
+                {data.adress}
+              </span>
             </p>
           </Link>
         </div>
