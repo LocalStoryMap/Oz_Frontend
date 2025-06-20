@@ -33,7 +33,9 @@ async function Page() {
       initialPageParam: 1,
     });
   } catch (e) {
-    console.error(e);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Story prefetch error:', e);
+    }
   }
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
