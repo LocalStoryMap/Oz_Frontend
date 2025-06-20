@@ -1,7 +1,12 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { storyOption } from '@api/options/storyOption';
+import type {
+  StoryCardProps,
+  StoryQueryData,
+} from '@components/story/story.types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { EyeIcons, HeartIcon } from '@/components/icons';
@@ -17,32 +22,6 @@ import {
 import defaultUserProfile from '@images/default-userImage.png';
 
 import { css, cx } from '@root/styled-system/css';
-
-type StoryCardProps = {
-  story: {
-    storyId: string;
-    images?: string[];
-    userProfile?: string;
-    title?: string;
-    content?: string;
-    likeCount?: number;
-    viewCount?: number;
-    isLiked?: boolean;
-    userNickname?: string;
-    createdAt?: string;
-  };
-};
-
-type Story = StoryCardProps['story'];
-
-type StoryPage = {
-  results: Story[];
-};
-
-type StoryQueryData = {
-  pages: StoryPage[];
-  pageParams: unknown[];
-};
 
 function StoryCard({ story }: StoryCardProps) {
   const {
@@ -106,59 +85,61 @@ function StoryCard({ story }: StoryCardProps) {
         radius: 'sm',
       })}
     >
-      <div
-        className={gridImageWrapper({
-          layout: layout as '1' | '2' | '3' | '4' | '5',
-        })}
-      >
-        {images?.slice(0, 5).map((src, i) => (
-          <div
-            key={i}
-            className={css({
-              position: 'relative',
-              ...(i === 0 && layout === '5' ? { gridRow: 'span 2' } : {}),
-            })}
-          >
-            <Image
-              src={src}
-              alt={`스토리 이미지 ${i + 1}`}
-              fill
-              className={cardImage()}
-              onError={e => {
-                const target = e.target as HTMLImageElement;
-                target.src = '/images/default.jpg';
-              }}
-            />
-          </div>
-        ))}
-      </div>
+      <Link href={`/story/${storyId}`} passHref>
+        <div
+          className={gridImageWrapper({
+            layout: layout as '1' | '2' | '3' | '4' | '5',
+          })}
+        >
+          {images?.slice(0, 5).map((src, i) => (
+            <div
+              key={i}
+              className={css({
+                position: 'relative',
+                ...(i === 0 && layout === '5' ? { gridRow: 'span 2' } : {}),
+              })}
+            >
+              <Image
+                src={src}
+                alt={`스토리 이미지 ${i + 1}`}
+                fill
+                className={cardImage()}
+                onError={e => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = 'errorDefaultImg.jpg';
+                }}
+              />
+            </div>
+          ))}
+        </div>
 
-      <div
-        className={css({
-          position: 'absolute',
-          top: '175px',
-          left: 4,
-          w: '48px',
-          h: '48px',
-          borderRadius: 'full',
-          overflow: 'hidden',
-        })}
-      >
-        <Image src={userProfile || defaultUserProfile} alt="프로필" fill />
-      </div>
+        <div
+          className={css({
+            position: 'absolute',
+            top: '175px',
+            left: 4,
+            w: '48px',
+            h: '48px',
+            borderRadius: 'full',
+            overflow: 'hidden',
+          })}
+        >
+          <Image src={userProfile || defaultUserProfile} alt="프로필" fill />
+        </div>
 
-      <div className={cx(css({ mt: 8, pl: '4' }))}>
-        {userNickname && (
-          <span className={subText({ color: 'muted' })}>{userNickname}</span>
-        )}
-        {createdAt && (
-          <span>
-            <span className={subText({ color: 'default' })}>
-              {new Date(createdAt).toLocaleDateString()}
+        <div className={cx(css({ mt: 8, pl: '4' }))}>
+          {userNickname && (
+            <span className={subText({ color: 'muted' })}>{userNickname}</span>
+          )}
+          {createdAt && (
+            <span>
+              <span className={subText({ color: 'default' })}>
+                {new Date(createdAt).toLocaleDateString()}
+              </span>
             </span>
-          </span>
-        )}
-      </div>
+          )}
+        </div>
+      </Link>
 
       <div className={cx(css({ mt: 2 }), flex({ gap: 'md', p: 'lg' }))}>
         <p className={titleText({ color: 'gray600' })}>{title}</p>
