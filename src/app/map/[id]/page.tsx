@@ -23,7 +23,7 @@ async function page({ params }: { params: { id: string } }) {
 
   return (
     <div className={flex({ marginB: 'sm', gap: 'xl' })}>
-      <div className={cardImageWrapper({ maxWidth: 'none', aspect: 'wide' })}>
+      <div className={cardImageWrapper({ maxWidth: 'none', aspect: 'video' })}>
         <Image src={data.image} alt={data.markerName} fill />
         <span
           className={topRightAbsolute({ top: 3, right: 3 })}
