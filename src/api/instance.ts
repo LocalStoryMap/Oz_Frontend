@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { useAuthStore } from '@/store/useAuthStore';
 
-const BASE_URL = 'https://localstorymap.com/api';
+export const BASE_URL = 'https://localstorymap.com/api';
 
 export const instance = axios.create({
   baseURL: BASE_URL,

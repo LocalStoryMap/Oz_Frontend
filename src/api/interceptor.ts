@@ -1,6 +1,5 @@
+import { BASE_URL } from '@/api/instance';
 import { useAuthStore } from '@/store/useAuthStore';
-
-const API_BASE_URL = 'https://localstorymap.com/api';
 
 // 토큰 갱신 함수
 async function refreshAccessToken(): Promise<string | null> {
@@ -13,7 +12,7 @@ async function refreshAccessToken(): Promise<string | null> {
   }
 
   try {
-    const response = await fetch(`${API_BASE_URL}/users/token/refresh/`, {
+    const response = await fetch(`${BASE_URL}/users/token/refresh/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
