@@ -3,10 +3,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { storyOption } from '@api/options/storyOption';
-import type {
-  StoryCardProps,
-  StoryQueryData,
-} from '@components/story/story.types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { EyeIcons, HeartIcon } from '@/components/icons';
@@ -18,6 +14,7 @@ import {
   subText,
   titleText,
 } from '@/components/ui/common/cards/card.recipe';
+import type { StoryCardProps, StoryQueryData } from '@/types/story.types';
 
 import defaultUserProfile from '@images/default-userImage.png';
 
