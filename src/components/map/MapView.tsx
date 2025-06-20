@@ -26,7 +26,7 @@ function MapView() {
     libraries: ['clusterer', 'drawing', 'services'],
   });
 
-  const center = { lat: 35.115045, lng: 129.041519 };
+  const center = { lat: 35.179554, lng: 129.075642 };
 
   const type = searchParams.get('type');
   const selectedCategory: CategoryValueType = isValidCategory(type)
@@ -63,7 +63,7 @@ function MapView() {
           />
         ))}
       </div>
-      <Map center={center} style={{ width: '100%', height: '600px' }} level={5}>
+      <Map center={center} style={{ width: '100%', height: '600px' }} level={8}>
         {mapMarker?.map(marker => (
           <MarkerContainer
             key={marker.id}
