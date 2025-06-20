@@ -37,18 +37,20 @@ async function page({ params }: { params: { id: string } }) {
           <p className={modalText({ text: 'head3', align: 'left' })}>
             {data.markerName}
           </p>
-          <p
-            className={modalText({
-              text: 'body2',
-              flex: 'row',
-              gap: 1,
-              align: 'left',
-              color: 'gray400',
-            })}
-          >
-            <LocationIcon width={20} height={20} />
-            {data.adress}
-          </p>
+          <Link href={`/map/search?id=${data.id}`}>
+            <p
+              className={modalText({
+                text: 'body2',
+                flex: 'row',
+                gap: 1,
+                align: 'left',
+                color: 'gray400',
+              })}
+            >
+              <LocationIcon width={20} height={20} />
+              {data.adress}
+            </p>
+          </Link>
         </div>
         <p
           className={modalText({
