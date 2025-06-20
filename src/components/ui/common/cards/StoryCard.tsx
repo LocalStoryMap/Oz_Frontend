@@ -21,6 +21,7 @@ import defaultUserProfile from '@images/default-userImage.png';
 import { css, cx } from '@root/styled-system/css';
 
 function StoryCard({ story }: StoryCardProps) {
+  const errorDefaultImg = '/images/errorDefaultImg.jpg';
   const {
     storyId,
     likeCount,
@@ -103,7 +104,7 @@ function StoryCard({ story }: StoryCardProps) {
                 className={cardImage()}
                 onError={e => {
                   const target = e.target as HTMLImageElement;
-                  target.src = 'errorDefaultImg.jpg';
+                  target.src = errorDefaultImg;
                 }}
               />
             </div>
