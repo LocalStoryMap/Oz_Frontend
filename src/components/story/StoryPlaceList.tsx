@@ -18,6 +18,7 @@ import SquareCard from '@/components/ui/common/cards/SquareCard';
 import { modalText } from '@/components/ui/common/modals/modal.recipe';
 import FeelingIcon from '@/components/ui/feelings/FeelingIcon';
 import { Story, StoryImage } from '@/types/story';
+import { formatDate } from '@/util/date';
 
 import { css, cx } from '@root/styled-system/css';
 
@@ -108,7 +109,7 @@ function StoryPlaceList() {
                     >
                       <CalendarIcon />
                       <span className={subText({ color: 'muted', clamp: 1 })}>
-                        {story.createdAt}
+                        {formatDate(story.createdAt)}
                       </span>
                     </p>
                     <span className={topRightAbsolute({ top: 1, right: 3 })}>
