@@ -22,3 +22,10 @@ export type Story = {
   updatedAt: string;
   isLiked: boolean;
 };
+
+export type StoryImage = {
+  imageId: number;
+  imageFile: string;
+  imageUrl: string;
+  uploadedAt: string;
+};
