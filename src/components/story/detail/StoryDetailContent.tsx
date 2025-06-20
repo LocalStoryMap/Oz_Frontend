@@ -9,11 +9,14 @@ import { EyeIcons, HeartIcon } from '@components/icons';
 import UserInfo from '@components/story/detail/UserInfo';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
+import type { StoryType } from '@/types/story.types';
+
 import { css } from '@root/styled-system/css';
 
 function StoryDetailContent({ storyId }: { storyId: string }) {
+  const errorDefaultImg = '/images/errorDefaultImg.jpg';
   const queryClient = useQueryClient();
-  const { data, isError, isLoading } = useQuery({
+  const { data, isError, isLoading } = useQuery<StoryType>({
     queryKey: ['storyDetail', storyId],
     queryFn: () =>
       instance.get(ENDPOINTS.STORY.DETAIL(storyId)).then(res => res.data),
@@ -32,17 +35,19 @@ function StoryDetailContent({ storyId }: { storyId: string }) {
   const mutation = useMutation({
     ...storyOption.postLikeStory(storyId),
     onMutate: async () => {
-      await queryClient.setQueryData(['storyDetail'], old => {
+      queryClient.setQueryData<StoryType>(['storyDetail'], old => {
         if (!old) return old;
         return {
           ...old,
-          isLiked: false,
-          likeCount: Number(data?.likeCount ?? 0) + (data?.isLiked ? 1 : -1),
+          isLiked: !old?.isLiked,
+          likeCount: Number(old?.likeCount ?? 0) + (old?.isLiked ? 1 : -1),
         };
       });
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['storyDetail'] });
+      await queryClient.invalidateQueries({
+        queryKey: ['storyDetail', storyId],
+      });
     },
   });
 
@@ -61,15 +66,19 @@ function StoryDetailContent({ storyId }: { storyId: string }) {
           alt="StoryDetail"
           width={1080}
           height={600}
-          className={css({ objectFit: 'cover', width: '100%', height: '1%' })}
+          className={css({
+            objectFit: 'cover',
+            width: '100%',
+            height: '500px',
+          })}
           onError={e => {
             const target = e.target as HTMLImageElement;
-            target.src = '/images/errorDefaultImg.jpg';
+            target.src = errorDefaultImg;
           }}
         />
         <div>
           <p className={css({ mt: 12, mb: 1, textStyle: 'body2' })}>
-            {new Date(createdAt).toLocaleDateString()}
+            {createdAt ? new Date(createdAt).toLocaleDateString() : undefined}
           </p>
           <h1 className={css({ textStyle: 'headline3', mb: 12 })}>{title}</h1>
           <p>{content}</p>
