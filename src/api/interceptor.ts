@@ -1,8 +1,9 @@
-import { BASE_URL } from '@/api/instance';
 import { useAuthStore } from '@/store/useAuthStore';
 
+const BASE_URL = 'https://localstorymap.com/api';
+
 // 토큰 갱신 함수
-async function refreshAccessToken(): Promise<string | null> {
+export async function refreshAccessToken(): Promise<string | null> {
   const { refresh, setAuth, clearAuth, user } = useAuthStore.getState();
 
   if (!refresh) {
@@ -50,7 +51,7 @@ export async function apiRequest(
   url: string,
   options: RequestInit = {},
 ): Promise<Response> {
-  const { access, clearAuth } = useAuthStore.getState();
+  const { access } = useAuthStore.getState();
 
   // 첫 번째 시도
   let response = await fetch(url, {
