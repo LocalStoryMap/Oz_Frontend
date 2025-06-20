@@ -27,7 +27,7 @@ function StoryDetailContent({ storyId }: { storyId: string }) {
     isLiked,
     likeCount,
     viewCount,
-  } = data;
+  } = data ?? {};
 
   const mutation = useMutation({
     ...storyOption.postLikeStory(storyId),
