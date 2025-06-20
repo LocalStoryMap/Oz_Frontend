@@ -101,7 +101,7 @@ export const useUserProfile = () => {
         const updatedUser = await updateUserProfileImage(file);
         const updatedClientUser: ClientUser = {
           ...user,
-          profile_image: updatedUser.profile_image || null,
+          profile_image: updatedUser.profileImage || null,
         };
 
         const newProfile = clientUserToProfile(updatedClientUser);
@@ -109,7 +109,7 @@ export const useUserProfile = () => {
         setAuth(updatedClientUser, access, refresh || '');
         localStorage.setItem('user', JSON.stringify(updatedClientUser));
 
-        return updatedUser.profile_image || '';
+        return updatedUser.profileImage || '';
       } catch (err) {
         console.error('Failed to upload profile image:', err);
         throw new Error('프로필 사진 업로드에 실패했습니다.');

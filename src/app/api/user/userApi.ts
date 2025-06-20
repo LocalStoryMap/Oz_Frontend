@@ -7,11 +7,11 @@ export interface User {
   email: string;
   nickname: string | null;
   provider: 'google' | 'kakao';
-  social_id: string | null;
-  profile_image: string | null;
-  is_paid_user: boolean;
-  date_joined: string;
-  last_login: string | null;
+  socialId: string | null;
+  profileImage: string | null;
+  isPaidUser: boolean;
+  dateJoined: string;
+  lastLogin: string | null;
 }
 
 // GET - 유저 정보 조회
