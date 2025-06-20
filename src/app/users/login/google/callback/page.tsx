@@ -25,10 +25,6 @@ function GoogleCallbackContent() {
         const clientUser = apiUserToClientUser(user as ApiUser);
         setAuth(clientUser, access, refresh);
 
-        localStorage.setItem('user', JSON.stringify(clientUser));
-        localStorage.setItem('access', access);
-        localStorage.setItem('refresh', refresh);
-
         setAuthHeader(access);
         router.push('/');
       })
