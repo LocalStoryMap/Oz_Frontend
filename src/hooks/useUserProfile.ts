@@ -36,7 +36,6 @@ export const useUserProfile = () => {
 
       setProfile(newProfile);
       setAuth(clientUser, access, refresh || '');
-      localStorage.setItem('user', JSON.stringify(clientUser));
     } catch (err) {
       console.error('Failed to fetch user profile:', err);
       setError('프로필 정보를 불러오는데 실패했습니다.');
