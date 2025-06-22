@@ -30,7 +30,7 @@ function StoryPlaceList() {
   const id = searchParams.get('id') || 0;
 
   const { data } = useQuery(markerOption.getMarkerStory(Number(id)));
-  const storyList = data?.data ?? [];
+  const storyList = data ?? [];
   const storyIds = storyList.map((story: Story) => story.storyId) ?? [];
   const storyImageQueries = useQueries({
     queries: storyIds.map(storyId => storyOption.getStoryImage(storyId)),

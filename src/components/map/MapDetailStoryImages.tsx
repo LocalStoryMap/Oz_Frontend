@@ -10,7 +10,7 @@ import { Story, StoryImage } from '@/types/story';
 
 function MapDetailStoryImages({ id, title }: { id: number; title: string }) {
   const { data: storyList } = useQuery(markerOption.getMarkerStory(id));
-  const storyIds = storyList?.data?.map((story: Story) => story.storyId) ?? [];
+  const storyIds = storyList?.map((story: Story) => story.storyId) ?? [];
   const storyImageQueries = useQueries({
     queries: storyIds.map(storyId => storyOption.getStoryImage(storyId)),
   });
