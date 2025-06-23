@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ENDPOINTS } from '@api/endpoints';
 import { instance } from '@api/instance';
@@ -47,7 +46,7 @@ function StorySearchSection() {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
-
+  const defaultUserImage = '/images/default-userImage.png';
   if (isError) return <p>Error...</p>;
   return (
     <article className={css({ mt: 24 })}>
@@ -57,18 +56,23 @@ function StorySearchSection() {
           value={inputValue}
           onChange={onChange}
         />
-        <ul className={css({ mt: 4 })}>
+        <ul
+          className={css({
+            mt: 4,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 4,
+          })}
+        >
           {data &&
-            data?.users.length > 0 &&
-            data?.users.map(item => (
+            data.users.length > 0 &&
+            data.users.map(item => (
               <li
-                key={item?.id}
+                key={item.id}
                 className={css({
                   cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
+                  mb: 4,
+                  gap: 4,
                 })}
               >
                 <button
@@ -76,9 +80,10 @@ function StorySearchSection() {
                   aria-label={`${item.nickname} 프로필로 이동`}
                   className={css({
                     display: 'flex',
-                    cursor: 'pointer',
-                    flexDirection: 'column',
                     alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 4,
+                    cursor: 'pointer',
                   })}
                   onClick={() =>
                     router.push(
@@ -86,18 +91,26 @@ function StorySearchSection() {
                     )
                   }
                 >
-                  <Image
-                    src={item.profileImage}
+                  {/* Image Next 사용 시 get 무한 요청으로 차선책 img태그로 교체 */}
+                  <img
+                    src={
+                      item.profileImage && item.profileImage.trim() !== ''
+                        ? item.profileImage
+                        : defaultUserImage
+                    }
                     alt={item.nickname}
-                    width={40}
-                    height={40}
-                    className={css({
+                    width={30}
+                    height={30}
+                    style={{
                       objectFit: 'cover',
                       borderRadius: '50%',
                       height: '100%',
-                    })}
+                    }}
+                    onError={e => {
+                      e.currentTarget.src = defaultUserImage;
+                    }}
                   />
-                  <p className={css({ mt: 2, textStyle: 'headline4' })}>
+                  <p className={css({ mt: 2, textStyle: 'body3' })}>
                     {item.nickname}
                   </p>
                 </button>
