@@ -12,6 +12,8 @@ import { useQueries, useQuery } from '@tanstack/react-query';
 
 import { css } from '@root/styled-system/css';
 
+export const dynamic = 'force-dynamic';
+
 export interface UserStory {
   id: string;
   title: string;
