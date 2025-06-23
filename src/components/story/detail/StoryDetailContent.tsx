@@ -9,6 +9,7 @@ import { EyeIcons, HeartIcon } from '@components/icons';
 import CommentSection from '@components/story/detail/comment/CommentSection';
 import UserInfo from '@components/story/detail/UserInfo';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { formatDate } from '@util/date';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -30,10 +31,9 @@ function StoryDetailContent({ storyId }: { storyId: string }) {
         string,
         { increaseView?: boolean },
       ];
-      const url =
-        options && options.increaseView
-          ? `${ENDPOINTS.STORY.DETAIL(storyId)}?increase_view=true`
-          : ENDPOINTS.STORY.DETAIL(storyId);
+      const url = options?.increaseView
+        ? `${ENDPOINTS.STORY.DETAIL(storyId)}?increase_view=true`
+        : ENDPOINTS.STORY.DETAIL(storyId);
       return instance.get(url).then(res => res.data);
     },
   });
@@ -117,7 +117,7 @@ function StoryDetailContent({ storyId }: { storyId: string }) {
         </Swiper>
         <div>
           <p className={css({ mt: 12, mb: 1, textStyle: 'body2' })}>
-            {createdAt ? new Date(createdAt).toLocaleDateString() : undefined}
+            {createdAt ? formatDate(createdAt) : undefined}
           </p>
           <h1 className={css({ textStyle: 'headline3', mb: 12 })}>{title}</h1>
           <p>{content}</p>
