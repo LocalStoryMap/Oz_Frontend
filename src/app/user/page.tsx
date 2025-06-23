@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
@@ -71,112 +71,118 @@ function Page() {
   if (!user) return <div>유저 없음</div>;
 
   return (
-    <section className={css({ mt: 24, maxWidth: 700, mx: 'auto', mb: 24 })}>
-      <article
-        className={css({
-          display: 'flex',
-          alignItems: 'center',
-          gap: 12,
-          mb: 12,
-          borderBottom: '1px solid #eee',
-          pb: 8,
-        })}
-      >
-        <Image
-          src={user.profileImage}
-          alt={user.nickname}
-          width={120}
-          height={120}
+    <Suspense fallback={<div>로딩중...</div>}>
+      <section className={css({ mt: 24, maxWidth: 700, mx: 'auto', mb: 24 })}>
+        <article
           className={css({
-            objectFit: 'cover',
-            borderRadius: 'full',
-            border: '2px solid #ddd',
-            bg: '#fafafa',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 12,
+            mb: 12,
+            borderBottom: '1px solid #eee',
+            pb: 8,
           })}
-        />
-        <div>
-          <div
+        >
+          <Image
+            src={user.profileImage}
+            alt={user.nickname}
+            width={120}
+            height={120}
             className={css({
-              display: 'flex',
-              alignItems: 'center',
-              gap: 4,
-              mb: 2,
+              objectFit: 'cover',
+              borderRadius: 'full',
+              border: '2px solid #ddd',
+              bg: '#fafafa',
             })}
-          >
-            <p className={css({ fontWeight: 'bold', fontSize: 24 })}>
-              {user.nickname}
-            </p>
+          />
+          <div>
+            <div
+              className={css({
+                display: 'flex',
+                alignItems: 'center',
+                gap: 4,
+                mb: 2,
+              })}
+            >
+              <p className={css({ fontWeight: 'bold', fontSize: 24 })}>
+                {user.nickname}
+              </p>
+            </div>
+            <Button type="button" size="sm" color="primary">
+              팔로우
+            </Button>
+            <div
+              className={css({
+                display: 'flex',
+                gap: 8,
+                mt: 2,
+                color: 'gray.600',
+                fontSize: 16,
+              })}
+            >
+              <span>
+                게시물 <b>{stories.length}</b>
+              </span>
+            </div>
           </div>
-          <Button type="button" size="sm" color="primary">
-            팔로우
-          </Button>
-          <div
-            className={css({
-              display: 'flex',
-              gap: 8,
-              mt: 2,
-              color: 'gray.600',
-              fontSize: 16,
-            })}
-          >
-            <span>
-              게시물 <b>{stories.length}</b>
-            </span>
-          </div>
-        </div>
-      </article>
+        </article>
 
-      <div
-        className={css({
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: 4,
-        })}
-      >
-        {storiesWithImages.length === 0 ? (
-          <div
-            className={css({
-              gridColumn: '1 / -1',
-              textAlign: 'center',
-              color: 'gray.500',
-              py: 24,
-            })}
-          >
-            게시물이 없습니다.
-          </div>
-        ) : (
-          storiesWithImages.map(story => (
-            <Link key={story.id} href={`/story/${story.id}`}>
-              <div
-                key={story.id}
-                className={css({
-                  aspectRatio: '1/1',
-                  overflow: 'hidden',
-                  borderRadius: 'md',
-                  border: '1px solid #eee',
-                  mb: 2,
-                  bg: '#fafafa',
-                  cursor: 'pointer',
-                  _hover: { opacity: 0.8 },
-                })}
-              >
-                <Image
-                  src={story.imageUrl || defaultImg}
-                  alt={story.title}
-                  width={300}
-                  height={300}
-                  style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-                  onError={e => {
-                    const target = e.target as HTMLImageElement;
-                    target.src = defaultImg;
-                  }}
-                />
-              </div>
-            </Link>
-          ))
-        )}
-      </div>
-    </section>
+        <div
+          className={css({
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: 4,
+          })}
+        >
+          {storiesWithImages.length === 0 ? (
+            <div
+              className={css({
+                gridColumn: '1 / -1',
+                textAlign: 'center',
+                color: 'gray.500',
+                py: 24,
+              })}
+            >
+              게시물이 없습니다.
+            </div>
+          ) : (
+            storiesWithImages.map(story => (
+              <Link key={story.id} href={`/story/${story.id}`}>
+                <div
+                  key={story.id}
+                  className={css({
+                    aspectRatio: '1/1',
+                    overflow: 'hidden',
+                    borderRadius: 'md',
+                    border: '1px solid #eee',
+                    mb: 2,
+                    bg: '#fafafa',
+                    cursor: 'pointer',
+                    _hover: { opacity: 0.8 },
+                  })}
+                >
+                  <Image
+                    src={story.imageUrl || defaultImg}
+                    alt={story.title}
+                    width={300}
+                    height={300}
+                    style={{
+                      objectFit: 'cover',
+                      width: '100%',
+                      height: '100%',
+                    }}
+                    onError={e => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = defaultImg;
+                    }}
+                  />
+                </div>
+              </Link>
+            ))
+          )}
+        </div>
+      </section>
+    </Suspense>
   );
 }
 
