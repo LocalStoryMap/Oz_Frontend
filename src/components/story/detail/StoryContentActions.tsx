@@ -1,16 +1,27 @@
 'use client';
 
 import React from 'react';
+import { followsOption } from '@api/options/followsOption';
 import { Button } from '@components/ui/common/buttons/Button';
+import { useMutation } from '@tanstack/react-query';
 
 import { css } from '@root/styled-system/css';
 
 type Props = {
   mode: 'comment' | 'story';
   isMine: boolean;
+  userNickname?: string;
 };
 
-function StoryContentActions({ mode, isMine }: Props) {
+function StoryContentActions({ mode, isMine, userNickname }: Props) {
+  const mutation = useMutation({
+    ...followsOption.postFollows(),
+  });
+
+  const onSubmit = () => {
+    mutation.mutate({ nickname: userNickname });
+  };
+
   return (
     <div
       className={css({
@@ -20,8 +31,13 @@ function StoryContentActions({ mode, isMine }: Props) {
         ml: 'auto',
       })}
     >
-      <Button size="sm" color="outlineSoft" aria-label="팔로우 버튼">
-        Follows
+      <Button
+        size="sm"
+        color="outlineSoft"
+        aria-label="팔로우 버튼"
+        onClick={onSubmit}
+      >
+        {mutation.isPending ? 'asd' : 'Follows'}
       </Button>
       {mode === 'story' && isMine && (
         <>
