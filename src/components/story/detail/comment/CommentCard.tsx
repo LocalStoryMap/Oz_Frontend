@@ -196,7 +196,7 @@ function CommentCard({
       {isReplyFormOpen && (
         <CommentForm
           storyId={storyId}
-          mode="replay"
+          mode="reply"
           parentId={comment.commentId}
           targetId={null}
           onCancel={() =>
