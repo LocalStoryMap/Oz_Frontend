@@ -7,15 +7,7 @@ import CommentCard from '@components/story/detail/comment/CommentCard';
 import CommentForm from '@components/story/detail/comment/CommentForm';
 import { useQuery } from '@tanstack/react-query';
 
-import { CommentStory } from '@/types/story.types';
-
-export type InputMode = {
-  mode: 'edit' | 'replay' | 'none';
-  payload: {
-    targetId: number | null;
-    parent: number | null;
-  };
-};
+import type { CommentStory, InputMode } from '@/types/story.types';
 
 function CommentSection({ storyId }: { storyId: string }) {
   const { data, isLoading, isError } = useQuery<CommentStory[]>({
@@ -55,7 +47,7 @@ function CommentSection({ storyId }: { storyId: string }) {
             }
             onReplyClick={() =>
               setMode({
-                mode: 'replay',
+                mode: 'reply',
                 payload: {
                   targetId: null,
                   parent:

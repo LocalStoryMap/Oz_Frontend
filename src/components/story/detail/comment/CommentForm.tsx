@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { storyOption } from '@api/options/storyOption';
 import { Button } from '@components/ui/common/buttons/Button';
 import { Input } from '@components/ui/common/textfields';
@@ -12,7 +12,7 @@ import { InputMode } from '@/types/story.types';
 
 type Props = {
   storyId: string;
-  mode: 'edit' | 'replay' | 'none';
+  mode: 'edit' | 'reply' | 'none';
   parentId: number | null;
   targetId: number | null;
   onCancel?: () => void;
@@ -105,7 +105,7 @@ function CommentForm({
       >
         등록
       </Button>
-      {onCancel && (mode === 'edit' || mode === 'replay') && (
+      {onCancel && (mode === 'edit' || mode === 'reply') && (
         <Button
           type="button"
           color="outlineSoft"

@@ -18,7 +18,7 @@ type Props = {
   onEditClick: () => void;
   onReplyClick: () => void;
   depth?: number;
-  mode: 'edit' | 'replay' | 'none';
+  mode: 'edit' | 'reply' | 'none';
   modePayload: { targetId: number | null; parent: number | null };
   storyId: string;
 };
@@ -65,20 +65,23 @@ function CommentCard({
       String(comment?.commentId),
     ),
     onMutate: () => {
-      queryClient.setQueryData<CommentStory[]>(['comment'], old => {
-        if (!old) return old;
-        return old.map(item =>
-          item?.commentId === comment?.commentId
-            ? {
-                ...item,
-                isLiked: !item.isLiked,
-                likeCount: item.isLiked
-                  ? item.likeCount - 1
-                  : item.likeCount + 1,
-              }
-            : item,
-        );
-      });
+      queryClient.setQueryData<CommentStory[]>(
+        ['comment', String(comment?.storyId)],
+        old => {
+          if (!old) return old;
+          return old.map(item =>
+            item?.commentId === comment?.commentId
+              ? {
+                  ...item,
+                  isLiked: !item.isLiked,
+                  likeCount: item.isLiked
+                    ? item.likeCount - 1
+                    : item.likeCount + 1,
+                }
+              : item,
+          );
+        },
+      );
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({
@@ -94,7 +97,7 @@ function CommentCard({
   };
 
   const isReplyFormOpen =
-    mode === 'replay' && modePayload.parent === comment.commentId;
+    mode === 'reply' && modePayload.parent === comment.commentId;
   const isEditFormOpen =
     mode === 'edit' && modePayload.targetId === comment.commentId;
 
@@ -237,7 +240,7 @@ function CommentCard({
             }
             onReplyClick={() =>
               setMode({
-                mode: 'replay',
+                mode: 'reply',
                 payload: {
                   targetId: null,
                   parent: item?.commentId,
