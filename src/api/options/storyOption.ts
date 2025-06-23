@@ -77,6 +77,9 @@ export const storyOption = {
       return storyRes;
     },
   }),
+  deleteStory: (id: string) => ({
+    mutationFn: () => mutationFetcher('delete', ENDPOINTS.STORY.DETAIL(id)),
+  }),
   postComment: (storyId: string) => ({
     mutationFn: ({
       content,
