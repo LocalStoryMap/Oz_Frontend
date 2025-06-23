@@ -28,14 +28,15 @@ function MapView() {
 
   const [center, setCenter] = useState({ lat: 35.179554, lng: 129.075642 });
 
+  const position = searchParams.get('position') === 'true';
   useEffect(() => {
-    if (navigator.geolocation) {
+    if (position && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         const { latitude, longitude } = position.coords;
         setCenter({ lat: latitude, lng: longitude });
       });
     }
-  }, []);
+  }, [position]);
 
   const type = searchParams.get('type');
   const selectedCategory: CategoryValueType = isValidCategory(type)
@@ -55,6 +56,7 @@ function MapView() {
   const markerClick = (param: string, value: string) => {
     const next = new URLSearchParams(searchParams);
     next.set(param, value);
+    next.set('position', 'false');
     router.push(`/map/search?${next.toString()}`);
   };
 
@@ -68,7 +70,10 @@ function MapView() {
             icon={category.icon}
             size="md"
             selected={selectedCategory === category.value}
-            onClick={() => markerClick('type', category.value)}
+            onClick={() => {
+              markerClick('type', category.value);
+              setCenter({ lat: 35.179554, lng: 129.075642 });
+            }}
           />
         ))}
       </div>
@@ -82,6 +87,7 @@ function MapView() {
             onClick={() => markerClick('id', marker.id.toString())}
           />
         ))}
+        {position && <MarkerContainer position={center} type="current" />}
       </Map>
       {place && (
         <div className={mapOverlayWrapper({ type: 'card' })}>
