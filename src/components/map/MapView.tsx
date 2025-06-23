@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { Map, useKakaoLoader } from 'react-kakao-maps-sdk';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
@@ -25,7 +26,16 @@ function MapView() {
     libraries: ['clusterer', 'drawing', 'services'],
   });
 
-  const center = { lat: 35.179554, lng: 129.075642 };
+  const [center, setCenter] = useState({ lat: 35.179554, lng: 129.075642 });
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        const { latitude, longitude } = position.coords;
+        setCenter({ lat: latitude, lng: longitude });
+      });
+    }
+  }, []);
 
   const type = searchParams.get('type');
   const selectedCategory: CategoryValueType = isValidCategory(type)
