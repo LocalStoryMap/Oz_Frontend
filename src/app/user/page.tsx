@@ -1,9 +1,16 @@
 'use client';
 
-import UserPageContent from '@/app/user/_components/UserPageContent';
+import { Suspense } from 'react';
+
+import UserPageContent from './_components/UserPageContent';
 
 export const dynamic = 'force-dynamic';
 
-export default function Page() {
-  return <UserPageContent />;
+function Page() {
+  return (
+    <Suspense fallback={<div>로딩중</div>}>
+      <UserPageContent />
+    </Suspense>
+  );
 }
+export default Page;
