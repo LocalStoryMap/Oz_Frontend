@@ -8,7 +8,6 @@ export async function refreshAccessToken(): Promise<string | null> {
 
   if (!refresh) {
     clearAuth();
-    window.location.href = '/login';
     return null;
   }
 
@@ -40,8 +39,6 @@ export async function refreshAccessToken(): Promise<string | null> {
   } catch (error) {
     console.error('Failed to refresh token:', error);
     clearAuth();
-    localStorage.clear();
-    window.location.href = '/login';
     return null;
   }
 }

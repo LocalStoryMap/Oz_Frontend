@@ -20,7 +20,7 @@ export const setAuthHeader = (token: string) => {
 };
 
 export const clearAuthHeader = () => {
-  delete instance.defaults.headers.common.Authorization;
+  instance.defaults.headers.common.Authorization = undefined;
 };
 
 if (typeof window !== 'undefined') {
@@ -43,8 +43,8 @@ if (typeof window !== 'undefined') {
       const originalRequest = error.config;
 
       if (
-        (error.response?.status === 401 || error.response?.status === 403) &&
-        !originalRequest._retry
+        error.response?.status === 401 ||
+        (error.response?.status === 403 && !originalRequest._retry)
       ) {
         originalRequest._retry = true;
 
@@ -52,13 +52,11 @@ if (typeof window !== 'undefined') {
         if (newAccessToken) {
           setAuthHeader(newAccessToken);
           originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-
           return instance(originalRequest);
         }
 
         clearAuthHeader();
         useAuthStore.getState().clearAuth();
-        localStorage.clear();
         window.location.href = '/login';
       }
       return Promise.reject(error);
