@@ -69,6 +69,7 @@ function StoryContentActions({ mode, isMine }: Props) {
               })}
               aria-label="글 삭제 버튼"
               onClick={openModal}
+              disabled={deleteMutation.isPending}
             >
               삭제
             </Button>
