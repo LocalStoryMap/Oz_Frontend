@@ -1,9 +1,10 @@
 'use client';
 
 import React from 'react';
-import { followsOption } from '@api/options/followsOption';
 import { Button } from '@components/ui/common/buttons/Button';
 import { useMutation } from '@tanstack/react-query';
+
+import { followsOption } from '@/api/options/followsOption';
 
 import { css } from '@root/styled-system/css';
 
