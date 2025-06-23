@@ -91,7 +91,7 @@ function StoryPostForm({ initialData, storyId }: Props) {
         <p className={modalText({ text: 'head4', align: 'left' })}>
           {storyId ? '글 수정' : '글 작성'}
         </p>
-        <StoryPostPlace setMarker={setMarker} />
+        <StoryPostPlace marker={marker} setMarker={setMarker} />
         <div className={flex({ direction: 'row', gap: 'md' })}>
           <FilterDropdown
             options={getYearOptions()}
