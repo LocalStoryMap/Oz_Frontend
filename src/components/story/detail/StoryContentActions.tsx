@@ -17,8 +17,8 @@ type Props = {
 
 function StoryContentActions({ mode, isMine }: Props) {
   const router = useRouter();
-  const params = useParams() as { storyId: string };
-  const id = params?.storyId;
+  const params = useParams();
+  const id = params?.storyId as string;
 
   const deleteMutation = useMutation({
     ...storyOption.deleteStory(id),
