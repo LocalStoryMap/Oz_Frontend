@@ -30,10 +30,14 @@ function WithdrawalConfirmModal() {
       clearAuth();
       close();
       router.replace('/');
-    } catch (e: any) {
-      setError('회원 탈퇴에 실패했습니다. 다시 시도해주세요.');
+    } catch (e: unknown) {
+      const errorMessage =
+        e instanceof Error
+          ? e.message
+          : '회원 탈퇴에 실패했습니다. 다시 시도해주세요.';
+      setError(errorMessage);
       setShake(true);
-      setTimeout(() => setShake(false), 400);
+      setTimeout(() => setShake(false), 500);
     } finally {
       setLoading(false);
     }
