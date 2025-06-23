@@ -55,7 +55,7 @@ export type CommentStory = {
 };
 
 export type InputMode = {
-  mode: 'edit' | 'replay' | 'none';
+  mode: 'edit' | 'reply' | 'none';
   payload: {
     content?: string;
     targetId: number | null;
