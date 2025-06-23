@@ -1,5 +1,6 @@
 'use client';
 
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { storyOption } from '@api/options/storyOption';
@@ -16,8 +17,6 @@ import {
 } from '@/components/ui/common/cards/card.recipe';
 import type { StoryCardProps, StoryQueryData } from '@/types/story.types';
 
-import defaultUserProfile from '@images/default-userImage.png';
-
 import { css, cx } from '@root/styled-system/css';
 
 function StoryCard({ story }: StoryCardProps) {
@@ -30,7 +29,7 @@ function StoryCard({ story }: StoryCardProps) {
     userNickname,
     createdAt,
     storyImages = [],
-    userProfile,
+    userProfileImage,
     title,
     content,
   } = story;
@@ -68,7 +67,12 @@ function StoryCard({ story }: StoryCardProps) {
     if (newLiked === undefined) return;
     mutation.mutate(newLiked);
   };
-
+  const defaultUserImage = '/images/default-userImage.png';
+  const [profileSrc, setProfileSrc] = useState(
+    userProfileImage && userProfileImage.trim() !== ''
+      ? userProfileImage
+      : defaultUserImage,
+  );
   const images = storyImages.map(img => img.imageUrl);
   const imageCount = images.length;
   const layout = String(Math.max(1, Math.min(imageCount, 5)));
@@ -158,7 +162,15 @@ function StoryCard({ story }: StoryCardProps) {
             overflow: 'hidden',
           })}
         >
-          <Image src={userProfile || defaultUserProfile} alt="프로필" fill />
+          <Image
+            src={profileSrc}
+            alt="프로필"
+            fill
+            onError={() => {
+              console.log('onError triggered for:', profileSrc);
+              setProfileSrc(defaultUserImage);
+            }}
+          />
         </div>
 
         <div className={cx(css({ mt: 8, pl: '4' }))}>
