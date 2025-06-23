@@ -52,7 +52,11 @@ function StoryPlaceList() {
       ) : (
         <div className={flex({ gap: 'lg' })}>
           <div className={flexBetween()}>
-            <div className={flex({ gap: 'xs' })}>
+            <div
+              className={flex({ gap: 'xs' })}
+              onClick={() => router.push(`/map/search?id=${id}`)}
+              style={{ cursor: 'pointer' }}
+            >
               <span className={modalText({ text: 'search', align: 'left' })}>
                 {query}
               </span>
