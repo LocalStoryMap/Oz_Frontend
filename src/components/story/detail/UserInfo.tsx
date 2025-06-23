@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import StoryContentActions from '@components/story/detail/StoryContentActions';
 import { useAuthStore } from '@store/useAuthStore';
+import { formatDate } from '@util/date';
 
 import { css } from '@root/styled-system/css';
 
@@ -46,9 +47,7 @@ function UserInfo({ mode, createdAt, userNickname, userProfileImage }: Props) {
             },
           })}
         >
-          <p>
-            {createdAt ? new Date(createdAt).toLocaleDateString() : undefined}
-          </p>
+          <p>{createdAt ? formatDate(createdAt) : undefined}</p>
           <p>{userNickname}</p>
         </div>
         <StoryContentActions isMine={isMine} mode={mode} />
