@@ -8,7 +8,7 @@ import { CategoryValueType } from '@/constants/map';
 
 type MarkerContainerProps = {
   position: MapMarkerProps['position'];
-  type?: CategoryValueType;
+  type?: CategoryValueType | 'current';
   content?: string;
   onClick?: () => void;
 };
