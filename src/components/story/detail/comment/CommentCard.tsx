@@ -110,10 +110,8 @@ function CommentCard({
         borderLeft: depth > 0 ? '3px solid #cbd5e1' : 'none',
         maxWidth: { base: 600, sm: '100%' },
         fontSize: { base: 'md', sm: 'sm' },
-      })}
-      style={{
         marginLeft: depth > 0 ? `clamp(8px, ${depth * 20}px, 40px)` : 0,
-      }}
+      })}
     >
       <UserInfo
         createdAt={comment?.createdAt}
