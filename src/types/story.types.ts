@@ -19,7 +19,7 @@ export type StoryCardProps = {
   story: {
     storyId: string;
     storyImages: StoryImageType[];
-    userProfile?: string;
+    userProfileImage?: string;
     title: string;
     content: string;
     likeCount?: number;
