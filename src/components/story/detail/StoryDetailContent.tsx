@@ -14,15 +14,28 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import type { StoryType } from '@/types/story.types';
 
+import 'swiper/css';
 import { css } from '@root/styled-system/css';
+
+import 'swiper/css/pagination';
 
 function StoryDetailContent({ storyId }: { storyId: string }) {
   const errorDefaultImg = '/images/errorDefaultImg.jpg';
   const queryClient = useQueryClient();
   const { data, isError, isLoading } = useQuery<StoryType>({
-    queryKey: ['storyDetail', storyId],
-    queryFn: () =>
-      instance.get(ENDPOINTS.STORY.DETAIL(storyId)).then(res => res.data),
+    queryKey: ['storyDetail', storyId, { increaseView: true }],
+    queryFn: ({ queryKey }) => {
+      const [_key, storyId, options] = queryKey as [
+        string,
+        string,
+        { increaseView?: boolean },
+      ];
+      const url =
+        options && options.increaseView
+          ? `${ENDPOINTS.STORY.DETAIL(storyId)}?increase_view=true`
+          : ENDPOINTS.STORY.DETAIL(storyId);
+      return instance.get(url).then(res => res.data);
+    },
   });
   const {
     createdAt,
@@ -38,18 +51,21 @@ function StoryDetailContent({ storyId }: { storyId: string }) {
   const mutation = useMutation({
     ...storyOption.postLikeStory(storyId),
     onMutate: () => {
-      queryClient.setQueryData<StoryType>(['storyDetail'], old => {
-        if (!old) return old;
-        return {
-          ...old,
-          isLiked: !old?.isLiked,
-          likeCount: Number(old?.likeCount ?? 0) + (old?.isLiked ? 1 : -1),
-        };
-      });
+      queryClient.setQueryData<StoryType>(
+        ['storyDetail', storyId, { increaseView: true }],
+        old => {
+          if (!old) return old;
+          return {
+            ...old,
+            isLiked: !old?.isLiked,
+            likeCount: Number(old?.likeCount ?? 0) + (old?.isLiked ? -1 : 1),
+          };
+        },
+      );
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: ['storyDetail', storyId],
+        queryKey: ['storyDetail', storyId, { increaseView: false }],
       });
     },
   });
@@ -65,29 +81,37 @@ function StoryDetailContent({ storyId }: { storyId: string }) {
     <article>
       <div className={css({ mb: 12 })}>
         <Swiper
-          spaceBetween={10}
-          slidesPerView={1.2}
+          spaceBetween={0}
+          slidesPerView={1}
           modules={[Pagination]}
           pagination={{ clickable: true }}
           navigation={false}
+          style={{ width: '100%', height: '1000px' }}
         >
           {data?.storyImages.map(image => (
             <SwiperSlide key={image.imageId}>
-              <Image
-                src={image.imageUrl}
-                alt="StoryDetail"
-                width={1080}
-                height={600}
+              <div
                 className={css({
-                  objectFit: 'cover',
                   width: '100%',
-                  height: '100%',
+                  height: '1000px',
+                  position: 'relative',
                 })}
-                onError={e => {
-                  const target = e.target as HTMLImageElement;
-                  target.src = errorDefaultImg;
-                }}
-              />
+              >
+                <Image
+                  src={image.imageUrl}
+                  alt="StoryDetail"
+                  fill
+                  className={css({
+                    objectFit: 'cover',
+                    width: '100%',
+                    height: '100%',
+                  })}
+                  onError={e => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = errorDefaultImg;
+                  }}
+                />
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
@@ -100,6 +124,7 @@ function StoryDetailContent({ storyId }: { storyId: string }) {
         </div>
       </div>
       <UserInfo
+        mode="story"
         createdAt={createdAt}
         userNickname={userNickname}
         userProfileImage={userProfileImage}
