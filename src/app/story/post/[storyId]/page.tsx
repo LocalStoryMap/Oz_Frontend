@@ -6,11 +6,18 @@ import { useParams } from 'next/navigation';
 import { ENDPOINTS } from '@/api/endpoints';
 import { ssrFetcher } from '@/api/fetcher';
 import StoryPostForm from '@/components/story/StoryPostForm';
+import { StoryImage } from '@/types/story';
 
 function EditStoryPage() {
   const params = useParams();
   const storyId = params?.storyId as string | undefined;
-  const [initialData, setInitialData] = useState<any>(null);
+  const [initialData, setInitialData] = useState<{
+    marker: number | null;
+    title: string;
+    content: string;
+    emoji: string;
+    storyImages?: StoryImage[];
+  } | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
