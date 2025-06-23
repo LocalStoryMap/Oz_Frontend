@@ -31,10 +31,16 @@ function MapView() {
   const position = searchParams.get('position') === 'true';
   useEffect(() => {
     if (position && navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        const { latitude, longitude } = position.coords;
-        setCenter({ lat: latitude, lng: longitude });
-      });
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          const { latitude, longitude } = position.coords;
+          setCenter({ lat: latitude, lng: longitude });
+        },
+        error => {
+          console.warn('위치 정보를 가져올 수 없습니다:', error.message);
+        },
+        { timeout: 5000 },
+      );
     }
   }, [position]);
 
