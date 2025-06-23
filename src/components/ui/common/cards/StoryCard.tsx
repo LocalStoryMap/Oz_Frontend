@@ -29,7 +29,7 @@ function StoryCard({ story }: StoryCardProps) {
     isLiked,
     userNickname,
     createdAt,
-    images,
+    storyImages = [],
     userProfile,
     title,
     content,
@@ -60,7 +60,7 @@ function StoryCard({ story }: StoryCardProps) {
       });
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['story'] });
+      await queryClient.invalidateQueries({ queryKey: ['story', storyId] });
     },
   });
 
@@ -69,7 +69,8 @@ function StoryCard({ story }: StoryCardProps) {
     mutation.mutate(newLiked);
   };
 
-  const imageCount = images?.length ?? 0;
+  const images = storyImages.map(img => img.imageUrl);
+  const imageCount = images.length;
   const layout = String(Math.max(1, Math.min(imageCount, 5)));
 
   return (
@@ -82,34 +83,69 @@ function StoryCard({ story }: StoryCardProps) {
         p: 'none',
         radius: 'sm',
       })}
+      style={{ width: '100%' }}
     >
-      <Link href={`/story/${storyId}`} passHref>
-        <div
-          className={gridImageWrapper({
-            layout: layout as '1' | '2' | '3' | '4' | '5',
-          })}
-        >
-          {images?.slice(0, 5).map((src, i) => (
-            <div
-              key={i}
-              className={css({
-                position: 'relative',
-                ...(i === 0 && layout === '5' ? { gridRow: 'span 2' } : {}),
-              })}
-            >
-              <Image
-                src={src}
-                alt={`스토리 이미지 ${i + 1}`}
-                fill
-                className={cardImage()}
-                onError={e => {
-                  const target = e.target as HTMLImageElement;
-                  target.src = errorDefaultImg;
-                }}
-              />
-            </div>
-          ))}
-        </div>
+      <Link
+        href={`/story/${storyId}`}
+        passHref
+        aria-label="글 상세 이동 버튼"
+        className={css({ width: '100%' })}
+      >
+        {imageCount === 1 || imageCount === 0 ? (
+          <div
+            style={{
+              width: '100%',
+              height: '200px',
+              position: 'relative',
+              overflow: 'hidden',
+              borderRadius: 8,
+            }}
+          >
+            <Image
+              src={imageCount === 1 ? images[0] : errorDefaultImg}
+              alt="스토리 이미지"
+              fill
+              style={{
+                objectFit: 'cover',
+                width: '100%',
+                height: '100%',
+                display: 'block',
+              }}
+              onError={e => {
+                const target = e.target as HTMLImageElement;
+                target.src = errorDefaultImg;
+              }}
+            />
+          </div>
+        ) : (
+          <div
+            className={gridImageWrapper({
+              layout: layout as '2' | '3' | '4' | '5',
+            })}
+            style={{ width: '100%', height: '200px', position: 'relative' }}
+          >
+            {images.slice(0, 5).map((src, i) => (
+              <div
+                key={i}
+                className={css({
+                  position: 'relative',
+                  ...(i === 0 && layout === '5' ? { gridRow: 'span 2' } : {}),
+                })}
+              >
+                <Image
+                  src={src}
+                  alt={`스토리 이미지 ${i + 1}`}
+                  fill
+                  className={cardImage()}
+                  onError={e => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = errorDefaultImg;
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+        )}
 
         <div
           className={css({
