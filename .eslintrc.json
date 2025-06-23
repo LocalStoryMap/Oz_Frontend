@@ -23,6 +23,7 @@
     "no-unused-vars": "warn",
     "no-shadow": "off",
     "no-use-before-define": "off",
+    "no-underscore-dangle": ["warn", { "allow": ["_retry"] }],
 
     //react 관련
     "no-undef": "off",
