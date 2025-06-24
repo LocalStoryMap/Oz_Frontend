@@ -104,40 +104,40 @@ export default defineConfig({
           background: {
             value: {
               base: '{colors.white}',
-              _dark: '{colors.gray.800}',
+              _dark: '#191A20',
             },
           },
           text: {
             value: {
               base: '{colors.textDefault}',
-              _dark: '{colors.white}',
+              _dark: '#F5F6FA',
             },
           },
           primary: {
             value: {
               base: '{colors.blue.500}',
-              _dark: '{colors.blue.500}',
+              _dark: '{colors.blue.400}',
             },
             description: '주요 버튼, 링크 등에 사용하는 메인 컬러',
           },
           onPrimary: {
             value: {
               base: '{colors.white}',
-              _dark: '{colors.white}',
+              _dark: '#191A20',
             },
             description: 'primary 배경 위에 사용하는 텍스트/아이콘 컬러',
           },
           secondary: {
             value: {
               base: '{colors.yellow.500}',
-              _dark: '{colors.yellow.500}',
+              _dark: '{colors.yellow.400}',
             },
             description: '보조 포인트 요소에 사용하는 컬러',
           },
           onSecondary: {
             value: {
               base: '{colors.black}',
-              _dark: '{colors.black}',
+              _dark: '{colors.gray.900}',
             },
             description: 'secondary 배경 위에 사용하는 텍스트/아이콘 컬러',
           },
@@ -165,15 +165,14 @@ export default defineConfig({
           info: {
             value: {
               base: '#0063F7',
-              _dark: '#0063F7',
+              _dark: '#4F8CFF',
             },
             description: '정보 전달용 아이콘 등에 사용하는 컬러',
           },
-
           titleBorder: {
             value: {
               base: '#E6E6E6',
-              _dark: '#E6E6E6',
+              _dark: '#313136',
             },
             description: '페이지 타이틀 구분선 컬러',
           },
