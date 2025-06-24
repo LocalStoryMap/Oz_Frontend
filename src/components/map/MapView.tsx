@@ -85,7 +85,7 @@ function MapView() {
           />
         ))}
       </div>
-      <Map center={center} style={{ width: '100%', height: '600px' }} level={8}>
+      <Map center={center} style={{ width: '100%', height: '75vh' }} level={8}>
         {markers?.map(marker => (
           <MarkerContainer
             key={marker.id}
