@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { notificationOption } from '@api/options/notificationOption';
+import { paymentOption } from '@api/options/paymentOption';
 import { TossIcon } from '@components/icons';
 import { Button } from '@components/ui/common/buttons/Button';
 import FAQList from '@components/ui/faq/FAQList';
@@ -28,7 +28,7 @@ function Page() {
   const email = user?.email;
 
   const mutation = useMutation({
-    ...notificationOption.postSubscribes(),
+    ...paymentOption.postSubscribes(),
   });
 
   const handlePayment = () => {
