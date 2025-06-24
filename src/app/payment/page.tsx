@@ -34,6 +34,9 @@ function Page() {
   const handlePayment = () => {
     if (!window.IMP) return;
     const { IMP } = window;
+    if (typeof IMP.close === 'function') {
+      IMP.close();
+    }
     IMP?.init('imp44645324');
 
     const paymentData = {
@@ -41,10 +44,10 @@ function Page() {
       pay_method: 'card',
       merchant_uid: `payment-${crypto.randomUUID()}`,
       amount: 1000,
-      name: name ?? 'asd',
+      name: '일로일로 구독 결제',
+      buyer_name: name ?? '',
       buyer_email: email ?? '',
     };
-
     IMP.request_pay(paymentData, callback);
   };
 
