@@ -119,9 +119,14 @@ function Page() {
               <Button
                 aria-label="토스로 결제하기"
                 onClick={() => handlePayment()}
+                className={css({
+                  display: 'flex',
+                  gap: 4,
+                  alignItems: 'center',
+                })}
               >
                 <TossIcon />
-                토스 결제
+                토스 페이먼츠 결제
               </Button>
             </div>
           </div>
