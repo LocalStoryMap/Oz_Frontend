@@ -55,9 +55,10 @@ function Page() {
     const { success, error_msg } = response;
 
     if (success) {
+      console.log(success);
       mutation.mutate({
-        imp_uid: response?.imp_uid ?? undefined,
-        merchant_uid: response?.merchant_uid ?? undefined,
+        imp_uid: response?.imp_uid ?? '',
+        merchant_uid: response?.merchant_uid ?? '',
       });
       setModalOpen(true);
     } else {

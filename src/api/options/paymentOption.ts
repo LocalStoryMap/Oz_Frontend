@@ -8,8 +8,8 @@ export const paymentOption = {
       imp_uid,
       merchant_uid,
     }: {
-      imp_uid?: string;
-      merchant_uid?: string;
+      imp_uid: string;
+      merchant_uid: string;
     }) => {
       return mutationFetcher('post', ENDPOINTS.SUBSCRIBE.LIST, {
         imp_uid,
