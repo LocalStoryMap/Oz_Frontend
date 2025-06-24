@@ -26,6 +26,3 @@ declare global {
     };
   }
 }
-
-// 이 파일이 모듈이 되도록 export {} 추가 (다른 전역 선언과 충돌 방지)
-export {};
