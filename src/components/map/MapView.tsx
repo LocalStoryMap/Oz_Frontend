@@ -105,14 +105,14 @@ function MapView() {
               subtitle={place.layer}
               date={false}
               footerType="location"
-              footerText={place.adress}
+              footerText={place?.adress || '장소 정보 없음'}
               action={
                 <Likes
                   liked={place.isLiked}
                   onChange={() => mutate(place.id)}
                 />
               }
-              onClick={() => router.push(`/map/${place.id}`)}
+              onClick={() => router.push(`/map/${place?.id}`)}
             />
           </WideCard>
         </div>

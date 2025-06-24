@@ -54,7 +54,7 @@ async function page({ params }: { params: { id: string } }) {
                   clamp: 1,
                 })}
               >
-                {data.adress}
+                {data.adress || '장소 정보 없음'}
               </span>
             </p>
           </Link>
