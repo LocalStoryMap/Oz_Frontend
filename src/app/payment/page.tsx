@@ -9,7 +9,6 @@ import FAQList from '@components/ui/faq/FAQList';
 import { useAuthStore } from '@store/useAuthStore';
 import { useMutation } from '@tanstack/react-query';
 import { formatDotDate } from '@util/date';
-import * as process from 'node:process';
 
 import Modal from '@/components/ui/common/modals/Modal';
 import { FAQ } from '@/constants/subscribe';
