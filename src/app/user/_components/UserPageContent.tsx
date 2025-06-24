@@ -5,8 +5,8 @@ import { useSearchParams } from 'next/navigation';
 import { ENDPOINTS } from '@api/endpoints';
 import { instance } from '@api/instance';
 import { followsOption } from '@api/options/followsOption';
-import { FollowItem } from '@components/story/detail/StoryContentActions';
 import { Button } from '@components/ui/common/buttons/Button';
+import { useFollowStatus } from '@hooks/useFollowStatus';
 import {
   useMutation,
   useQueries,
@@ -71,20 +71,9 @@ function UserPageContent() {
     return { ...story, imageUrl };
   });
 
-  const { data: follow } = useQuery({
-    queryKey: ['follow'],
-    queryFn: () => instance.get(ENDPOINTS.FOLLOWS.LIST).then(res => res.data),
-  });
+  const { isFollowing, followId } = useFollowStatus(user?.nickname);
 
   const queryClient = useQueryClient();
-  const followList: FollowItem[] = follow ?? [];
-  const followData = followList.find(
-    f =>
-      f.follow.nickname.trim().toLowerCase() ===
-      user?.nickname.trim().toLowerCase(),
-  );
-  const isFollowing = !!followData;
-  const followId = followData?.id;
 
   const followMutation = useMutation({
     ...followsOption.postFollows(),
@@ -94,7 +83,7 @@ function UserPageContent() {
   });
 
   const unfollowMutation = useMutation({
-    ...followsOption.deleteFollows(String(followId)),
+    ...followsOption.deleteFollows(followId ? String(followId) : ''),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['follow'] });
     },

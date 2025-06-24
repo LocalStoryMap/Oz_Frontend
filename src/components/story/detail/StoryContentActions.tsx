@@ -1,10 +1,9 @@
 'use client';
 
 import { useParams, useRouter } from 'next/navigation';
-import { ENDPOINTS } from '@api/endpoints';
-import { instance } from '@api/instance';
 import { Button } from '@components/ui/common/buttons/Button';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useFollowStatus } from '@hooks/useFollowStatus';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { followsOption } from '@/api/options/followsOption';
 import { storyOption } from '@/api/options/storyOption';
@@ -19,34 +18,11 @@ type Props = {
   userNickname?: string;
 };
 
-export type FollowItem = {
-  id: number;
-  follow: {
-    id: number;
-    nickname: string;
-    profileImage: string | null;
-  };
-  createdAt: string;
-};
-
 function StoryContentActions({ mode, isMine, userNickname }: Props) {
   const router = useRouter();
   const params = useParams();
   const id = params?.storyId as string;
-
-  const { data } = useQuery({
-    queryKey: ['follow'],
-    queryFn: () => instance.get(ENDPOINTS.FOLLOWS.LIST).then(res => res.data),
-  });
-
-  const followList: FollowItem[] = data ?? [];
-  const followData = followList.find(
-    f =>
-      f.follow.nickname.trim().toLowerCase() ===
-      (userNickname ?? '').trim().toLowerCase(),
-  );
-  const isFollowing = !!followData;
-  const followId = followData?.id;
+  const { isFollowing, followId } = useFollowStatus(userNickname);
 
   const queryClient = useQueryClient();
 
@@ -58,7 +34,7 @@ function StoryContentActions({ mode, isMine, userNickname }: Props) {
   });
 
   const unfollowMutation = useMutation({
-    ...followsOption.deleteFollows(String(followId)),
+    ...followsOption.deleteFollows(followId ? String(followId) : ''),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['follow'] });
     },
