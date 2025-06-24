@@ -9,6 +9,7 @@ import FAQList from '@components/ui/faq/FAQList';
 import { useAuthStore } from '@store/useAuthStore';
 import { useMutation } from '@tanstack/react-query';
 import { formatDotDate } from '@util/date';
+import * as process from 'node:process';
 
 import Modal from '@/components/ui/common/modals/Modal';
 import { FAQ } from '@/constants/subscribe';
@@ -29,15 +30,21 @@ function Page() {
 
   const mutation = useMutation({
     ...paymentOption.postSubscribes(),
+    onError: error => {
+      alert('구독 생성에 실패했습니다. 고객센터에 문의해주세요.');
+    },
   });
 
   const handlePayment = () => {
-    if (!window.IMP) return;
+    if (!window.IMP) {
+      alert('결제 모듈을 불러오는 중입니다. 잠시 후 다시 시도해주세요.');
+      return;
+    }
     const { IMP } = window;
     if (typeof IMP.close === 'function') {
       IMP.close();
     }
-    IMP?.init('imp44645324');
+    IMP?.init(process.env.NEXT_PUBLIC_IAMPORT_ID!);
 
     const paymentData = {
       pg: 'uplus',
@@ -45,8 +52,8 @@ function Page() {
       merchant_uid: `payment-${crypto.randomUUID()}`,
       amount: 1000,
       name: '일로일로 구독 결제',
-      buyer_name: name ?? '',
-      buyer_email: email ?? '',
+      buyer_name: name ?? '구매자',
+      buyer_email: email ?? 'no-email@example.com',
     };
     IMP.request_pay(paymentData, callback);
   };
@@ -55,15 +62,18 @@ function Page() {
     const { success, error_msg } = response;
 
     if (success) {
-      console.log(success);
+      if (!response?.imp_uid) {
+        alert('결제 정보가 올바르지 않습니다.');
+        return;
+      }
       mutation.mutate({
-        imp_uid: response?.imp_uid ?? '',
+        imp_uid: response.imp_uid,
         merchant_uid: response?.merchant_uid ?? '',
       });
       setModalOpen(true);
     } else {
       console.error(error_msg);
-      alert('결제 실패');
+      alert(`결제 실패: ${error_msg || '알 수 없는 오류'}`);
     }
   }
 
