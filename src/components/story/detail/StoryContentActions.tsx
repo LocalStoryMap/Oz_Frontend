@@ -1,8 +1,10 @@
 'use client';
 
 import { useParams, useRouter } from 'next/navigation';
+import { ENDPOINTS } from '@api/endpoints';
+import { instance } from '@api/instance';
 import { Button } from '@components/ui/common/buttons/Button';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { followsOption } from '@/api/options/followsOption';
 import { storyOption } from '@/api/options/storyOption';
@@ -17,17 +19,55 @@ type Props = {
   userNickname?: string;
 };
 
+export type FollowItem = {
+  id: number;
+  follow: {
+    id: number;
+    nickname: string;
+    profileImage: string | null;
+  };
+  createdAt: string;
+};
+
 function StoryContentActions({ mode, isMine, userNickname }: Props) {
   const router = useRouter();
   const params = useParams();
   const id = params?.storyId as string;
 
+  const { data } = useQuery({
+    queryKey: ['follow'],
+    queryFn: () => instance.get(ENDPOINTS.FOLLOWS.LIST).then(res => res.data),
+  });
+
+  const followList: FollowItem[] = data ?? [];
+  const followData = followList.find(
+    f =>
+      f.follow.nickname.trim().toLowerCase() ===
+      (userNickname ?? '').trim().toLowerCase(),
+  );
+  const isFollowing = !!followData;
+  const followId = followData?.id;
+
+  const queryClient = useQueryClient();
+
   const followMutation = useMutation({
     ...followsOption.postFollows(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['follow'] });
+    },
+  });
+
+  const unfollowMutation = useMutation({
+    ...followsOption.deleteFollows(String(followId)),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['follow'] });
+    },
   });
 
   const handleFollow = () => {
-    followMutation.mutate({ nickname: userNickname });
+    if (isFollowing) {
+      if (followId) unfollowMutation.mutate();
+    } else if (userNickname) followMutation.mutate({ nickname: userNickname });
   };
 
   const deleteMutation = useMutation({
@@ -50,16 +90,15 @@ function StoryContentActions({ mode, isMine, userNickname }: Props) {
           ml: 'auto',
         })}
       >
-        {/* 팔로우 버튼 */}
         <Button
           size="sm"
           color="outlineSoft"
           aria-label="팔로우 버튼"
           onClick={handleFollow}
+          disabled={followMutation.isPending || unfollowMutation.isPending}
         >
-          {followMutation.isPending ? '로딩중...' : 'Follows'}
+          {isFollowing ? 'unFollow' : 'Follow'}
         </Button>
-        {/* 수정/삭제 버튼 */}
         {mode === 'story' && isMine && (
           <>
             <Button
@@ -86,7 +125,6 @@ function StoryContentActions({ mode, isMine, userNickname }: Props) {
               })}
               aria-label="글 삭제 버튼"
               onClick={openModal}
-              disabled={deleteMutation.isPending}
             >
               삭제
             </Button>

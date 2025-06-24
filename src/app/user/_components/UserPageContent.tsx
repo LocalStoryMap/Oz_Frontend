@@ -4,8 +4,15 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { ENDPOINTS } from '@api/endpoints';
 import { instance } from '@api/instance';
+import { followsOption } from '@api/options/followsOption';
+import { FollowItem } from '@components/story/detail/StoryContentActions';
 import { Button } from '@components/ui/common/buttons/Button';
-import { useQueries, useQuery } from '@tanstack/react-query';
+import {
+  useMutation,
+  useQueries,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 
 import { css } from '@root/styled-system/css';
 
@@ -30,7 +37,7 @@ export interface StoryImageResponse {
   results: { imageUrl: string }[];
 }
 
-export default function UserPageContent() {
+function UserPageContent() {
   const searchParams = useSearchParams();
   const nickname = searchParams.get('nickname');
   const { data, isError } = useQuery<UserSearchResponse>({
@@ -63,6 +70,42 @@ export default function UserPageContent() {
       images && images.length > 0 ? images[0].imageUrl : defaultImg;
     return { ...story, imageUrl };
   });
+
+  const { data: follow } = useQuery({
+    queryKey: ['follow'],
+    queryFn: () => instance.get(ENDPOINTS.FOLLOWS.LIST).then(res => res.data),
+  });
+
+  const queryClient = useQueryClient();
+  const followList: FollowItem[] = follow ?? [];
+  const followData = followList.find(
+    f =>
+      f.follow.nickname.trim().toLowerCase() ===
+      user?.nickname.trim().toLowerCase(),
+  );
+  const isFollowing = !!followData;
+  const followId = followData?.id;
+
+  const followMutation = useMutation({
+    ...followsOption.postFollows(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['follow'] });
+    },
+  });
+
+  const unfollowMutation = useMutation({
+    ...followsOption.deleteFollows(String(followId)),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['follow'] });
+    },
+  });
+
+  const handleFollow = () => {
+    if (isFollowing) {
+      if (followId) unfollowMutation.mutate();
+    } else if (user?.nickname)
+      followMutation.mutate({ nickname: user?.nickname });
+  };
 
   if (!user) return <div>유저 없음</div>;
   if (isError) return <div>에러</div>;
@@ -103,8 +146,14 @@ export default function UserPageContent() {
               {user.nickname}
             </p>
           </div>
-          <Button type="button" size="sm" color="primary">
-            팔로우
+          <Button
+            size="sm"
+            color="outlineSoft"
+            aria-label="팔로우 버튼"
+            onClick={handleFollow}
+            disabled={followMutation.isPending || unfollowMutation.isPending}
+          >
+            {isFollowing ? 'unFollow' : 'Follow'}
           </Button>
           <div
             className={css({
@@ -179,3 +228,5 @@ export default function UserPageContent() {
     </section>
   );
 }
+
+export default UserPageContent;
