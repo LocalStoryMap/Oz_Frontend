@@ -154,24 +154,28 @@ function ChatBotMessage({ openModal }: Props) {
           onChange={onChange}
           placeholder="메시지를 입력하세요..."
         />
-        <Button
-          type="submit"
-          size="sm"
-          color="primary"
-          aria-label="전송하기"
-          className={css({ mb: 2 })}
+        <div
+          className={css({
+            display: 'flex',
+            alignItems: 'center',
+            gap: 2,
+            mb: 2,
+            mt: 2,
+          })}
         >
-          전송
-        </Button>
-        <Button
-          type="button"
-          onClick={onSummarize}
-          size="sm"
-          color="primary"
-          aria-label="요약하기"
-        >
-          요약하기
-        </Button>
+          <Button type="submit" size="sm" color="primary" aria-label="전송하기">
+            전송
+          </Button>
+          <Button
+            type="button"
+            onClick={onSummarize}
+            size="sm"
+            color="primary"
+            aria-label="요약하기"
+          >
+            요약하기
+          </Button>
+        </div>
       </form>
     </div>
   );
