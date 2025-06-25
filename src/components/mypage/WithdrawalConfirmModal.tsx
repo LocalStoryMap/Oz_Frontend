@@ -7,13 +7,11 @@ import { withdrawUser } from '@/app/api/user/userApi';
 import { SpinnerMessage } from '@/components/ui/common/loading/SpinnerMessage';
 import Modal from '@/components/ui/common/modals/Modal';
 import { useAuthStore } from '@/store/useAuthStore';
-import { useModalStore } from '@/store/useModalStore';
 
 import { css } from '@root/styled-system/css';
 
-function WithdrawalConfirmModal() {
+function WithdrawalConfirmModal({ onClose }: { onClose: () => void }) {
   const router = useRouter();
-  const { close } = useModalStore();
   const { clearAuth, refresh } = useAuthStore();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -28,7 +26,6 @@ function WithdrawalConfirmModal() {
       if (!refresh) throw new Error('로그인 정보가 없습니다.');
       await withdrawUser(refresh);
       clearAuth();
-      close();
       router.replace('/');
     } catch (e: unknown) {
       const errorMessage =
@@ -58,23 +55,26 @@ function WithdrawalConfirmModal() {
   }
 
   return (
-    <Modal
-      title={error ? '탈퇴 처리 실패' : '정말 탈퇴하시겠어요?'}
-      content={
-        error ? (
-          <span>{error}</span>
-        ) : (
-          <>
-            탈퇴 시 모든 정보가 삭제되며,
-            <br />
-            복구는 불가능합니다.
-          </>
-        )
-      }
-      type={error ? 'one' : 'two'}
-      onConfirm={error ? handleCloseError : handleWithdraw}
-      className={shake ? shakeClass : ''}
-    />
+    <div>
+      <Modal
+        title={error ? '탈퇴 처리 실패' : '정말 탈퇴하시겠어요?'}
+        content={
+          error ? (
+            <span>{error}</span>
+          ) : (
+            <>
+              탈퇴 시 모든 정보가 삭제되며,
+              <br />
+              복구는 불가능합니다.
+            </>
+          )
+        }
+        type={error ? 'one' : 'two'}
+        onConfirm={error ? handleCloseError : handleWithdraw}
+        onCancel={onClose}
+        className={shake ? shakeClass : ''}
+      />
+    </div>
   );
 }
 
