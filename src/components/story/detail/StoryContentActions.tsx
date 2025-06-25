@@ -49,12 +49,16 @@ function StoryContentActions({ mode, isMine, userNickname }: Props) {
   const deleteMutation = useMutation({
     ...storyOption.deleteStory(id),
     onSuccess: () => {
+      close();
       router.push('/story');
     },
   });
 
-  const openModal = useModalStore(state => state.open);
-  const isModalOpen = useModalStore(state => state.isOpen);
+  const { open, isOpen, close } = useModalStore(state => ({
+    open: state.open,
+    isOpen: state.isOpen,
+    close: state.close,
+  }));
 
   return (
     <>
@@ -100,14 +104,14 @@ function StoryContentActions({ mode, isMine, userNickname }: Props) {
                 },
               })}
               aria-label="글 삭제 버튼"
-              onClick={openModal}
+              onClick={() => open()}
             >
               삭제
             </Button>
           </>
         )}
       </div>
-      {isModalOpen && (
+      {isOpen && (
         <Modal
           title="정말 삭제하시겠어요?"
           content={
@@ -117,7 +121,9 @@ function StoryContentActions({ mode, isMine, userNickname }: Props) {
               복구는 불가능합니다.
             </>
           }
-          onConfirm={() => deleteMutation.mutate()}
+          onConfirm={() => {
+            deleteMutation.mutate();
+          }}
         />
       )}
     </>
