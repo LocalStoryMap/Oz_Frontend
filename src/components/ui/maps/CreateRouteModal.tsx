@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
 
+import { routeOption } from '@/api/options/routeOption';
 import { Button } from '@/components/ui/common/buttons/Button';
 import { flex } from '@/components/ui/common/cards/card.recipe';
 import Modal from '@/components/ui/common/modals/Modal';
@@ -22,6 +24,11 @@ function CreateRouteModal() {
     isPublic: true,
   });
 
+  const postMutation = useMutation({
+    ...routeOption.postRoute(),
+    onSuccess: () => close(),
+  });
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
@@ -37,10 +44,11 @@ function CreateRouteModal() {
     }));
   };
 
-  const handleSubmit = () => {
+  const onSubmit = () => {
     const payload: PostRoutePayload = {
       ...form,
     };
+    postMutation.mutate(payload);
   };
 
   return (
@@ -81,7 +89,7 @@ function CreateRouteModal() {
         <Button onClick={close} color="outlineSoft" size="md" radius="md">
           취소
         </Button>
-        <Button onClick={handleSubmit} color="primary" size="md" radius="md">
+        <Button onClick={onSubmit} color="primary" size="md" radius="md">
           확인
         </Button>
       </div>
