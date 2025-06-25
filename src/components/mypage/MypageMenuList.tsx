@@ -61,6 +61,12 @@ export default function MypageMenuList() {
       colorMode: 'fill',
     },
     {
+      title: '결제 내역',
+      icon: SettingsIcon,
+      route: '/mypage/payment-history',
+      colorMode: 'fill',
+    },
+    {
       title: '회원탈퇴',
       icon: LogoutIcon,
       colorMode: 'stroke',
