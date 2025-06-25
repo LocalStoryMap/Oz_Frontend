@@ -13,7 +13,6 @@ import {
   VersionIcon,
 } from '@/components/icons';
 import IconWrapper from '@/components/icons/IconWrapper';
-import { useModalStore } from '@/store/useModalStore';
 
 import {
   menuButton,
