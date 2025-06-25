@@ -118,7 +118,12 @@ export const routeModalLabel = cva({
     flexDirection: 'row',
     alignItems: 'center',
     width: 'full',
-    marginTop: 2,
+    marginTop: 3,
+  },
+  variants: {
+    mb: {
+      sm: { marginBottom: 3 },
+    },
   },
 });
 
