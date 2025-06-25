@@ -15,7 +15,7 @@ import {
 import { useModalStore } from '@/store/useModalStore';
 import { PostRoutePayload } from '@/types/route';
 
-function CreateRouteModal() {
+function RouteCreateModal() {
   const { close } = useModalStore();
 
   const [form, setForm] = useState({
@@ -97,4 +97,4 @@ function CreateRouteModal() {
   );
 }
 
-export default CreateRouteModal;
+export default RouteCreateModal;

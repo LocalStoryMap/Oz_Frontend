@@ -10,9 +10,9 @@ import { mapOverlayWrapper } from '@/components/map/map.recipe';
 import WideCard from '@/components/ui/common/cards/WideCard';
 import WideCardContent from '@/components/ui/common/cards/WideCardContent';
 import { Likes } from '@/components/ui/common/toggles';
-import CreateRouteModal from '@/components/ui/maps/CreateRouteModal';
 import MarkerContainer from '@/components/ui/maps/MarkerContainer';
 import MarkerIcon from '@/components/ui/maps/MarkerIcon';
+import RouteCreateModal from '@/components/ui/maps/RouteCreateModal';
 import { CategoryValueType, MAP_CATEGORY } from '@/constants/map';
 import { useModalStore } from '@/store/useModalStore';
 import { isValidCategory } from '@/util/map';
@@ -96,7 +96,7 @@ function MapView() {
           만들기
         </button>
       </div>
-      {isOpen && modalType === 'content' && <CreateRouteModal />}
+      {isOpen && modalType === 'content' && <RouteCreateModal />}
       <Map center={center} style={{ width: '100%', height: '75vh' }} level={8}>
         {markers?.map(marker => (
           <MarkerContainer
