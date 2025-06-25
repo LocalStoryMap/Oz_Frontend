@@ -104,13 +104,13 @@ export default defineConfig({
           background: {
             value: {
               base: '{colors.white}',
-              _dark: '#191A20',
+              _dark: '{colors.gray.800}',
             },
           },
           text: {
             value: {
               base: '{colors.textDefault}',
-              _dark: '#F5F6FA',
+              _dark: '{colors.gray.100}',
             },
           },
           primary: {
@@ -123,21 +123,21 @@ export default defineConfig({
           onPrimary: {
             value: {
               base: '{colors.white}',
-              _dark: '#191A20',
+              _dark: '{colors.textDefault}',
             },
             description: 'primary 배경 위에 사용하는 텍스트/아이콘 컬러',
           },
           secondary: {
             value: {
               base: '{colors.yellow.500}',
-              _dark: '{colors.yellow.400}',
+              _dark: '{colors.yellow.500}',
             },
             description: '보조 포인트 요소에 사용하는 컬러',
           },
           onSecondary: {
             value: {
               base: '{colors.black}',
-              _dark: '{colors.gray.900}',
+              _dark: '{colors.gray.100}',
             },
             description: 'secondary 배경 위에 사용하는 텍스트/아이콘 컬러',
           },
@@ -171,8 +171,8 @@ export default defineConfig({
           },
           titleBorder: {
             value: {
-              base: '#E6E6E6',
-              _dark: '#313136',
+              base: '{colors.gray.100}',
+              _dark: '{colors.gray.700}',
             },
             description: '페이지 타이틀 구분선 컬러',
           },
