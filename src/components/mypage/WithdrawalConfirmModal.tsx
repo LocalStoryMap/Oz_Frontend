@@ -55,26 +55,24 @@ function WithdrawalConfirmModal({ onClose }: { onClose: () => void }) {
   }
 
   return (
-    <div>
-      <Modal
-        title={error ? '탈퇴 처리 실패' : '정말 탈퇴하시겠어요?'}
-        content={
-          error ? (
-            <span>{error}</span>
-          ) : (
-            <>
-              탈퇴 시 모든 정보가 삭제되며,
-              <br />
-              복구는 불가능합니다.
-            </>
-          )
-        }
-        type={error ? 'one' : 'two'}
-        onConfirm={error ? handleCloseError : handleWithdraw}
-        onCancel={onClose}
-        className={shake ? shakeClass : ''}
-      />
-    </div>
+    <Modal
+      title={error ? '탈퇴 처리 실패' : '정말 탈퇴하시겠어요?'}
+      content={
+        error ? (
+          <span>{error}</span>
+        ) : (
+          <>
+            탈퇴 시 모든 정보가 삭제되며,
+            <br />
+            복구는 불가능합니다.
+          </>
+        )
+      }
+      type={error ? 'one' : 'two'}
+      onConfirm={error ? handleCloseError : handleWithdraw}
+      onCancel={onClose}
+      className={shake ? shakeClass : ''}
+    />
   );
 }
 
