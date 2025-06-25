@@ -8,25 +8,9 @@ import Modal from '@components/ui/common/modals/Modal';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import PaymentList from '@/app/mypage/payment-history/_components/PaymentList';
+import type { Payment } from '@/types/payment.types';
 
 import { css } from '@root/styled-system/css';
-
-type Payment = {
-  id: number;
-  user: number;
-  userEmail: string;
-  merchantUid: string;
-  amount: number;
-  status: string;
-  paymentMethod: string;
-  cardName: string;
-  cardNumber: string;
-  paidAt: string;
-  receiptUrl: string;
-  createdAt: string;
-  updatedAt: string;
-  isDeleted: boolean;
-};
 
 type Result = {
   results: Payment[];

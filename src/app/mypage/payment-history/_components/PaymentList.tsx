@@ -3,24 +3,9 @@ import { CheckIcon, CloseIcon, LogoIcon } from '@components/icons';
 import { Button } from '@components/ui/common/buttons/Button';
 import { formatDotDate } from '@util/date';
 
-import { css } from '@root/styled-system/css';
+import type { Payment } from '@/types/payment.types';
 
-type Payment = {
-  id: number;
-  user: number;
-  userEmail: string;
-  merchantUid: string;
-  amount: number;
-  status: string;
-  paymentMethod: string;
-  cardName: string;
-  cardNumber: string;
-  paidAt: string;
-  receiptUrl: string;
-  createdAt: string;
-  updatedAt: string;
-  isDeleted: boolean;
-};
+import { css } from '@root/styled-system/css';
 
 type Props = {
   payment: Payment;
