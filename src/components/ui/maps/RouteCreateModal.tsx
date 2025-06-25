@@ -29,7 +29,7 @@ function RouteCreateModal() {
     onSuccess: res => {
       close();
       setTimeout(() => {
-        open('content', res, 2);
+        open(null, res, 2);
       }, 0);
     },
   });
