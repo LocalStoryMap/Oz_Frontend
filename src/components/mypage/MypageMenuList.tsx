@@ -7,6 +7,7 @@ import {
   BookmarkIcon,
   ChevronRightIcon,
   LogoutIcon,
+  PaymentIcon,
   SettingsIcon,
   TravelIcon,
   VersionIcon,
@@ -62,7 +63,7 @@ export default function MypageMenuList() {
     },
     {
       title: '결제 내역',
-      icon: SettingsIcon,
+      icon: PaymentIcon,
       route: '/mypage/payment-history',
       colorMode: 'fill',
     },
