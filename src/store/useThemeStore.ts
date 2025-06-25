@@ -15,11 +15,9 @@ export const useThemeStore = create<ThemeState>()(
       mode: 'light',
       toggleTheme: () => {
         const newMode = get().mode === 'light' ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', newMode);
         set({ mode: newMode });
       },
       setTheme: mode => {
-        document.documentElement.setAttribute('data-theme', mode);
         set({ mode });
       },
     }),
