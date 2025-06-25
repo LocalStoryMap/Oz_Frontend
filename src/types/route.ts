@@ -1,14 +1,15 @@
 import { Marker } from '@/types/marker';
 
 export type Route = {
-  routeId: number;
-  userId: number;
+  id: number;
+  user: string;
   name: string;
   description: string;
   likeCount: number;
   isPublic: boolean;
   createdAt: string;
   updatedAt: string;
+  markerCount: number;
   markers: RouteMarker[];
   isLiked: boolean;
 };
@@ -36,8 +37,8 @@ export type RouteMarkers = {
 };
 
 export type PostRouteMarkerPayload = {
-  routeId: number;
-  markerId: number;
+  route_id: number;
+  marker_id: number | null;
   sequence: number;
 };
 
