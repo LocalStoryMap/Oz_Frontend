@@ -132,15 +132,12 @@ export const mapOverlayWrapper = cva({
       routeMaker: {
         top: '1',
         right: '1',
-        backgroundColor: 'blue.500',
-        color: 'white',
         textStyle: 'label1',
-        padding: '3',
-        borderRadius: 'full',
-        cursor: 'pointer',
-        _hover: {
-          backgroundColor: 'blue.600',
-        },
+      },
+      route: {
+        top: '12',
+        right: '1',
+        textStyle: 'label1',
       },
     },
   },

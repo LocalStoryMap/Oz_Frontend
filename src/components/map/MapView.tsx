@@ -7,6 +7,8 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { markerOption } from '@/api/options/markerOption';
 import { mapOverlayWrapper } from '@/components/map/map.recipe';
+import RouteList from '@/components/map/RouteList';
+import { Button } from '@/components/ui/common/buttons/Button';
 import WideCard from '@/components/ui/common/cards/WideCard';
 import WideCardContent from '@/components/ui/common/cards/WideCardContent';
 import { Likes } from '@/components/ui/common/toggles';
@@ -73,6 +75,8 @@ function MapView() {
 
   const { id, type: modalType, open, isOpen } = useModalStore();
 
+  const [routeOpen, setRouteOpen] = useState(false);
+
   return (
     <div className={css({ position: 'relative' })}>
       <div className={mapOverlayWrapper()}>
@@ -91,14 +95,18 @@ function MapView() {
         ))}
       </div>
       <div className={mapOverlayWrapper({ type: 'routeMaker' })}>
-        <button type="button" onClick={() => open('content')}>
-          루트
-          <br />
-          만들기
-        </button>
+        <Button color="outline" onClick={() => open('content')}>
+          루트 만들기
+        </Button>
+      </div>
+      <div className={mapOverlayWrapper({ type: 'route' })}>
+        <Button color="outline" onClick={() => setRouteOpen(true)}>
+          둘러보기
+        </Button>
       </div>
       {isOpen && modalType === 'content' && <RouteCreateModal />}
       {isOpen && id === 2 && <RouteMarkModal />}
+      {routeOpen && <RouteList />}
       <Map center={center} style={{ width: '100%', height: '75vh' }} level={8}>
         {markers?.map(marker => (
           <MarkerContainer
