@@ -5,7 +5,7 @@ export type Subscribe = {
   impUid: string;
   merchantUid: string;
   isActive: boolean;
-  startAt: string;
-  expiresAt: string;
+  startAt: string | Date;
+  expiresAt: string | Date;
   isPaidUser: boolean;
 };
