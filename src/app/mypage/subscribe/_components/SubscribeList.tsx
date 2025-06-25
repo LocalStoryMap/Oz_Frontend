@@ -3,7 +3,7 @@ import { CheckIcon, CloseIcon, LogoIcon } from '@components/icons';
 import { Button } from '@components/ui/common/buttons/Button';
 import { formatDotDate } from '@util/date';
 
-import { Subscribe } from '@/types/subscribeId.type';
+import type { Subscribe } from '@/types/subscribeId.type';
 
 import { css } from '@root/styled-system/css';
 

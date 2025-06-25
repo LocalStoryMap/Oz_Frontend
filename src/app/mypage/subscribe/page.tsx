@@ -8,7 +8,7 @@ import Modal from '@components/ui/common/modals/Modal';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import SubscribeList from '@/app/mypage/subscribe/_components/SubscribeList';
-import { Subscribe } from '@/types/subscribeId.type';
+import type { Subscribe } from '@/types/subscribeId.type';
 
 import { css } from '@root/styled-system/css';
 
