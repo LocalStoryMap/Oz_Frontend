@@ -16,12 +16,14 @@ import { IamportResponse } from '@/types/iamport';
 
 import { css } from '@root/styled-system/css';
 
+const SUBSCRIPTION_PRICE = 4000;
+const SUBSCRIPTION_PERIOD_MONTHS = 1;
 function PaymentSection() {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const { user } = useAuthStore();
-  const date = new Date();
-  const month = date.getMonth();
-  date.setMonth(month + 1);
+  const startDate = new Date();
+  const endDate = new Date();
+  endDate.setMonth(endDate.getMonth() + SUBSCRIPTION_PERIOD_MONTHS);
 
   const router = useRouter();
   const name = user?.nickname;
@@ -29,7 +31,7 @@ function PaymentSection() {
 
   const mutation = useMutation({
     ...paymentOption.postSubscribes(),
-    onError: error => {
+    onError: () => {
       alert('구독 생성에 실패했습니다. 고객센터에 문의해주세요.');
     },
   });
@@ -65,7 +67,6 @@ function PaymentSection() {
         alert('결제 정보가 올바르지 않습니다.');
         return;
       }
-      console.log(response?.buyer_name);
       mutation.mutate({
         imp_uid: response.imp_uid,
         merchant_uid: response?.merchant_uid ?? '',
@@ -102,10 +103,10 @@ function PaymentSection() {
             <p>스토리 + 여행 상세 정보</p>
             {/* 여기를 날짜를 받아서 변경해주세요. 아니면 현재 날짜로 1달 계산해서 */}
             <p>
-              이용기간 : {formatDotDate(new Date())} ~ {formatDotDate(date)}{' '}
+              이용기간 : {formatDotDate(startDate)} ~ {formatDotDate(endDate)}{' '}
               (1개월)
             </p>
-            <p>금액 (매월) :4,000원</p>
+            <p>금액 (매월) : {SUBSCRIPTION_PRICE.toLocaleString()}원</p>
           </div>
           <div className={css({ borderBottom: '1px solid #484848', mt: 8 })} />
           <div>
