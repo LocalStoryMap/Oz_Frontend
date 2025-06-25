@@ -13,6 +13,7 @@ import { Likes } from '@/components/ui/common/toggles';
 import MarkerContainer from '@/components/ui/maps/MarkerContainer';
 import MarkerIcon from '@/components/ui/maps/MarkerIcon';
 import RouteCreateModal from '@/components/ui/maps/RouteCreateModal';
+import RouteMarkModal from '@/components/ui/maps/RouteMarkModal';
 import { CategoryValueType, MAP_CATEGORY } from '@/constants/map';
 import { useModalStore } from '@/store/useModalStore';
 import { isValidCategory } from '@/util/map';
@@ -70,7 +71,7 @@ function MapView() {
     router.push(`/map/search?${next.toString()}`);
   };
 
-  const { type: modalType, open, isOpen } = useModalStore();
+  const { id, type: modalType, open, isOpen } = useModalStore();
 
   return (
     <div className={css({ position: 'relative' })}>
@@ -97,6 +98,7 @@ function MapView() {
         </button>
       </div>
       {isOpen && modalType === 'content' && <RouteCreateModal />}
+      {isOpen && id === 2 && <RouteMarkModal />}
       <Map center={center} style={{ width: '100%', height: '75vh' }} level={8}>
         {markers?.map(marker => (
           <MarkerContainer

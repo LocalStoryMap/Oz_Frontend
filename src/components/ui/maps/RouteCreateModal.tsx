@@ -16,7 +16,7 @@ import { useModalStore } from '@/store/useModalStore';
 import { PostRoutePayload } from '@/types/route';
 
 function RouteCreateModal() {
-  const { close } = useModalStore();
+  const { open, close } = useModalStore();
 
   const [form, setForm] = useState({
     name: '',
@@ -26,7 +26,12 @@ function RouteCreateModal() {
 
   const postMutation = useMutation({
     ...routeOption.postRoute(),
-    onSuccess: () => close(),
+    onSuccess: res => {
+      close();
+      setTimeout(() => {
+        open('content', res, 2);
+      }, 0);
+    },
   });
 
   const handleChange = (
