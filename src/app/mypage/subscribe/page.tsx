@@ -25,7 +25,7 @@ function Page() {
     ...paymentOption.deleteSubscribes(),
     onSuccess: () => {
       alert('삭제 성공');
-      queryClient.invalidateQueries({ queryKey: ['paymentHistory'] });
+      queryClient.invalidateQueries({ queryKey: ['subscription'] });
     },
     onError: () => {
       alert('삭제 실패');
