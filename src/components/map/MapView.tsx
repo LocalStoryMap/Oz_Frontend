@@ -10,9 +10,11 @@ import { mapOverlayWrapper } from '@/components/map/map.recipe';
 import WideCard from '@/components/ui/common/cards/WideCard';
 import WideCardContent from '@/components/ui/common/cards/WideCardContent';
 import { Likes } from '@/components/ui/common/toggles';
+import CreateRouteModal from '@/components/ui/maps/CreateRouteModal';
 import MarkerContainer from '@/components/ui/maps/MarkerContainer';
 import MarkerIcon from '@/components/ui/maps/MarkerIcon';
 import { CategoryValueType, MAP_CATEGORY } from '@/constants/map';
+import { useModalStore } from '@/store/useModalStore';
 import { isValidCategory } from '@/util/map';
 
 import { css } from '@root/styled-system/css';
@@ -68,6 +70,8 @@ function MapView() {
     router.push(`/map/search?${next.toString()}`);
   };
 
+  const { type: modalType, open, isOpen } = useModalStore();
+
   return (
     <div className={css({ position: 'relative' })}>
       <div className={mapOverlayWrapper()}>
@@ -85,6 +89,14 @@ function MapView() {
           />
         ))}
       </div>
+      <div className={mapOverlayWrapper({ type: 'routeMaker' })}>
+        <button type="button" onClick={() => open('content')}>
+          루트
+          <br />
+          만들기
+        </button>
+      </div>
+      {isOpen && modalType === 'content' && <CreateRouteModal />}
       <Map center={center} style={{ width: '100%', height: '75vh' }} level={8}>
         {markers?.map(marker => (
           <MarkerContainer
