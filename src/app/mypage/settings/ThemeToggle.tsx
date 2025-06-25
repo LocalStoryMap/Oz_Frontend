@@ -37,7 +37,7 @@ export default function ThemeToggle() {
         <IconWrapper size={22}>
           <ThemeIcon
             fill={
-              checked ? 'var(--colors.gray-300)' : 'var(--colors-yellow-500)'
+              checked ? 'var(--colors.gray-300)' : 'var(--colors.yellow-500)'
             }
           />
         </IconWrapper>
