@@ -44,5 +44,5 @@ export type PostRouteMarkerPayload = {
 
 export type PutRouteMarkerUpdate = {
   routeId: number;
-  markers: [{ routeMarkerId: number; sequence: number }];
+  markers: { routeMarkerId: number; sequence: number }[];
 };

@@ -25,7 +25,7 @@ export const routeOption = {
     queryOptions<RouteListResponse>({
       queryKey: ['route', 'list', params],
       queryFn: () =>
-        queryFetcher(ENDPOINTS.MARKER.LIST, params)().then(res => ({
+        queryFetcher(ENDPOINTS.ROUTE.LIST, params)().then(res => ({
           data: res.data,
           pagination: res.pagination,
         })),
