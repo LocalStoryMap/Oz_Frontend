@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import { markerOption } from '@/api/options/markerOption';
 import { gridLayout } from '@/components/map/map.recipe';
 import { flex, flexBetween } from '@/components/ui/common/cards/card.recipe';
+import { SpinnerMessage } from '@/components/ui/common/loading/SpinnerMessage';
 import { modalText } from '@/components/ui/common/modals/modal.recipe';
 
 type MapDetailStoryProps = {
@@ -17,9 +18,15 @@ type MapDetailStoryProps = {
 function MapDetailStory({ id, title }: MapDetailStoryProps) {
   const router = useRouter();
 
-  const { data } = useQuery(markerOption.getMarkerStory(id));
+  const { data, isLoading } = useQuery(markerOption.getMarkerStory(id));
   const storyList = data ?? [];
 
+  if (isLoading)
+    return (
+      <div>
+        <SpinnerMessage />
+      </div>
+    );
   if (!storyList.length) return <div>작성된 스토리가 없습니다</div>;
 
   return (
