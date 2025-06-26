@@ -28,28 +28,25 @@ export const storyOption = {
         story,
       );
 
-      if (!images || images.length === 0) {
-        return storyRes;
-      }
+      if (!images || images.length === 0) return storyRes;
 
-      const formData = new FormData();
-      const { storyId } = storyRes;
-      formData.append('story_id', storyId);
-      images.forEach(image => formData.append('image_file', image));
+      await Promise.all(
+        images.map(image => {
+          const formData = new FormData();
+          formData.append('story_id', storyRes.storyId);
+          formData.append('image_file', image);
 
-      const imageRes = await instance.post(
-        ENDPOINTS.STORY_IMAGE.UPLOAD(storyId),
-        formData,
-        {
-          headers: {
-            'Content-Type': undefined,
-          },
-        },
+          return instance.post(
+            ENDPOINTS.STORY_IMAGE.UPLOAD(storyRes.storyId),
+            formData,
+            {
+              headers: {
+                'Content-Type': undefined,
+              },
+            },
+          );
+        }),
       );
-
-      if (imageRes.status >= 400) {
-        throw new Error('이미지 업로드에 실패했습니다.');
-      }
 
       return storyRes;
     },

@@ -162,7 +162,11 @@ function StoryPostForm({ initialData, storyId }: Props) {
             ))}
           </div>
         )}
-        <FileUploadButton setImages={setImages} setError={setError} />
+        <FileUploadButton
+          images={images}
+          setImages={setImages}
+          setError={setError}
+        />
         {/* 새로 업로드하는 이미지 */}
         <div className={gridLayout({ columns: 3, p: 'xs', gap: 'sm' })}>
           {images.map((file, idx) => (
