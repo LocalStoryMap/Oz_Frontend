@@ -63,6 +63,9 @@ function StoryPostForm({ initialData, storyId }: Props) {
   const patchMutation = useMutation({
     ...storyOption.patchStory(),
     onSuccess: () => router.push(`/story/${storyId}`),
+    onError: (error: any) => {
+      setError(error.request.responseText ?? error.message);
+    },
   });
 
   useEffect(() => {
