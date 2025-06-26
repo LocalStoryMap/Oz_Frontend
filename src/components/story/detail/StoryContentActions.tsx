@@ -54,11 +54,7 @@ function StoryContentActions({ mode, isMine, userNickname }: Props) {
     },
   });
 
-  const { open, isOpen, close } = useModalStore(state => ({
-    open: state.open,
-    isOpen: state.isOpen,
-    close: state.close,
-  }));
+  const { open, isOpen, close } = useModalStore();
 
   return (
     <>
