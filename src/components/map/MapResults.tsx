@@ -10,9 +10,12 @@ import WideCard from '@/components/ui/common/cards/WideCard';
 import WideCardContent from '@/components/ui/common/cards/WideCardContent';
 import FilterDropdown from '@/components/ui/common/dropdowns/FilterDropdown';
 import { SpinnerMessage } from '@/components/ui/common/loading/SpinnerMessage';
+import Modal from '@/components/ui/common/modals/Modal';
 import { modalText } from '@/components/ui/common/modals/modal.recipe';
 import { Likes } from '@/components/ui/common/toggles';
 import { MAP_DROPDOWN_OPTIONS } from '@/constants/map';
+
+import { css } from '@root/styled-system/css';
 
 function MapResults({ query }: { query: string }) {
   const router = useRouter();
@@ -22,6 +25,8 @@ function MapResults({ query }: { query: string }) {
     latitude: number;
     longitude: number;
   } | null>(null);
+
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (selected === 'distance' && !coords && navigator.geolocation) {
@@ -33,7 +38,7 @@ function MapResults({ query }: { query: string }) {
           });
         },
         error => {
-          console.warn('위치 정보를 가져올 수 없습니다:', error.message);
+          setError(`위치 정보를 가져올 수 없습니다: ${error.message}`);
         },
       );
     }
@@ -49,6 +54,13 @@ function MapResults({ query }: { query: string }) {
     }),
   );
   const searchList = data?.data ?? [];
+
+  useEffect(() => {
+    if (selected === 'distance' && searchList.length === 0) {
+      setError('반경(10km) 내 결과가 없어 최신순으로 조회합니다');
+      setSelected('latest');
+    }
+  }, [data, selected]);
 
   const { mutate } = useMutation(markerOption.postMarkerLike());
 
@@ -99,6 +111,15 @@ function MapResults({ query }: { query: string }) {
             ))}
           </div>
         </div>
+      )}
+      {error && (
+        <Modal
+          title="알림"
+          content={error}
+          type="one"
+          onConfirm={() => setError(null)}
+          className={css({ animation: 'shake 0.5s' })}
+        />
       )}
     </div>
   );
