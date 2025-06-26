@@ -77,7 +77,11 @@ function SquareCard({
           className={cardImage()}
         />
         <span className={topRightAbsolute()}>
-          <Likes liked={liked} onChange={onToggle} />
+          {onToggle && (
+            <span className={topRightAbsolute()}>
+              <Likes liked={liked} onChange={onToggle} />
+            </span>
+          )}
         </span>
       </div>
       {custom ? (

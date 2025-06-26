@@ -1,81 +1,61 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/navigation';
+import { bookmarkOption } from '@api/options/bookmarkOption';
+import { useQuery } from '@tanstack/react-query';
 
-import { deleteBookmark, getBookmarks } from '@/app/api/mypage/bookmarkApi';
+import {
+  flex,
+  subText,
+  titleText,
+} from '@/components/ui/common/cards/card.recipe';
 import SquareCard from '@/components/ui/common/cards/SquareCard';
-import { BookmarkListResponse, BookmarkWithStory } from '@/types/bookmark';
+import BookmarkToggle from '@/components/ui/common/toggles/Bookmark';
 
-import { css } from '@root/styled-system/css';
+import { css, cx } from '@root/styled-system/css';
 
-export default function BookmarkPage() {
+export default function BookmarksPage() {
   const router = useRouter();
-  const [bookmarks, setBookmarks] = useState<BookmarkWithStory[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
+  const { data, isLoading, isError } = useQuery(bookmarkOption.getBookmarks());
 
-  const fetchBookmarks = useCallback(async () => {
-    try {
-      setLoading(true);
-      const fetchFunction = getBookmarks(page);
-      const response = await fetchFunction();
-
-      let bookmarkData: BookmarkWithStory[] = [];
-
-      if (Array.isArray(response)) {
-        bookmarkData = response;
-      } else if (response && 'results' in response) {
-        bookmarkData = (response as BookmarkListResponse).results || [];
-      }
-
-      if (page === 1) {
-        setBookmarks(bookmarkData);
-      } else {
-        setBookmarks(prev => [...prev, ...bookmarkData]);
-      }
-    } catch (error) {
-      if (process.env.NODE_ENV === 'development') {
-        console.error('북마크 불러오기 실패:', error);
-      }
-    } finally {
-      setLoading(false);
-    }
-  }, [page]);
-
-  useEffect(() => {
-    fetchBookmarks();
-  }, [fetchBookmarks]);
-
-  const handleToggleLike = async (bookmarkId: number) => {
-    try {
-      await deleteBookmark(bookmarkId);
-      setBookmarks(prev => prev.filter(item => item.id !== bookmarkId));
-    } catch (error) {
-      if (process.env.NODE_ENV === 'development') {
-        console.error('북마크 삭제 실패:', error);
-      }
-    }
-  };
-
-  if (loading && page === 1) {
+  if (isLoading) {
     return (
       <div
         className={css({
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          height: '400px',
+          height: '50vh',
+          textStyle: 'body2',
+          color: 'gray.400',
         })}
       >
-        <p className={css({ textStyle: 'body2', color: 'gray.500' })}>
-          로딩 중...
-        </p>
+        로딩 중...
       </div>
     );
   }
 
-  if (bookmarks.length === 0 && !loading) {
+  if (isError) {
+    return (
+      <div
+        className={css({
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '50vh',
+          textStyle: 'body2',
+          color: 'error',
+        })}
+      >
+        오류가 발생했습니다.
+      </div>
+    );
+  }
+
+  const bookmarks = data?.results || [];
+
+  if (bookmarks.length === 0) {
     return (
       <div
         className={css({
@@ -83,16 +63,29 @@ export default function BookmarkPage() {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          height: '400px',
-          gap: '16px',
+          height: '50vh',
+          gap: 4,
         })}
       >
-        <p className={css({ textStyle: 'body2', color: 'gray.500' })}>
+        <p
+          className={css({
+            textStyle: 'body1',
+            color: 'gray.400',
+          })}
+        >
           아직 북마크한 스토리가 없습니다.
+        </p>
+        <p
+          className={css({
+            textStyle: 'body3',
+            color: 'gray.300',
+          })}
+        >
+          마음에 드는 스토리를 북마크해보세요!
         </p>
         <button
           type="button"
-          onClick={() => router.push('/map')}
+          onClick={() => router.push('/story')}
           className={css({
             padding: '12px 24px',
             backgroundColor: 'primary',
@@ -107,7 +100,7 @@ export default function BookmarkPage() {
             },
           })}
         >
-          지도 둘러보기
+          스토리 둘러보기
         </button>
       </div>
     );
@@ -115,35 +108,79 @@ export default function BookmarkPage() {
 
   return (
     <div
-      className={css({
-        display: 'grid',
-        gridTemplateColumns: {
-          base: 'repeat(2, 1fr)',
-          md: 'repeat(4, 1fr)',
-        },
-        gap: '24px', // 여기 직접 숫자로 고정
-        padding: '16px', // 이것도 확실하게 고정
-      })}
+      className={cx(
+        css({
+          display: 'grid',
+          gap: 4,
+          width: '100%',
+          pb: 8,
+          gridTemplateColumns: {
+            base: 'repeat(2, 1fr)',
+            md: 'repeat(4, 1fr)',
+          },
+        }),
+      )}
     >
       {bookmarks.map(bookmark => {
         const story = bookmark.storyDetail;
-        const marker = story?.marker;
-        const image =
-          story?.images?.[0]?.image || '/images/default-thumbnail.png';
-        const title = marker?.place_name || story?.title || '제목 없음';
-        const location = marker?.address || story?.address || '';
+        const firstImage = story.storyImages?.[0]?.imageUrl;
+        const storyId = story.storyId || String(bookmark.story);
 
         return (
-          <SquareCard
-            key={bookmark.id}
-            id={bookmark.id}
-            image={image}
-            liked
-            title={title}
-            location={location}
-            onClick={() => router.push(`/story/${story?.id ?? bookmark.story}`)}
-            onToggle={() => handleToggleLike(bookmark.id)}
-          />
+          <div key={bookmark.id} className={css({ position: 'relative' })}>
+            <SquareCard
+              id={bookmark.id}
+              image={firstImage}
+              custom
+              onClick={() => router.push(`/story/${storyId}`)}
+            >
+              <div className={flex({ gap: 'sm', px: 'xs' })}>
+                <p className={titleText()}>{story.title}</p>
+                <p
+                  className={subText({
+                    textStyle: 'body4',
+                    color: 'black',
+                    clamp: 1,
+                  })}
+                >
+                  {story.content}
+                </p>
+                <div
+                  className={css({
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    mt: 1,
+                  })}
+                >
+                  <span
+                    className={subText({ color: 'muted', textStyle: 'body4' })}
+                  >
+                    {story.userNickname}
+                  </span>
+                  <span
+                    className={subText({ color: 'muted', textStyle: 'body4' })}
+                  >
+                    {new Date(story.createdAt).toLocaleDateString()}
+                  </span>
+                </div>
+              </div>
+            </SquareCard>
+            <div
+              className={css({
+                position: 'absolute',
+                top: '8px',
+                right: '8px',
+              })}
+            >
+              <BookmarkToggle
+                storyId={storyId}
+                isBookmarked
+                bookmarkId={bookmark.id}
+                showBackground
+              />
+            </div>
+          </div>
         );
       })}
     </div>

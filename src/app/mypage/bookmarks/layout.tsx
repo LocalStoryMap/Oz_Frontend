@@ -1,28 +1,15 @@
-import { css } from '@root/styled-system/css';
+import { mypageContainer } from '@/components/mypage/mypage.recipe';
+import PageHeader from '@/components/ui/common/pageHeader/PageHeader';
 
-export default function BookmarkLayout({
+export default function BookmarksLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div
-      className={css({
-        maxWidth: '1200px',
-        margin: '0 auto',
-        padding: '24px 16px',
-      })}
-    >
-      <h1
-        className={css({
-          textStyle: 'headline3',
-          marginBottom: '24px',
-          color: 'textDefault',
-        })}
-      >
-        북마크
-      </h1>
-      {children}
-    </div>
+    <>
+      <PageHeader title="북마크" />
+      <div className={mypageContainer()}>{children}</div>
+    </>
   );
 }
