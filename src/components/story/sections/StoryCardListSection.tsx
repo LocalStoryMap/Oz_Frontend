@@ -56,8 +56,14 @@ function StoryCardListSection() {
 
     if (!allStories || allStories.length === 0) return [];
 
-    const validStories = allStories.filter(story => story && story.storyId);
-    return [...validStories].sort(() => Math.random() - 0.5);
+    const validStories = allStories.filter(story => story?.storyId);
+    const shuffled = [...validStories];
+    // eslint-disable-next-line no-plusplus
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
   }, [data?.pages]);
 
   if (isError) return <p>...Error</p>;
