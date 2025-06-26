@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Map, useKakaoLoader } from 'react-kakao-maps-sdk';
+import { Map, Polyline, useKakaoLoader } from 'react-kakao-maps-sdk';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
@@ -74,7 +74,27 @@ function MapView() {
 
   const { mutate } = useMutation(markerOption.postMarkerLike());
 
+  const [polylinePath, setPolylinePath] = useState<
+    { lat: number; lng: number }[]
+  >([]);
+
+  useEffect(() => {
+    if (routeId && route?.data.markers) {
+      const path = route.data.markers.map(marker => ({
+        lat: Number(marker.latitude),
+        lng: Number(marker.longitude),
+      }));
+      setPolylinePath(path);
+    } else {
+      setPolylinePath([]);
+    }
+  }, [routeId, route]);
+
   const markerClick = (param: string, value: string) => {
+    if (param === 'type') {
+      setPolylinePath([]);
+    }
+
     const next = new URLSearchParams(searchParams);
     next.set(param, value);
     next.set('position', 'false');
@@ -126,6 +146,15 @@ function MapView() {
           />
         ))}
         {position && <MarkerContainer position={center} type="current" />}
+        {routeId && polylinePath.length > 1 && (
+          <Polyline
+            path={polylinePath}
+            strokeWeight={4}
+            strokeColor="red"
+            strokeOpacity={0.8}
+            strokeStyle="solid"
+          />
+        )}
       </Map>
       {place && (
         <div className={mapOverlayWrapper({ type: 'card' })}>
