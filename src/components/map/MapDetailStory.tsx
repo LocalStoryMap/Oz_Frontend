@@ -57,7 +57,7 @@ function MapDetailStory({ id, title }: MapDetailStoryProps) {
         </span>
       </p>
       <div className={gridLayout({ columns: 4, gap: 'sm', p: 'xs' })}>
-        {storyList.map(story => {
+        {storyList.slice(0, 8).map(story => {
           const storyImage = story.storyImages?.[0];
           return (
             <Image
