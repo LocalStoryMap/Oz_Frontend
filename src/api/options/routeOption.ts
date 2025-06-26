@@ -20,6 +20,16 @@ type RouteListResponse = {
   };
 };
 
+type RouteDetailResponse = {
+  data: Route;
+  pagination: {
+    currentPage: number;
+    totalPages: number;
+    totalItems: number;
+    itemsPerPage: number;
+  };
+};
+
 export const routeOption = {
   getRouteList: (params?: Record<string, any>) =>
     queryOptions<RouteListResponse>({
@@ -33,7 +43,8 @@ export const routeOption = {
   getRouteDetail: (id: number) => {
     return {
       queryKey: ['route', id],
-      queryFn: () => queryFetcher<Route>(ENDPOINTS.ROUTE.DETAIL(id))(),
+      queryFn: () =>
+        queryFetcher<RouteDetailResponse>(ENDPOINTS.ROUTE.DETAIL(id))(),
     };
   },
   postRoute: () => ({
@@ -59,7 +70,7 @@ export const routeOption = {
   getRouteMarkersList: () =>
     queryOptions({
       queryKey: ['routemarkers', 'list'],
-      queryFn: () => queryFetcher<RouteMarkers>(ENDPOINTS.ROUTEMARKER.LIST),
+      queryFn: () => queryFetcher<RouteMarkers[]>(ENDPOINTS.ROUTEMARKER.LIST),
     }),
   postRouteMarkers: () => ({
     mutationFn: async (data: PostRouteMarkerPayload) => {

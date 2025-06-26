@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { markerOption } from '@/api/options/markerOption';
+import { routeOption } from '@/api/options/routeOption';
 import { mapOverlayWrapper } from '@/components/map/map.recipe';
 import RouteList from '@/components/map/RouteList';
 import { Button } from '@/components/ui/common/buttons/Button';
@@ -56,7 +57,14 @@ function MapView() {
   const { data } = useQuery(
     markerOption.getMarkerList({ layer: selectedCategory }),
   );
-  const markers = data?.data ?? [];
+
+  const routeId = searchParams.get('route');
+  const { data: route } = useQuery({
+    ...routeOption.getRouteDetail(Number(routeId)),
+    enabled: !!routeId,
+  });
+
+  const markers = type ? (data?.data ?? []) : (route?.data.markers ?? []);
 
   const markerId = Number(searchParams.get('id'));
   const { data: place } = useQuery({
@@ -95,24 +103,24 @@ function MapView() {
         ))}
       </div>
       <div className={mapOverlayWrapper({ type: 'routeMaker' })}>
-        <Button color="outline" onClick={() => open('content')}>
+        <Button size="sm" color="outline" onClick={() => open('content')}>
           루트 만들기
         </Button>
       </div>
       <div className={mapOverlayWrapper({ type: 'route' })}>
-        <Button color="outline" onClick={() => setRouteOpen(true)}>
-          둘러보기
+        <Button size="sm" color="outline" onClick={() => setRouteOpen(true)}>
+          루트 둘러보기
         </Button>
       </div>
       {isOpen && modalType === 'content' && <RouteCreateModal />}
       {isOpen && id === 2 && <RouteMarkModal />}
-      {routeOpen && <RouteList />}
+      {routeOpen && <RouteList setRouteOpen={setRouteOpen} />}
       <Map center={center} style={{ width: '100%', height: '75vh' }} level={8}>
         {markers?.map(marker => (
           <MarkerContainer
             key={marker.id}
             position={{ lat: marker.latitude, lng: marker.longitude }}
-            type={selectedCategory}
+            type={type ? selectedCategory : 'current'}
             content={marker.markerName}
             onClick={() => markerClick('id', marker.id.toString())}
           />
