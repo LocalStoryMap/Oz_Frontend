@@ -9,6 +9,7 @@ import { flex, flexBetween } from '@/components/ui/common/cards/card.recipe';
 import WideCard from '@/components/ui/common/cards/WideCard';
 import WideCardContent from '@/components/ui/common/cards/WideCardContent';
 import FilterDropdown from '@/components/ui/common/dropdowns/FilterDropdown';
+import { SpinnerMessage } from '@/components/ui/common/loading/SpinnerMessage';
 import { modalText } from '@/components/ui/common/modals/modal.recipe';
 import { Likes } from '@/components/ui/common/toggles';
 import { MAP_DROPDOWN_OPTIONS } from '@/constants/map';
@@ -38,7 +39,7 @@ function MapResults({ query }: { query: string }) {
     }
   }, [selected, coords]);
 
-  const { data } = useQuery(
+  const { data, isLoading } = useQuery(
     markerOption.getMarkerList({
       search_term: query,
       sort: selected,
@@ -50,6 +51,13 @@ function MapResults({ query }: { query: string }) {
   const searchList = data?.data ?? [];
 
   const { mutate } = useMutation(markerOption.postMarkerLike());
+
+  if (isLoading)
+    return (
+      <div>
+        <SpinnerMessage />
+      </div>
+    );
 
   return (
     <div className={flex({ p: 'md', marginB: 'sm' })}>
