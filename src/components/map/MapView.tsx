@@ -82,7 +82,7 @@ function MapView() {
   >([]);
 
   useEffect(() => {
-    if (routeId && route?.data.markers) {
+    if (!type && routeId && route?.data.markers) {
       const path = route.data.markers.map(marker => ({
         lat: Number(marker.latitude),
         lng: Number(marker.longitude),
