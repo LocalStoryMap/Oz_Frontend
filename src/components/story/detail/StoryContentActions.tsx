@@ -69,7 +69,7 @@ function StoryContentActions({ mode, isMine, userNickname }: Props) {
     onError: error => {
       close();
       setDelError(error.message);
-      toast.error('게시글 작성에 실패했습니다!');
+      toast.error('게시글 삭제에 실패했습니다!');
     },
   });
 
