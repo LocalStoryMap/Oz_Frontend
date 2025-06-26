@@ -147,7 +147,6 @@ function StoryContentActions({ mode, isMine, userNickname }: Props) {
           onConfirm={() => {
             deleteMutation.mutate();
           }}
-          className={css({ animation: 'shake 0.5s' })}
         />
       )}
     </>
