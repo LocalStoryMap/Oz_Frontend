@@ -1,5 +1,16 @@
 # 로컬스토리맵 (일로일로)
 
+## 🗺 프로젝트 소개
+
+**LocalStoryMap**은 지도를 통해 지역의 다양한 이야기를 찾아보고,  
+자신만의 경험을 스토리로 남길 수 있는 **위치 기반 커뮤니티 웹 서비스**입니다.
+
+사용자는 지도의 마커를 클릭해 장소에 얽힌 이야기를 확인하고,  
+여행 중 방문한 장소나 특별한 순간의 감정을 스토리로 기록할 수 있습니다.  
+지금 이 순간, 나만의 이야기를 지도 위에 남겨보세요.
+
+---
+
 ## 👥 팀 동료
 
 | [<img src="https://avatars.githubusercontent.com/Leekwanyong" width="80"/>](https://github.com/Leekwanyong) | [<img src="https://avatars.githubusercontent.com/seonysun" width="80"/>](https://github.com/seonysun) | [<img src="https://avatars.githubusercontent.com/hohhh" width="80"/>](https://github.com/hohhh) |
@@ -34,6 +45,69 @@
 ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white)
 ![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=000000)
 ![CodeRabbit](https://img.shields.io/badge/CodeRabbit-AI--Review-purple?style=for-the-badge)
+
+---
+
+## 📌 주요 기능 및 구현 기술
+
+### 1. 👤 회원 및 마이페이지 기능
+- **사용 기술**: 카카오/네이버 소셜 로그인, JWT 기반 인증
+- **주요 기능**
+  - 소셜 로그인, 토큰 재발급, 회원 탈퇴 기능
+  - 마이페이지에서 내 정보, 북마크 목록, 작성 스토리 관리
+
+---
+
+### 2. 💳 구독 및 결제
+- **사용 기술**: PortOne 결제 API
+- **주요 기능**
+  - 유료 구독 회원만 접근 가능한 기능 제한
+  - 결제 및 구독 상태에 따른 페이지 접근 제어
+
+---
+
+### 3. 🤖 AI 챗봇 (네이버 Clova Studio)
+- **사용 기술**: 네이버 Clova Chat API
+- **주요 기능**
+  - 사용자의 질문이나 상황에 대응하는 AI 챗봇 도입
+  - 기본적인 서비스 안내 및 내비게이션 지원
+
+---
+
+### 4. 🗺 지도 기반 장소 탐색
+- **사용 기술**: Kakao Map JavaScript SDK, Geolocation API, 지도 라이브러리 (clusterer, drawing, services)
+- **주요 기능**
+  - 커스텀 이미지 마커 생성 및 지도 렌더링
+  - 카테고리별 마커 필터링(다중 표시) 및 제어
+  - 마커 hover 시 인포윈도우 노출, 클릭 시 장소 카드 출력
+  - 사용자 현재 위치 기반 마커 노출
+
+---
+
+### 5. 🔗 유저 추천 경로 생성 및 조회
+- **사용 기술**: Kakao Polyline, Tanstack Query
+- **주요 기능**
+  - 사용자가 장소를 그룹화하여 루트 생성 가능
+  - 그룹화된 마커 간 선(Polyline) 연결로 시각적인 경로 제공
+
+---
+
+### 6. 🧭 지역 명소 리스트 및 검색
+- **사용 기술**: Geolocation API, 쿼리스트링 기반 검색
+- **주요 기능**
+  - 최신순 / 인기순 / 거리순 등 정렬 조건 기반 필터링
+  - 키워드 기반 명소 검색
+  - 사용자 위치 기준 반경 10km 내 장소 탐색
+
+---
+
+### 7. 📖 스토리(후기) 작성 기능
+- **사용 기술**: AWS S3, FormData, 클라이언트 유효성 검사
+- **주요 기능**
+  - 장소에 대한 스토리(후기) 작성, 수정, 삭제
+  - 지도 상세 및 스토리 목록 페이지에서 접근 가능
+  - 이미지 업로드 기능(S3 연동), 자동 작성일 기록
+  - 키워드 기반 스토리 검색, 대댓글 기능 포함
 
 ---
 
