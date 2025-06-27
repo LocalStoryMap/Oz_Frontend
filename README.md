@@ -156,5 +156,6 @@
 - [📜 요구사항 정의서](https://docs.google.com/spreadsheets/d/17xPDiH6k2B0Vqq7D1OYXzgHwvptw2tSGctseTkB8o5w/edit?gid=211662200#gid=211662200)
 - [📜 플로우 차트](https://excalidraw.com/#room=5bfa76f92a583e41c584,P5HPte0F56823x8jKNUHFQ)
 - [📜 와이어프레임](https://www.figma.com/design/JSccwQkynWD8Eyzr9HRJ8I/%EC%98%A4%EC%A6%88_%ED%95%A9%EB%8F%99%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_%EB%A1%9C%EC%BB%AC%EC%8A%A4%ED%86%A0%EB%A6%AC%EB%A7%B5?node-id=0-1&t=rNQGk12X7MLMTmN0-1)
+- [📜 화면 정의서](https://docs.google.com/spreadsheets/d/1HwfxZjO9LO7roi9IzROZnc6nt22SlYBmaRbu7fnVA_E/edit?usp=sharing)
 - [📜 API 명세서](https://localstorymap.com/swagger/)
 
