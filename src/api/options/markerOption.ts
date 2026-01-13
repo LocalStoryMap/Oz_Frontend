@@ -5,6 +5,14 @@ import { mutationFetcher, queryFetcher } from '@/api/fetcher';
 import { Marker } from '@/types/marker';
 import { Story } from '@/types/story';
 
+interface MarkerSearchParams {
+  search_term?: string;
+  sort?: 'latest' | 'likes' | 'distance';
+  latitude?: number;
+  longitude?: number;
+  layer?: string;
+}
+
 type MarkerListResponse = {
   data: Marker[];
   pagination: {
@@ -16,7 +24,7 @@ type MarkerListResponse = {
 };
 
 export const markerOption = {
-  getMarkerList: (params?: Record<string, any>) =>
+  getMarkerList: (params?: MarkerSearchParams) =>
     queryOptions<MarkerListResponse>({
       queryKey: ['marker', 'list', params],
       queryFn: () =>
