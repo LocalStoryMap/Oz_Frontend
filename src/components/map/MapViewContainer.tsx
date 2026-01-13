@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useKakaoLoader } from 'react-kakao-maps-sdk';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -29,6 +29,13 @@ function MapViewContainer() {
     { lat: number; lng: number }[]
   >([]);
 
+  const [bounds, setBounds] = useState<{
+    minlat?: number;
+    maxlat?: number;
+    minlng?: number;
+    maxlng?: number;
+  }>({});
+
   const position = searchParams.get('position') === 'true';
   const type = searchParams.get('type');
   const routeId = searchParams.get('route');
@@ -53,6 +60,20 @@ function MapViewContainer() {
   });
 
   const markers = type ? (marker?.data ?? []) : (route?.data.markers ?? []);
+  const visibleMarkers = useMemo(() => {
+    if (!bounds) return markers;
+
+    return markers.filter(marker => {
+      const lat = Number(marker.latitude);
+      const lng = Number(marker.longitude);
+      return (
+        lat >= bounds.minlat! &&
+        lat <= bounds.maxlat! &&
+        lng >= bounds.minlng! &&
+        lng <= bounds.maxlng!
+      );
+    });
+  }, [markers, bounds]);
 
   const { mutate: toggleLike } = useMutation(markerOption.postMarkerLike());
 
@@ -98,6 +119,19 @@ function MapViewContainer() {
     if (place) router.push(`/map/${place?.id}`);
   };
 
+  const boundsChange = (map: kakao.maps.Map) => {
+    const bounds = map.getBounds();
+    const sw = bounds.getSouthWest();
+    const ne = bounds.getNorthEast();
+
+    setBounds({
+      minlat: sw.getLat(),
+      maxlat: ne.getLat(),
+      minlng: sw.getLng(),
+      maxlng: ne.getLng(),
+    });
+  };
+
   return (
     <div className={css({ position: 'relative' })}>
       <MapView
@@ -111,11 +145,12 @@ function MapViewContainer() {
         position={position}
         routeId={routeId}
         selectedCategory={selectedCategory}
-        markers={markers}
+        markers={visibleMarkers}
         place={place}
         markerClick={markerClick}
         likeClick={toggleLike}
         cardClick={cardClick}
+        boundsChange={boundsChange}
       />
     </div>
   );

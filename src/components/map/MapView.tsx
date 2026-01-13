@@ -35,6 +35,7 @@ interface MapViewProps {
   markerClick: (key: 'id' | 'type', value: string) => void;
   likeClick: (id: number) => void;
   cardClick: () => void;
+  boundsChange?: (map: kakao.maps.Map) => void;
 }
 
 function MapView({
@@ -53,6 +54,7 @@ function MapView({
   markerClick,
   likeClick,
   cardClick,
+  boundsChange,
 }: MapViewProps) {
   const { id, type: modalType, open, isOpen } = useModalStore();
 
@@ -95,7 +97,13 @@ function MapView({
       {isOpen && modalType === 'content' && <RouteCreateModal />}
       {isOpen && id === 2 && <RouteMarkModal />}
       {routeOpen && <RouteList setRouteOpen={setRouteOpen} />}
-      <Map center={center} style={{ width: '100%', height: '75vh' }} level={8}>
+      <Map
+        center={center}
+        style={{ width: '100%', height: '75vh' }}
+        level={8}
+        onDragEnd={boundsChange}
+        onZoomChanged={boundsChange}
+      >
         {markers?.map(marker => (
           <MarkerContainer
             key={marker.id}
