@@ -8,6 +8,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { markerOption } from '@/api/options/markerOption';
 import { routeOption } from '@/api/options/routeOption';
 import MapView from '@/components/map/MapView';
+import { SpinnerMessage } from '@/components/ui/common/loading/SpinnerMessage';
 import { CategoryValueType, MAP_CATEGORY } from '@/constants/map';
 import { isValidCategory } from '@/util/map';
 
@@ -17,7 +18,7 @@ function MapViewContainer() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  useKakaoLoader({
+  const [mapLoading, mapError] = useKakaoLoader({
     appkey: process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY!,
     libraries: ['clusterer', 'drawing', 'services'],
   });
@@ -131,6 +132,17 @@ function MapViewContainer() {
       maxlng: ne.getLng(),
     });
   };
+
+  if (mapLoading)
+    return (
+      <div>
+        <SpinnerMessage />
+      </div>
+    );
+  if (mapError)
+    return (
+      <div>지도를 로드하는 중 에러가 발생했습니다. {mapError.message}</div>
+    );
 
   return (
     <div className={css({ position: 'relative' })}>
