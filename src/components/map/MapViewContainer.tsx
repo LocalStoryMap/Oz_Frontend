@@ -34,7 +34,7 @@ function MapViewContainer() {
     maxlat?: number;
     minlng?: number;
     maxlng?: number;
-  }>({});
+  } | null>(null);
 
   const position = searchParams.get('position') === 'true';
   const type = searchParams.get('type');
