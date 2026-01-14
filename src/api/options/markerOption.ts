@@ -2,16 +2,17 @@ import { queryOptions } from '@tanstack/react-query';
 
 import { ENDPOINTS } from '@/api/endpoints';
 import { mutationFetcher, queryFetcher } from '@/api/fetcher';
+import { MapDropdownValueType } from '@/constants/map';
 import { Marker } from '@/types/marker';
 import { Story } from '@/types/story';
 
-interface MarkerSearchParams {
+type MarkerSearchParams = {
   search_term?: string;
-  sort?: 'latest' | 'likes' | 'distance';
+  sort?: MapDropdownValueType;
   latitude?: number;
   longitude?: number;
   layer?: string;
-}
+};
 
 type MarkerListResponse = {
   data: Marker[];

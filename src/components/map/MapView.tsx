@@ -19,7 +19,7 @@ import { Marker } from '@/types/marker';
 
 import { css } from '@root/styled-system/css';
 
-interface MapViewProps {
+type MapViewProps = {
   error: string | null;
   setError: (err: string | null) => void;
   center: { lat: number; lng: number };
@@ -36,7 +36,7 @@ interface MapViewProps {
   likeClick: (id: number) => void;
   cardClick: () => void;
   boundsChange?: (map: kakao.maps.Map) => void;
-}
+};
 
 function MapView({
   error,
